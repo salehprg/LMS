@@ -69,13 +69,13 @@ public class Api {
     }
 
     
-    public static boolean createNewQuiz(QuizesModel quizesModel) {
+    public static int createNewQuiz(QuizesModel quizesModel) {
         
         if(SendRequest(RequestList.Admin_createNewQuiz.getId(), new Object[] { quizesModel }))
         {
-            return (boolean)ReadResponse();
+            return (int)ReadResponse();
         }
-        return false;
+        return -1;
     }
 
     

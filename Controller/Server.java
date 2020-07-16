@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
 
+import Helper.ExcelFile;
+
 public class Server {
     private ServerSocket serverSocket;
 
@@ -41,6 +43,7 @@ public class Server {
     public static void main(String[] args) {
         int port = 9876;
 		try {
+			ExcelFile.ReadDate();
 			new Server(port).acceptClients();
 		} catch(IOException e) {
 			e.printStackTrace();

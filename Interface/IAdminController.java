@@ -13,7 +13,7 @@ public interface IAdminController {
 
 //#region Quiz
 
-    boolean createNewQuiz(QuizesModel quizesModel);
+    int createNewQuiz(QuizesModel quizesModel);
 
     boolean addQuestionToQuiz(QuestionsModel questionsModel);
 

@@ -18,9 +18,11 @@ public class AdminController extends SqlManager implements IAdminController{
 //#region Quiz
 
     @Override
-    public boolean createNewQuiz(QuizesModel quizesModel)
+    public int createNewQuiz(QuizesModel quizesModel)
     {
-        return (DB_CreateQuiz(quizesModel) != -1 ? true : false);
+        int quizId = DB_CreateQuiz(quizesModel);
+
+        return quizId;
     }
 
     @Override
