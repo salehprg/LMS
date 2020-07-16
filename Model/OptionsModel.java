@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class OptionsModel {
+public class OptionsModel implements Serializable {
     public int Id;
     public int QuestionId;
     public String OptionText;

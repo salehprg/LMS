@@ -21,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import selectpage.SelectPage;
 //import sun.font.Decoration;
+import selectpage.Api.Api;
 
 /**
  * FXML Controller class
@@ -51,15 +52,19 @@ public class StudentLogInController implements Initializable{
         
           try {
 
-                FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentPage.fxml"));
-                Parent root1 = (Parent) fxmlloader.load();
-                Stage stage = new Stage();
+                int userId = Api.Login(UserName.getText(), Password.getText());
+                if(userId != -1)
+                {
+                    FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentPage.fxml"));
+                    Parent root1 = (Parent) fxmlloader.load();
+                    Stage stage = new Stage();
 
-                stage.setTitle("Student Page");
-                stage.setScene(new Scene(root1));
-                stage.show();
-                stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-                stage.close();
+                    stage.setTitle("Student Page");
+                    stage.setScene(new Scene(root1));
+                    stage.show();
+                    stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+                    stage.close();
+                }
             } catch (IOException ex) {
                 System.out.println("Can't Open Student page");
 
@@ -70,6 +75,7 @@ public class StudentLogInController implements Initializable{
     private void CreateAcc(MouseEvent event) {
         
         try {
+
                 FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentRegister.fxml"));
                 Parent root1 = (Parent) fxmlloader.load();
                 Stage stage = new Stage();

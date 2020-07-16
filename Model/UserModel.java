@@ -1,8 +1,10 @@
 package Model;
 
+import java.io.Serializable;
+
 import Helper.SqlManager;
 
-public class UserModel {
+public class UserModel  implements Serializable{
     public int Id;
     public String FirstName;
     public String LastName;

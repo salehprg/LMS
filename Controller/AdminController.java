@@ -1,14 +1,14 @@
 package Controller;
 
-import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Helper.SqlManager;
+import Interface.IAdminController;
 import Model.*;
 import Model.QuestionsModel.QType;
 
-public class AdminController extends SqlManager {
+public class AdminController extends SqlManager implements IAdminController{
 
     public AdminController() throws SQLException {
         super();
@@ -17,17 +17,20 @@ public class AdminController extends SqlManager {
 
 //#region Quiz
 
-    boolean createNewQuiz(QuizesModel quizesModel)
+    @Override
+    public boolean createNewQuiz(QuizesModel quizesModel)
     {
         return (DB_CreateQuiz(quizesModel) != -1 ? true : false);
     }
 
-    boolean addQuestionToQuiz(QuestionsModel questionsModel)
+    @Override
+    public boolean addQuestionToQuiz(QuestionsModel questionsModel)
     {
         return (DB_AddQuestion(questionsModel) != -1 ? true : false);
     }
 
-    boolean addQuestionToQuiz(QuestionsModel questionsModel , ArrayList<OptionsModel> optionsModels)
+    @Override
+    public boolean addQuestionToQuiz(QuestionsModel questionsModel , ArrayList<OptionsModel> optionsModels)
     {
         int QuestionId = DB_AddQuestion(questionsModel);
 
@@ -42,7 +45,8 @@ public class AdminController extends SqlManager {
         return true;
     } 
 
-    boolean AssignUserToQuiz(UserModel _userModel , int QuizId)
+    @Override
+    public boolean AssignUserToQuiz(UserModel _userModel , int QuizId)
     {
         UserModel user = DB_GetUserInfo(_userModel.IdNumber);
         
@@ -66,18 +70,18 @@ public class AdminController extends SqlManager {
 
     }
 
-    boolean RemoveUserFromQuiz(int userId , int QuizId)
+    @Override
+    public boolean RemoveUserFromQuiz(int userId , int QuizId)
     {
         return DB_RemoveUserFromQuiz(userId, QuizId);
     }
 
-    boolean BanUserFromQuiz(String IdNumber , int QuizId)
-    {
+    @Override
+    public boolean BanUserFromQuiz(String IdNumber, int QuizId) {
         UserModel user = DB_GetUserInfo(IdNumber);
-        
-        //If user does not exist Register it
-        if(user != null)
-        {
+
+        // If user does not exist Register it
+        if (user != null) {
             return DB_BanUser(user.Id, QuizId);
         }
 
@@ -85,14 +89,16 @@ public class AdminController extends SqlManager {
 
     }
 
-    
 //#endregion
-    ArrayList<AnswersForGrading> getUserAnswers(int UserId , int QuizId)
+
+    @Override
+    public ArrayList<AnswersForGrading> getUserAnswers(int UserId , int QuizId)
     {
         return DB_GetAnswersForGrading(QuizId , UserId);
     }
 
-    ArrayList<QuestionsModel> getQuestions(int QuizId)
+    @Override
+    public ArrayList<QuestionsModel> getQuestions(int QuizId)
     {
         return getQuestions(QuizId);
     }

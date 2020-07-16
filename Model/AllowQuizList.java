@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AllowQuizList {
+public class AllowQuizList implements Serializable{
     public boolean Allow;
     public String IdNumber;
     public int UserId;

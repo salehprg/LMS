@@ -1,6 +1,5 @@
 package Controller;
 
-import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,20 +8,17 @@ import java.util.Random;
 import Helper.SqlManager;
 import Model.AllowQuizList;
 import Model.AnswersModel;
-import Model.OptionsModel;
-import Model.QuestionsModel;
-import Model.QuizesModel;
-import Model.TriesModel;
-import Model.UserModel;
+import Interface.*;
+import Model.*;
 
-public class UserController extends SqlManager {
+public class UserController extends SqlManager implements IUserController{
 
     public UserController() throws SQLException {
         super();
         
     }
 
-
+    @Override
     public boolean Register(UserModel userModel)
     {
         ArrayList<UserModel> users = DB_GetAllUsers();
@@ -38,20 +34,22 @@ public class UserController extends SqlManager {
         return result;
     }
 
-    public boolean Login(String UserName , String Password)
+    @Override
+    public int Login(String UserName , String Password)
     {
         ArrayList<UserModel> users = DB_GetAllUsers();
 
         for (UserModel user : users) {
-            if(user.UserName == UserName && user.Password == Password)
+            if(user.UserName.equals(UserName) && user.Password.equals(Password))
             {
-                return true;
+                return user.Id;
             }
         }
 
-        return false;
+        return -1;
     }
 
+    @Override
     public boolean EnrolQuiz(int UserId , int QuizId)
     {
         QuizesModel quizesModel = new QuizesModel();
@@ -84,11 +82,13 @@ public class UserController extends SqlManager {
         return false;
     }
 
+    @Override
     public ArrayList<AllowQuizList> GetQuizes(int UserId)
     {
         return DB_GetUserQuizes(UserId);
     }
 
+    @Override
     public ArrayList<QuestionsModel> GetQuestions(int QuizId)
     {
         QuizesModel quizesModel = new QuizesModel();
@@ -113,6 +113,7 @@ public class UserController extends SqlManager {
         return questionsModels;
     }
 
+    @Override
     public ArrayList<QuestionsModel> Review_GetQuestions(int QuizId)
     {
         QuizesModel quizesModel = new QuizesModel();
@@ -126,6 +127,7 @@ public class UserController extends SqlManager {
         return null;
     }
 
+    @Override
     public Object Review_GetUserAnswer(int UserId , int QuestionId)
     {
         AnswersModel answersModel = DB_GetUserAnswer(UserId, QuestionId);
@@ -157,7 +159,7 @@ public class UserController extends SqlManager {
         return DB_SubmitAnswer(answersModel);
     }
 
-
+    @Override
     public boolean SubmitAnswer(AnswersModel answersModel)
     {
         return DB_SubmitAnswer(answersModel);

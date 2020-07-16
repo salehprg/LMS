@@ -1,8 +1,10 @@
 package Model;
 
+import java.io.Serializable;
+
 import Model.QuestionsModel.QType;
 
-public class AnswersForGrading {
+public class AnswersForGrading implements Serializable{
     public int AnswerId;
     public String Answer;
     public float UserGrade;
