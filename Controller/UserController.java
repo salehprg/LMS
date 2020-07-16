@@ -1,4 +1,4 @@
-package lms.Controller;
+package Controller;
 
 import java.lang.reflect.Array;
 import java.sql.SQLException;
@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-import lms.Helper.SqlManager;
-import lms.Model.AllowQuizList;
-import lms.Model.AnswersModel;
-import lms.Model.OptionsModel;
-import lms.Model.QuestionsModel;
-import lms.Model.QuizesModel;
-import lms.Model.TriesModel;
-import lms.Model.UserModel;
+import Helper.SqlManager;
+import Model.AllowQuizList;
+import Model.AnswersModel;
+import Model.OptionsModel;
+import Model.QuestionsModel;
+import Model.QuizesModel;
+import Model.TriesModel;
+import Model.UserModel;
 
 public class UserController extends SqlManager {
 

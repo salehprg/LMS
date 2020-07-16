@@ -1,4 +1,4 @@
-package lms.Model;
+package Model;
 
 public class UserGradesInQuiz {
     public float UserGrade;

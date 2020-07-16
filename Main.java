@@ -1,4 +1,3 @@
-package lms;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -9,7 +8,7 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-import lms.Helper.*;
+import Helper.*;
 //import sun.util.calendar.LocalGregorianCalendar.Date;
 
 public class Main {

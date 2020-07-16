@@ -1,4 +1,4 @@
-package lms.Helper;
+package Helper;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import lms.Model.*;
-import lms.Model.QuestionsModel.QType;
+import Model.*;
+import Model.QuestionsModel.QType;
 
 
 public class SqlManager {

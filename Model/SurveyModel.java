@@ -1,4 +1,4 @@
-package lms.Model;
+package Model;
 
 import java.time.LocalDateTime;
 
@@ -8,4 +8,5 @@ public class SurveyModel {
     public int QuizId;
     public int QuizLevel;
 
+    
 }

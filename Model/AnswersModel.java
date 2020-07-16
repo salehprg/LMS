@@ -1,4 +1,4 @@
-package lms.Model;
+package Model;
 
 import java.time.LocalDateTime;
 

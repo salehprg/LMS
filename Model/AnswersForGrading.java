@@ -1,6 +1,6 @@
-package lms.Model;
+package Model;
 
-import lms.Model.QuestionsModel.QType;
+import Model.QuestionsModel.QType;
 
 public class AnswersForGrading {
     public int AnswerId;
