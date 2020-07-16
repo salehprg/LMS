@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selectpage.Manager.ManagerRegisterController">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="134.0" style="-fx-background-color: #7647D3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="145.0" fitWidth="149.0" layoutX="28.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/student.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="51.0" layoutY="318.0" onMouseClicked="#LogIn" prefHeight="27.0" prefWidth="48.0" text="Log In" textFill="#19191a" underline="true">
+               <font>
+                  <Font name="Cambria Bold Italic" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="21.0" layoutY="34.0" onMouseClicked="#BackToRolls" prefHeight="27.0" prefWidth="108.0" text="Back to Rolls" textFill="#19191a" underline="true">
+               <font>
+                  <Font name="Cambria Bold Italic" size="16.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <TextField fx:id="firstName" layoutX="348.0" layoutY="93.0" promptText="First Name" />
+      <TextField fx:id="LastName" layoutX="348.0" layoutY="152.0" promptText="Last Name" />
+      <TextField fx:id="UserName" layoutX="348.0" layoutY="211.0" promptText="Username" />
+      <Label layoutX="342.0" prefHeight="80.0" prefWidth="160.0" text="Student Register" textFill="#191f46">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Label>
+      <Button layoutX="389.0" layoutY="342.0" mnemonicParsing="false" onAction="#Register" prefHeight="25.0" prefWidth="67.0" text="register" textFill="#7647d3" />
+      <PasswordField fx:id="Password" layoutX="348.0" layoutY="268.0" promptText="password" />
+   </children>
+</AnchorPane>
