@@ -16,7 +16,8 @@ public enum RequestList{
     Admin_RemoveUserFromQuiz(12),
     Admin_BanUserFromQuiz(13),
     Admin_Grading_getUserAnswers(14),
-    Admin_Grading_getQuestions(15);
+    Admin_Grading_getQuestions(15),
+    Admin_AdduserFromExcel(16);
 
     private int Id;
 

@@ -128,6 +128,12 @@ public class RequestHandler implements Runnable {
                     response = adminController.createNewQuiz(quizesModel);
                     break;
 
+                case Admin_AdduserFromExcel:
+                    String fileUrl = (String)fromClient.readObject();
+
+                    response = adminController.AdduserFromExcel(fileUrl);
+                    break;
+
                 case User_EnrolQuiz:
                     IdUser = (int)fromClient.readObject();
                     quizId = (int)fromClient.readObject();
