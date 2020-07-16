@@ -30,16 +30,16 @@
                </font>
             </Label>
          </children></Pane>
-      <TextField fx:id="FirstName" layoutX="349.0" layoutY="94.0" promptText="First Name" />
-      <TextField fx:id="Lastname" layoutX="348.0" layoutY="136.0" promptText="Last Name" />
-      <TextField fx:id="Username" layoutX="349.0" layoutY="214.0" promptText="Username" />
-      <TextField fx:id="IdNumber" layoutX="348.0" layoutY="175.0" promptText="ID Number" />
+      <TextField id="1" fx:id="FirstName" layoutX="349.0" layoutY="94.0" promptText="First Name" />
+      <TextField id="2" fx:id="Lastname" layoutX="348.0" layoutY="136.0" promptText="Last Name" />
+      <TextField id="3" fx:id="IdNumber" layoutX="348.0" layoutY="175.0" promptText="ID Number" />
+      <TextField id="4" fx:id="Username" layoutX="349.0" layoutY="214.0" promptText="Username" />
+      <PasswordField id="5" fx:id="Password" layoutX="349.0" layoutY="252.0" promptText="password" />
+      <Button layoutX="389.0" layoutY="318.0" mnemonicParsing="false" onAction="#BtnReister" prefHeight="25.0" prefWidth="67.0" text="register" textFill="#7647d3" />
       <Label layoutX="334.0" layoutY="14.0" prefHeight="80.0" prefWidth="179.0" text="Student Register" textFill="#191f46">
          <font>
             <Font name="Cambria Bold" size="23.0" />
          </font>
       </Label>
-      <Button layoutX="389.0" layoutY="318.0" mnemonicParsing="false" onAction="#BtnReister" prefHeight="25.0" prefWidth="67.0" text="register" textFill="#7647d3" />
-      <PasswordField fx:id="Password" layoutX="349.0" layoutY="252.0" promptText="password" />
    </children>
 </AnchorPane>
