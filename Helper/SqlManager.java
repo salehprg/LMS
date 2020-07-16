@@ -1,4 +1,4 @@
-package lms.Helper;
+package Helper;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;

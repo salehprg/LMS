@@ -1,4 +1,4 @@
-package lms.Controller;
+package Controller;
 
 import java.lang.reflect.Array;
 import java.sql.SQLException;
