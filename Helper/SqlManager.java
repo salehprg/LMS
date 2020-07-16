@@ -31,33 +31,40 @@ public class SqlManager {
         ",[Random]"+
         ",[CanReview])"+
         "VALUES"+
-        "(%s,%s,%s,%s,%s)" , quizesModel.StartTime , quizesModel.EndTime , quizesModel.Duration
+        "('%s','%s','%s','%s','%s')" , quizesModel.StartTime , quizesModel.EndTime , quizesModel.Duration
                                 , quizesModel.Random , quizesModel.CanReview);
 
+        Boolean result = false;
+
         try {
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            statement.execute(sqlQuery);
+            result = true;
         } catch (SQLException e) {
             e.printStackTrace();
-            return -1;
+            result = false;
         }
 
-        //Get currently quiz id
-        int QuizId = -1;
-        sqlQuery = "SELECT * from Quizes ORDER BY Id DESC";
+        if(result)
+        {
 
-        try {
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            //Get currently quiz id
+            int QuizId = -1;
+            sqlQuery = "SELECT * from Quizes ORDER BY Id DESC";
 
-            while (resultSet.next()) {
-                QuizId = resultSet.getInt("Id");
+            try {
+                ResultSet resultSet = statement.executeQuery(sqlQuery);
+
+                while (resultSet.next()) {
+                    QuizId = resultSet.getInt("Id");
+                }
+                
+                return QuizId;
+                
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            
-            return QuizId;
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        
+
         return -1;
     }
 
@@ -70,31 +77,37 @@ public class SqlManager {
         ",[Duration]"+
         ",[Answer]"+
         ",[Grade])"+
-        "VALUES (%s,%s,%s,%s,%s,%s)" , questionsModel.QuizId , questionsModel.QuestionText , questionsModel.QuestionType
+        "VALUES ('%s','%s','%s','%s','%s','%s')" , questionsModel.QuizId , questionsModel.QuestionText , questionsModel.QuestionType
                                 , questionsModel.Duration , questionsModel.Answer);
 
+        Boolean result = false;
+
         try {
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            statement.execute(sqlQuery);
+            result = true;
         } catch (SQLException e) {
             e.printStackTrace();
-            return -1;
+            result = false;
         }
 
-        //Get currently Question id
-        int QuestionId = -1;
-        sqlQuery = "SELECT * from Questions ORDER BY Id DESC";
+        if(result)
+        {
+            //Get currently Question id
+            int QuestionId = -1;
+            sqlQuery = "SELECT * from Questions ORDER BY Id DESC";
 
-        try {
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            try {
+                ResultSet resultSet = statement.executeQuery(sqlQuery);
 
-            while (resultSet.next()) {
-                QuestionId = resultSet.getInt("Id");
+                while (resultSet.next()) {
+                    QuestionId = resultSet.getInt("Id");
+                }
+                
+                return QuestionId;
+                
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            
-            return QuestionId;
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
 
         return -1;
@@ -106,16 +119,19 @@ public class SqlManager {
         String sqlQuery = String.format("INSERT INTO [dbo].[Options]"+
         "([QuestionId]"+
         ",[OptionText])"+
-        "VALUES (%s,%s)" , optionsModel.QuestionId , optionsModel.OptionText);
+        "VALUES ('%s','%s')" , optionsModel.QuestionId , optionsModel.OptionText);
+
+        Boolean result = false;
 
         try {
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            statement.execute(sqlQuery);
+            result = true;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            result = false;
         }
 
-        return true;
+        return result;
     }
 
     protected ArrayList<QuestionsModel> DB_GetQuestionInQuiz(int QuizId)
@@ -157,22 +173,25 @@ public class SqlManager {
         ",[QuizId]"+
         ",[Allow])"+
        " VALUES",
-        "(%s,%s,%s)" , UserId , QuizId , true);
+        "('%s','%s','%s')" , UserId , QuizId , true);
+
+        Boolean result = false;
 
         try {
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            statement.execute(sqlQuery);
+            result = true;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            result = false;
         }
 
-        return true;
+        return result;
     }
 
     protected boolean DB_RemoveUserFromQuiz(int UserId , int QuizId)
     {
         String sqlQuery = String.format("DELETE FROM [dbo].[AccesList]"+
-        "WHERE UserId = %s And QuizId = %s"  , UserId , QuizId , true);
+        "WHERE UserId = '%s' And QuizId = '%s'"  , UserId , QuizId , true);
 
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -191,16 +210,19 @@ public class SqlManager {
         ",[QuizId]"+
         ",[Allow])"+
        " VALUES",
-        "(%s,%s,%s)" , UserId , QuizId , false);
+        "('%s','%s','%s')" , UserId , QuizId , false);
+
+        Boolean result = false;
 
         try {
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            statement.execute(sqlQuery);
+            result = true;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            result = false;
         }
 
-        return true;
+        return result;
     }
 
     protected QuizesModel DB_GetQuizInfo(int QuizId)
@@ -239,16 +261,19 @@ public class SqlManager {
         ",[UserId]"+
         ",[TryTime])"+
         "VALUES"+
-        "(%s,%s,%s)" , triesModel.QuizId , triesModel.UserId , triesModel.TryTime , true);
+        "('%s','%s','%s')" , triesModel.QuizId , triesModel.UserId , triesModel.TryTime , true);
+
+        Boolean result = false;
 
         try {
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            statement.execute(sqlQuery);
+            result = true;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            result = false;
         }
 
-        return true;
+        return result;
     }
  
     protected TriesModel DB_GetUserTries(int UserId , int QuizId)
@@ -314,16 +339,19 @@ public class SqlManager {
         ",[Answer]"+
         ",[UserGrade])"+
         "VALUES"+
-        "(%s,%s,%s,%s)" , answersModel.UserId , answersModel.QuestionId , answersModel.Answer , 0);
+        "('%s','%s','%s','%s')" , answersModel.UserId , answersModel.QuestionId , answersModel.Answer , 0);
+
+        Boolean result = false;
 
         try {
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            statement.execute(sqlQuery);
+            result = true;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            result = false;
         }
 
-        return true;
+        return result;
     }
 
     protected AnswersModel DB_GetUserAnswer(int UserId , int QuestionId)
@@ -518,17 +546,20 @@ public class SqlManager {
         ",[Password]"+
         ",[RoleId]) "+
         "VALUES "+
-        "(%s,%s,%s,%s,%s,%s)" , userModel.FirstName , userModel.LastName , userModel.IdNumber , userModel.UserName ,
+        "('%s','%s','%s','%s','%s','%s')" , userModel.FirstName , userModel.LastName , userModel.IdNumber , userModel.UserName ,
                                         userModel.Password , userModel.RoleId);
 
+        Boolean result = false;
+
         try {
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            statement.execute(sqlQuery);
+            result = true;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            result = false;
         }
 
-        return true;
+        return result;
     }
 
 
