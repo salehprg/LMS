@@ -5,8 +5,10 @@
  */
 package selectpage.Manager;
 
+import Model.QuizesModel;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import selectpage.Api.Api;
 
 /**
  * FXML Controller class
@@ -60,26 +63,45 @@ public class ManagerArchiveTestController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-
-
+    }
 
     @FXML
     private void OpenStudentsAnswer(ActionEvent event) {
-        
-        try {
-                FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerArchiveTestStudent.fxml"));
-                Parent root1 = (Parent) fxmlloader.load();
-                Stage stage = new Stage();
 
-                stage.setTitle(" Manager Archive Test Student Page");
-                stage.setScene(new Scene(root1));
-                stage.show();
+        try {
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerArchiveTestStudent.fxml"));
+            Parent root1 = (Parent) fxmlloader.load();
+            Stage stage = new Stage();
+
+            stage.setTitle(" Manager Archive Test Student Page");
+            stage.setScene(new Scene(root1));
+            stage.show();
 //                stage = (Stage)((Lab)event.getSource()).getScene().getWindow();
 //                stage.close();
-            } catch (IOException ex) {
-                System.out.println("Can't Open Manager Archive Test Student Page");
-            }
+        } catch (IOException ex) {
+            System.out.println("Can't Open Manager Archive Test Student Page");
+        }
     }
+
     
+    private void loadData()
+    {
+
+        ArrayList<QuizesModel> mylist = Api.Admin_getQuizArchive();
+        QuizesModel myqModel = mylist.get(Api.CurrentQuizId);
+         TestName.setText(myqModel.QuizName);
+         TestDuration.setText(String.valueOf(myqModel.Duration));
+         Date.setText(myqModel.StartTime.getYear() + "/" + myqModel.StartTime.getMonth() + "/" + myqModel.StartTime.getDay() );
+        StartHour.setText(String.valueOf(myqModel.StartTime.getHours()));
+        StartMinute.setText(String.valueOf(myqModel.StartTime.getMinutes()));
+      
+        EndHour.setText(String.valueOf(myqModel.EndTime.getHours()));
+        EndMinute.setText(String.valueOf(myqModel.EndTime.getMinutes()));
+        if(myqModel.Random)
+        {
+            ArrangeMethod.setText("Random");
+        }else{
+            ArrangeMethod.setText(("Normal"));
+        }
+    }
 }

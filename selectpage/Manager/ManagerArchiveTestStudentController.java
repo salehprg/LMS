@@ -5,8 +5,10 @@
  */
 package selectpage.Manager;
 
+import Model.AllowQuizList;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import selectpage.Api.Api;
 
 /**
  * FXML Controller class
@@ -54,6 +57,16 @@ public class ManagerArchiveTestStudentController implements Initializable {
                 System.out.println("Can't Open Manager Archive Test Student Answer Page");
 
             }
+    }
+    
+    
+    
+    private void selection() {
+
+       
+        Api.CurrentQuizId = StudentsList.getSelectionModel().getSelectedIndex();
+        System.out.println(Api.CurrentQuizId);
+
     }
     
 }

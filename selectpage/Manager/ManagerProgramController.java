@@ -66,7 +66,7 @@ public class ManagerProgramController implements Initializable {
 
         int index = TestsList.getSelectionModel().getSelectedIndex();
 
-        ArrayList<AllowQuizList> quizLists = Api.GetQuizes();
+        
         Api.CurrentQuizId = TestsList.getSelectionModel().getSelectedIndex();
         System.out.println(Api.CurrentQuizId);
 
