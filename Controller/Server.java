@@ -41,7 +41,7 @@ public class Server {
 		int port = 9876;
 		try {
 			new Server(port).acceptClients();
-		} catch (IOException | SQLException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
     }
