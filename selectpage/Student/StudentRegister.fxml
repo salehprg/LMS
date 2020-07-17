@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selectpage.Student.StudentRegisterController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selectpage.Student.StudentRegisterController">
    <children>
       <Pane prefHeight="400.0" prefWidth="134.0" style="-fx-background-color: #7647D3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -30,16 +30,16 @@
                </font>
             </Label>
          </children></Pane>
-      <TextField layoutX="349.0" layoutY="94.0" promptText="First Name" />
-      <TextField layoutX="348.0" layoutY="136.0" promptText="Last Name" />
-      <TextField layoutX="349.0" layoutY="214.0" promptText="Username" />
-      <TextField layoutX="348.0" layoutY="175.0" promptText="ID Number" />
+      <TextField fx:id="FirstName" layoutX="349.0" layoutY="94.0" promptText="First Name" />
+      <TextField fx:id="Lastname" layoutX="348.0" layoutY="136.0" promptText="Last Name" />
+      <TextField fx:id="Username" layoutX="349.0" layoutY="214.0" promptText="Username" />
+      <TextField fx:id="IdNumber" layoutX="348.0" layoutY="175.0" promptText="ID Number" />
       <Label layoutX="334.0" layoutY="14.0" prefHeight="80.0" prefWidth="179.0" text="Student Register" textFill="#191f46">
          <font>
             <Font name="Cambria Bold" size="23.0" />
          </font>
       </Label>
       <Button layoutX="389.0" layoutY="318.0" mnemonicParsing="false" onAction="#BtnReister" prefHeight="25.0" prefWidth="67.0" text="register" textFill="#7647d3" />
-      <PasswordField layoutX="349.0" layoutY="252.0" promptText="password" />
+      <PasswordField fx:id="Password" layoutX="349.0" layoutY="252.0" promptText="password" />
    </children>
 </AnchorPane>

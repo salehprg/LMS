@@ -14,12 +14,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.swing.plaf.synth.Region;
+
+import Model.UserModel;
 import selectpage.SelectPage;
+import selectpage.Api.Api;
 
 /**
  * FXML Controller class
@@ -28,6 +30,20 @@ import selectpage.SelectPage;
  */
 public class StudentRegisterController implements Initializable {
 
+    @FXML
+    private TextField FirstName;
+
+    @FXML
+    private TextField Lastname;
+
+    @FXML
+    private TextField Username;
+
+    @FXML
+    private TextField IdNumber;
+
+    @FXML
+    private PasswordField Password;
     /**
      * Initializes the controller class.
      */
@@ -81,15 +97,28 @@ public class StudentRegisterController implements Initializable {
         
         try {
 
-                FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentPage.fxml"));
-                Parent root1 = (Parent) fxmlloader.load();
-                Stage stage = new Stage();
+                UserModel userModel = new UserModel();
+                userModel.FirstName = FirstName.getText();
+                userModel.LastName = Lastname.getText();
+                userModel.UserName = Username.getText();
+                userModel.Password = Password.getText();
+                userModel.IdNumber = IdNumber.getText();
 
-                stage.setTitle(" Student Student Page");
-                stage.setScene(new Scene(root1));
-                stage.show();
-                stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-                stage.close();
+                if(Api.Register(userModel))
+                {
+
+                    FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentPage.fxml"));
+                    Parent root1 = (Parent) fxmlloader.load();
+                    Stage stage = new Stage();
+
+                    stage.setTitle(" Student Student Page");
+                    stage.setScene(new Scene(root1));
+                    stage.show();
+                    stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+                    stage.close();
+                }
+                
+
             } catch (IOException ex) {
                 System.out.println("Can't Open Student Page");
 

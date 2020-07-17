@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class QuestionsModel {
+public class QuestionsModel implements Serializable{
     public int Id;
     public int QuizId;
     public String QuestionText;

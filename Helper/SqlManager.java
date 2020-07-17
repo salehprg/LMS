@@ -1,11 +1,6 @@
 package Helper;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 import Model.*;
@@ -18,6 +13,7 @@ public class SqlManager {
     Statement statement;
 
     public SqlManager () throws SQLException {
+
         String connectionUrl = "jdbc:sqlserver://localhost\\SQLSERVER2008R2:1433;databaseName=Javalms;integratedSecurity=true";
 
         conn = DriverManager.getConnection(connectionUrl);
@@ -28,14 +24,14 @@ public class SqlManager {
 
     protected int DB_CreateQuiz(QuizesModel quizesModel)
     {
-        String sqlQuery = String.format("INSERT INTO [dbo].[Quizes]",
-        "([StartTime]",
-        ",[EndTime]",
-        ",[Duration]",
-        ",[Random]",
-        ",[CanReview])",
-        "VALUES",
-        "({0},{1},{2},{3},{4})" , quizesModel.StartTime , quizesModel.EndTime , quizesModel.Duration
+        String sqlQuery = String.format("INSERT INTO [dbo].[Quizes]"+
+        "([StartTime]"+
+        ",[EndTime]"+
+        ",[Duration]"+
+        ",[Random]"+
+        ",[CanReview])"+
+        "VALUES"+
+        "(%s,%s,%s,%s,%s)" , quizesModel.StartTime , quizesModel.EndTime , quizesModel.Duration
                                 , quizesModel.Random , quizesModel.CanReview);
 
         try {
@@ -67,14 +63,14 @@ public class SqlManager {
 
     protected int DB_AddQuestion(QuestionsModel questionsModel)
     {
-        String sqlQuery = String.format("INSERT INTO [dbo].[Questions]",
-        "([QuizId]",
-        ",[QuestionText]",
-        ",[QuestionType]",
-        ",[Duration]",
-        ",[Answer]",
-        ",[Grade])",
-        "VALUES ({0},{1},{2},{3},{4},{5})" , questionsModel.QuizId , questionsModel.QuestionText , questionsModel.QuestionType
+        String sqlQuery = String.format("INSERT INTO [dbo].[Questions]"+
+        "([QuizId]"+
+        ",[QuestionText]"+
+        ",[QuestionType]"+
+        ",[Duration]"+
+        ",[Answer]"+
+        ",[Grade])"+
+        "VALUES (%s,%s,%s,%s,%s,%s)" , questionsModel.QuizId , questionsModel.QuestionText , questionsModel.QuestionType
                                 , questionsModel.Duration , questionsModel.Answer);
 
         try {
@@ -107,10 +103,10 @@ public class SqlManager {
     //Used when question Type is testi
     protected boolean DB_AddOptions(OptionsModel optionsModel)
     {
-        String sqlQuery = String.format("INSERT INTO [dbo].[Options]",
-        "([QuestionId]",
-        ",[OptionText])",
-        "VALUES ({0},{1})" , optionsModel.QuestionId , optionsModel.OptionText);
+        String sqlQuery = String.format("INSERT INTO [dbo].[Options]"+
+        "([QuestionId]"+
+        ",[OptionText])"+
+        "VALUES (%s,%s)" , optionsModel.QuestionId , optionsModel.OptionText);
 
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -156,12 +152,12 @@ public class SqlManager {
 
     protected boolean DB_AddUserToQuiz(int UserId , int QuizId)
     {
-        String sqlQuery = String.format("INSERT INTO [dbo].[AccesList]",
-        "([UserId]",
-        ",[QuizId]",
-        ",[Allow])",
+        String sqlQuery = String.format("INSERT INTO [dbo].[AccesList]"+
+        "([UserId]"+
+        ",[QuizId]"+
+        ",[Allow])"+
        " VALUES",
-        "({0},{1},{2})" , UserId , QuizId , true);
+        "(%s,%s,%s)" , UserId , QuizId , true);
 
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -175,8 +171,8 @@ public class SqlManager {
 
     protected boolean DB_RemoveUserFromQuiz(int UserId , int QuizId)
     {
-        String sqlQuery = String.format("DELETE FROM [dbo].[AccesList]",
-        "WHERE UserId = {0} And QuizId = {1}"  , UserId , QuizId , true);
+        String sqlQuery = String.format("DELETE FROM [dbo].[AccesList]"+
+        "WHERE UserId = %s And QuizId = %s"  , UserId , QuizId , true);
 
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -190,12 +186,12 @@ public class SqlManager {
 
     protected boolean DB_BanUser(int UserId , int QuizId)
     {
-        String sqlQuery = String.format("INSERT INTO [dbo].[AccesList]",
-        "([UserId]",
-        ",[QuizId]",
-        ",[Allow])",
+        String sqlQuery = String.format("INSERT INTO [dbo].[AccesList]"+
+        "([UserId]"+
+        ",[QuizId]"+
+        ",[Allow])"+
        " VALUES",
-        "({0},{1},{2})" , UserId , QuizId , false);
+        "(%s,%s,%s)" , UserId , QuizId , false);
 
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -238,12 +234,12 @@ public class SqlManager {
 
     protected boolean DB_EnrolUserToQuiz(TriesModel triesModel)
     {
-        String sqlQuery = String.format("INSERT INTO [dbo].[Tries]",
-        "([QuizId]",
-        ",[UserId]",
-        ",[TryTime])",
-        "VALUES",
-        "({0},{1},{2})" , triesModel.QuizId , triesModel.UserId , triesModel.TryTime , true);
+        String sqlQuery = String.format("INSERT INTO [dbo].[Tries]"+
+        "([QuizId]"+
+        ",[UserId]"+
+        ",[TryTime])"+
+        "VALUES"+
+        "(%s,%s,%s)" , triesModel.QuizId , triesModel.UserId , triesModel.TryTime , true);
 
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -312,13 +308,13 @@ public class SqlManager {
 
     protected boolean DB_SubmitAnswer(AnswersModel answersModel)
     {
-        String sqlQuery = String.format("INSERT INTO [dbo].[Answers]",
-        "([UserId]",
-        ",[QuestionId]",
-        ",[Answer]",
-        ",[UserGrade])",
-        "VALUES",
-        "({0},{1},{2},{3})" , answersModel.UserId , answersModel.QuestionId , answersModel.Answer , 0);
+        String sqlQuery = String.format("INSERT INTO [dbo].[Answers]"+
+        "([UserId]"+
+        ",[QuestionId]"+
+        ",[Answer]"+
+        ",[UserGrade])"+
+        "VALUES"+
+        "(%s,%s,%s,%s)" , answersModel.UserId , answersModel.QuestionId , answersModel.Answer , 0);
 
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -514,15 +510,15 @@ public class SqlManager {
 
     protected boolean DB_AddUser(UserModel userModel) 
     {
-        String sqlQuery = String.format("INSERT INTO [dbo].[Users]",
-        "([FirstName]",
-        ",[LastName]",
-        ",[IdNumber]",
-        ",[UserName]",
-        ",[Password]",
-        ",[RoleId])",
-        "VALUES",
-        "({0},{1},{2},{3},{4},{5})" , userModel.FirstName , userModel.LastName , userModel.IdNumber , userModel.UserName ,
+        String sqlQuery = String.format("INSERT INTO Users "+
+        "([FirstName]"+
+        ",[LastName]"+
+        ",[IdNumber]"+
+        ",[UserName]"+
+        ",[Password]"+
+        ",[RoleId]) "+
+        "VALUES "+
+        "(%s,%s,%s,%s,%s,%s)" , userModel.FirstName , userModel.LastName , userModel.IdNumber , userModel.UserName ,
                                         userModel.Password , userModel.RoleId);
 
         try {

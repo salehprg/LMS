@@ -13,15 +13,14 @@
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-Main<lms_eb6fd19e>",
-            "vmArgs": "--module-path %PATH_TO_FX% --add-modules javafx.controls,javafx.fxml",
+            "name": "Debug Server",
             "request": "launch",
-            "mainClass": "Main",
+            "mainClass": "Controller.Server",
             "projectName": "lms_eb6fd19e"
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-SelectPage<lms_eb6fd19e>",
+            "name": "Debug Client",
             "vmArgs": "--module-path %PATH_TO_FX% --add-modules javafx.controls,javafx.fxml",
             "request": "launch",
             "mainClass": "selectpage.SelectPage",
