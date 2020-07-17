@@ -5,6 +5,7 @@
  */
 package selectpage.Manager;
 
+import Model.QuizesModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -27,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import selectpage.Api.Api;
 /**
  * FXML Controller class
  *
@@ -124,4 +126,19 @@ public class ManagerCreateTestController implements Initializable {
         ArrangeMethod.getItems().addAll(List);
     }
 
+    private void CreateTest()
+    {
+        QuizesModel MyQuizesModel = new QuizesModel();
+        
+        
+//        Api.addQuestionToQuiz(questionsModel);
+//        
+//        MyQuizesModel.QuizName = TestName.getText();
+//        MyQuizesModel.CanReview = ;
+//        MyQuizesModel. = TestName.getText();
+//        MyQuizesModel.QuizName = TestName.getText();
+//        
+//        Api.AssignUserToQuiz(_userModel, 0)
+//        Api.createNewQuiz(MyQuizesModel);
+    }
 }
