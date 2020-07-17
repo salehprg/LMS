@@ -40,8 +40,6 @@ public class Server {
 	public static void main(String[] args) {
 		int port = 9876;
 		try {
-			AdminController adminController = new AdminController();
-			adminController.saveExcelUserGrades(1);
 			new Server(port).acceptClients();
 		} catch (IOException | SQLException e) {
 			e.printStackTrace();
