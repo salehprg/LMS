@@ -22,7 +22,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="390.0" layoutY="430.0" text="Adddres" />
+      <TextField fx:id="Address" layoutX="390.0" layoutY="430.0" text="Adddres" />
       <Button layoutX="551.0" layoutY="425.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="67.0" text="Open File" />
       <TextArea layoutX="140.0" layoutY="46.0" prefHeight="167.0" prefWidth="596.0" />
    </children>

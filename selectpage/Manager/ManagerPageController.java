@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 //import jdk.nashorn.internal.ir.Labels;
@@ -142,7 +143,7 @@ public class ManagerPageController implements Initializable {
                 stage.setTitle(" Manager Archive Page");
                 stage.setScene(new Scene(root1));
                 stage.show();
-//                stage = (Stage)((Lab)event.getSource()).getScene().getWindow();
+//                stage = (Stage)((ImageView)event.getSource()).getScene().getWindow();
 //                stage.close();
             } catch (IOException ex) {
                 System.out.println("Can't Open Manager Archive page");

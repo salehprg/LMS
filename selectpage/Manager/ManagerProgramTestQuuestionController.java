@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package selectpage.Student;
+package selectpage.Manager;
 
-import selectpage.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 /**
@@ -17,19 +18,29 @@ import javafx.scene.control.TextField;
  *
  * @author sajad cj
  */
-public class StdDoTestMthdLngAnwCmpltController implements Initializable {
+public class ManagerProgramTestQuuestionController implements Initializable {
 
     @FXML
-    private TextField Address;
+    private TextArea Question;
+    @FXML
+    private TextField QuestionTime;
+    @FXML
+    private TextField QuestionAnswer;
 
-    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-//        Address.visibleProperty() ;
     }    
+
+    @FXML
+    private void Next(ActionEvent event) {
+    }
+
+    @FXML
+    private void Preview(ActionEvent event) {
+    }
     
 }

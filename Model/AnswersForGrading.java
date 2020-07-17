@@ -6,9 +6,6 @@ public class AnswersForGrading {
     public int AnswerId;
     public String Answer;
     public float UserGrade;
-   
-    
-    public float dik ;
     
     
     public int UserId;
