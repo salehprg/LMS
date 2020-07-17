@@ -85,7 +85,7 @@ public class ManagerArchiveController implements Initializable {
         for (int i = 0; i < 10; i++) {
             MyList.add(i, "test " + i); 
         }
-        
+        //ezafe kardn be list
         for (int i = 0; i < 10; i++) {
            ArchiveList.getItems().add(MyList.get(i)) ;
         }
