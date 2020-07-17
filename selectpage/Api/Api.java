@@ -24,13 +24,9 @@ public class Api {
     public static int ActiveUserId;
     
     public static int CurrentQuizId;
-<<<<<<< HEAD
     public static int CurrentStudentId;
     public static int CurrentQuestionId = -1;
 
-=======
-    public static String WarningMassage ;
->>>>>>> c1095ec8aca47aba4a18f394171d7dbdbcba7ba3
     static boolean SendRequest(int funcId, Object[] dataObjects) {
         try {
 
