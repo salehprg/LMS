@@ -18,7 +18,12 @@ public enum RequestList{
     Admin_Grading_getUserAnswers(14),
     Admin_Grading_getQuestions(15),
     Admin_AdduserFromExcel(16),
-    Admin_getOptions(17);
+    Admin_getOptions(17),
+    Admin_reportQuizByQuiz(18),
+    Admin_reportStudentByStudent(19),
+    Admin_saveExcelUserGrades(20),
+    Admin_saveExcelQuizByQuiz(21);
+
 
     private int Id;
 

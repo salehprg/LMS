@@ -126,4 +126,44 @@ public class AdminController extends SqlManager implements IAdminController {
     public ArrayList<OptionsModel> getOptions(int QuestionId) {
         return DB_GetQuestionOptions(QuestionId);
     }
+
+    @Override
+    public ArrayList<AvgQuizGrade> reportQuizByQuiz() {
+        
+        return DB_AvgQuizGrade();
+    }
+
+    @Override
+    public boolean saveExcelQuizByQuiz() {
+        
+        boolean result;
+        try {
+            result = ExcelFile.WriteQuizAvg(DB_AvgQuizGrade());
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        
+    }
+
+    @Override
+    public boolean saveExcelUserGrades(int QuizId) {
+        
+        boolean result;
+        try {
+            result = ExcelFile.WriteUserGrades(DB_GetUserGradesInQuiz(QuizId));
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        
+    }
+
+    @Override
+    public ArrayList<UserGradesInQuiz> reportStudentByStudent(int QuizId) {
+
+        return DB_GetUserGradesInQuiz(QuizId);
+    }
 }

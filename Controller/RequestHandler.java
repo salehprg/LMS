@@ -139,6 +139,24 @@ public class RequestHandler implements Runnable {
                     response = adminController.getOptions(QuestionId);
                     break;
 
+                case Admin_reportQuizByQuiz:
+                    response = adminController.reportQuizByQuiz();
+                    break;
+
+                case Admin_reportStudentByStudent:
+                    int QuizId = (int)fromClient.readObject();
+                    response = adminController.reportStudentByStudent(QuizId);
+                    break;
+
+                case Admin_saveExcelQuizByQuiz:
+                    response = adminController.saveExcelQuizByQuiz();
+                    break;
+
+                case Admin_saveExcelUserGrades:
+                    QuizId = (int)fromClient.readObject();
+                    response = adminController.saveExcelUserGrades(QuizId);
+                    break;
+
                 case User_EnrolQuiz:
                     IdUser = (int)fromClient.readObject();
                     quizId = (int)fromClient.readObject();

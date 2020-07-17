@@ -544,6 +544,66 @@ public class SqlManager {
     }
     //#endregion
 
+    //#region Reporting
+    protected ArrayList<UserGradesInQuiz> DB_GetUserGradesInQuiz(int QuizId)
+    {
+        // Create and execute a SELECT SQL statement.
+        String sqlQuery = "SELECT * from UserGradesInQuiz Where QuizId = " + QuizId;
+
+        try {
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            ArrayList<UserGradesInQuiz> userGrades = new ArrayList<>();
+
+            while (resultSet.next()) {
+                UserGradesInQuiz data = new UserGradesInQuiz();
+
+                data.UserGrade = resultSet.getFloat("UserGrade");
+                data.IdNumber = resultSet.getString("IdNumber");
+                data.QuizId = resultSet.getInt("QuizId");
+                data.FirstName = resultSet.getString("FirstName");
+                data.LastName = resultSet.getString("LastName");
+
+                userGrades.add(data);
+            }
+            
+            return userGrades;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+
+    protected ArrayList<AvgQuizGrade> DB_AvgQuizGrade()
+    {
+        // Create and execute a SELECT SQL statement.
+        String sqlQuery = "SELECT * from AvgQuizGrade";
+
+        try {
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            ArrayList<AvgQuizGrade> avgQuizGrade = new ArrayList<>();
+
+            while (resultSet.next()) {
+                AvgQuizGrade data = new AvgQuizGrade();
+
+                data.QuizName = resultSet.getString("QuizName");
+                data.avgGrade = resultSet.getFloat("AvgGrade");
+                data.quizId = resultSet.getInt("QuizId");
+
+                avgQuizGrade.add(data);
+            }
+            
+            return avgQuizGrade;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+    //#endregion
+
     protected UserModel DB_GetUserInfo(String IdNumber)
     {
         // Create and execute a SELECT SQL statement.

@@ -3,6 +3,7 @@ package Helper;
 import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_NUMERIC;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,6 +17,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import Model.AvgQuizGrade;
+import Model.UserGradesInQuiz;
 import Model.UserModel;  
 public class ExcelFile  
 {  
@@ -72,4 +75,81 @@ public class ExcelFile
             return null;
         }  
     }  
-}  
+
+    public static boolean WriteQuizAvg(ArrayList<AvgQuizGrade> avgQuizGrades) throws IOException  
+    {  
+        try
+        {
+
+            XSSFWorkbook wb = new XSSFWorkbook();   
+            XSSFSheet sheet = wb.createSheet("میانگین نمرات آزمون به آزمون");  
+            
+            int rowCount = 0;
+         
+            for (AvgQuizGrade quizGrade : avgQuizGrades) {
+                Row row = sheet.createRow(++rowCount);
+                
+                Cell cell = row.createCell(0);
+                cell.setCellValue((String) quizGrade.QuizName);
+
+                cell = row.createCell(1);
+                cell.setCellValue((float) quizGrade.avgGrade);
+                
+            }
+            
+            
+            try (FileOutputStream outputStream = new FileOutputStream("QuizAvgGrades.xlsx")) {
+                wb.write(outputStream);
+            }
+
+            return true;
+        } 
+        catch(Exception e)  
+        {  
+            e.printStackTrace();  
+            return false;
+        }  
+    }  
+
+    public static boolean WriteUserGrades(ArrayList<UserGradesInQuiz> userGrades) throws IOException  
+    {  
+        try
+        {
+
+            XSSFWorkbook wb = new XSSFWorkbook();   
+            XSSFSheet sheet = wb.createSheet("میانگین نمرات آزمون به آزمون");  
+            
+            int rowCount = 0;
+         
+            for (UserGradesInQuiz quizGrade : userGrades) {
+                Row row = sheet.createRow(++rowCount);
+
+                Cell cell = row.createCell(0);
+                cell.setCellValue((String) quizGrade.IdNumber);
+
+                cell = row.createCell(1);
+                cell.setCellValue((String) quizGrade.FirstName);
+
+                cell = row.createCell(2);
+                cell.setCellValue((String) quizGrade.LastName);
+
+                cell = row.createCell(3);
+                cell.setCellValue((float) quizGrade.UserGrade);
+                
+            }
+            
+            
+            try (FileOutputStream outputStream = new FileOutputStream("UserGrades.xlsx")) {
+                wb.write(outputStream);
+            }
+            
+            return true;
+        } 
+        catch(Exception e)  
+        {  
+            e.printStackTrace();  
+            return false;
+        }  
+    }  
+
+}   

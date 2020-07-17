@@ -73,6 +73,42 @@ public class Api {
     }
 
     
+    public static boolean Admin_saveExcelQuizByQuiz()
+    {
+        if(SendRequest(RequestList.Admin_saveExcelQuizByQuiz.getId(), null))
+        {
+            return (boolean)ReadResponse();
+        }
+        return false;
+    }
+
+    public static boolean Admin_saveExcelUserGrades(int QuizId)
+    {
+        if(SendRequest(RequestList.Admin_saveExcelUserGrades.getId(), new Object[] { QuizId }))
+        {
+            return (boolean)ReadResponse();
+        }
+        return false;
+    }
+
+    public static ArrayList<UserGradesInQuiz> Admin_reportStudentByStudent(int QuizId)
+    {
+        if(SendRequest(RequestList.Admin_reportStudentByStudent.getId(), new Object[] { QuizId }))
+        {
+            return (ArrayList<UserGradesInQuiz>)ReadResponse();
+        }
+        return null;
+    }
+
+    public static ArrayList<AvgQuizGrade> Admin_reportQuizByQuiz()
+    {
+        if(SendRequest(RequestList.Admin_reportQuizByQuiz.getId(), null))
+        {
+            return (ArrayList<AvgQuizGrade>)ReadResponse();
+        }
+        return null;
+    }
+
     public static boolean AddUserFromExcel(String fileUrl)
     {
         if(SendRequest(RequestList.Admin_AdduserFromExcel.getId(), new Object[] { fileUrl }))

@@ -33,7 +33,13 @@ public interface IAdminController {
     
     ArrayList<OptionsModel> getOptions(int QuestionId);
 
-    ArrayList<OptionsModel> reportQuizByQuiz();
+    ArrayList<AvgQuizGrade> reportQuizByQuiz();
 
-    ArrayList<OptionsModel> reportStudentByStudent();
+    ArrayList<UserGradesInQuiz> reportStudentByStudent(int QuizId);
+
+    boolean saveExcelQuizByQuiz();
+
+    boolean saveExcelUserGrades(int QuizId);
+
+    
 }
