@@ -58,15 +58,11 @@ public class ManagerProgramController implements Initializable {
             stage.close();
         } catch (IOException ex) {
             System.out.println("Can't Open Manager Program Test Page");
-
         }
     }
 
     private void selection() {
-
         int index = TestsList.getSelectionModel().getSelectedIndex();
-
-        
         Api.CurrentQuizId = TestsList.getSelectionModel().getSelectedIndex();
         System.out.println(Api.CurrentQuizId);
 
@@ -75,13 +71,9 @@ public class ManagerProgramController implements Initializable {
     private void loadData() {
 //        int index = TestsList.getSelectionModel().getSelectedIndex();
         ArrayList<QuizesModel> MymModels = Api.Admin_getQuizProgram();
+        for (int i = 0; i < MymModels.size(); i++) {
+            TestsList.getItems().add(MymModels.get(i).QuizName);
+        }
 
-        for (int i = 0; i < 10; i++) {
-//            MyList.add(MymModels.get(i).QuizName); 
-        }
-        //ezafe kardn be list
-        for (int i = 0; i < 10; i++) {
-            TestsList.getItems().add(i + "dick");
-        }
     }
 }

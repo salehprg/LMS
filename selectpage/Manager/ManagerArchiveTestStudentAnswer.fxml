@@ -13,16 +13,16 @@
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selectpage.Manager.ManagerArchiveTestStudentAnswerController">
    <children>
-      <TextArea fx:id="Answer" editable="false" layoutX="114.0" layoutY="247.0" prefHeight="167.0" prefWidth="632.0" />
-      <Button layoutX="190.0" layoutY="435.0" mnemonicParsing="false" onAction="#NextQuestion" prefHeight="35.0" prefWidth="67.0" text="Next" />
+      <TextArea fx:id="Answer" editable="false" layoutX="114.0" layoutY="247.0" prefHeight="142.0" prefWidth="632.0" />
+      <Button layoutX="199.0" layoutY="436.0" mnemonicParsing="false" onAction="#NextQuestion" prefHeight="35.0" prefWidth="67.0" text="Next" />
       <Button layoutX="114.0" layoutY="435.0" mnemonicParsing="false" onAction="#Preview" prefHeight="35.0" prefWidth="67.0" text="Preview" />
-      <Label layoutX="264.0" layoutY="435.0" prefHeight="35.0" prefWidth="109.0" text="File Address :" textFill="#7b5ef0">
+      <Label layoutX="291.0" layoutY="404.0" prefHeight="35.0" prefWidth="109.0" text="File Address :" textFill="#7b5ef0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="Address" editable="false" layoutX="356.0" layoutY="440.0" text="Adddres" />
-      <Button layoutX="513.0" layoutY="435.0" mnemonicParsing="false" onAction="#OpenFile" prefHeight="35.0" prefWidth="67.0" text="Open File" />
+      <TextField fx:id="Address" editable="false" layoutX="291.0" layoutY="442.0" promptText="Address" />
+      <Button layoutX="472.0" layoutY="435.0" mnemonicParsing="false" onAction="#OpenFile" prefHeight="35.0" prefWidth="67.0" text="Open File" />
       <TextArea fx:id="Question" editable="false" layoutX="114.0" layoutY="56.0" prefHeight="167.0" prefWidth="632.0" />
       <Label layoutX="43.0" layoutY="56.0" prefHeight="25.0" prefWidth="84.0" text="Question :" textFill="#7b5ef0">
          <font>
@@ -62,8 +62,14 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <TextField fx:id="Score" layoutX="690.0" layoutY="440.0" prefHeight="25.0" prefWidth="51.0" />
-      <Label layoutX="619.0" layoutY="435.0" prefHeight="35.0" prefWidth="61.0" text="Score :" textFill="#7b5ef0">
+      <TextField fx:id="Score" layoutX="566.0" layoutY="441.0" prefHeight="25.0" prefWidth="61.0" />
+      <Label layoutX="566.0" layoutY="405.0" prefHeight="35.0" prefWidth="61.0" text="Score :" textFill="#7b5ef0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Score1" layoutX="655.0" layoutY="441.0" prefHeight="25.0" prefWidth="61.0" promptText="0-100" />
+      <Label layoutX="655.0" layoutY="405.0" prefHeight="35.0" prefWidth="61.0" text="Survey :" textFill="#7b5ef0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
