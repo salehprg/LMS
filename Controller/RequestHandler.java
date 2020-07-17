@@ -180,11 +180,22 @@ public class RequestHandler implements Runnable {
 
                     break;
 
+                case Admin_getUsersInQuiz:
+                    QuizId = (int)fromClient.readObject();
+                    response = adminController.getUsersInQuiz(QuizId);
+                    break;
+
                 case Admin_getQuestions:
                     QuizId = (int)fromClient.readObject();
                     response = adminController.getQuestions(QuizId);
                     break;
 
+                case Admin_SubmitGrade:
+                    int AnswerId = (int)fromClient.readObject();
+                    float UserGrade = (float)fromClient.readObject();
+                    response = adminController.SubmitGrade(AnswerId, UserGrade);
+                    
+                    break;
                 case User_EnrolQuiz:
                     IdUser = (int)fromClient.readObject();
                     quizId = (int)fromClient.readObject();
@@ -219,6 +230,7 @@ public class RequestHandler implements Runnable {
                     break;
 
                 case User_SubmitAnswer:
+                    
                     AnswersModel answersModel = (AnswersModel)fromClient.readObject();
 
                     response = userController.SubmitAnswer(answersModel);

@@ -51,5 +51,9 @@ public interface IAdminController {
 
     ArrayList<QuizSurvey> getQuizSurvey(int QuizId);
 
+    ArrayList<UserModel> getUsersInQuiz(int QuizId);
+
+    boolean SubmitGrade(int AnswerId , float UserGrade);
+
     
 }
