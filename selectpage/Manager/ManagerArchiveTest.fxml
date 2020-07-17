@@ -78,7 +78,6 @@
       <TextField fx:id="ArrangeMethod" editable="false" layoutX="272.0" layoutY="121.0" />
       <TextField fx:id="AnswerMethod" editable="false" layoutX="589.0" layoutY="121.0" />
       <TextField fx:id="TestReview" editable="false" layoutX="595.0" layoutY="358.0" prefHeight="25.0" prefWidth="25.0" />
-      <Button layoutX="450.0" layoutY="413.0" mnemonicParsing="false" onAction="#OpenQuestions" prefHeight="39.0" prefWidth="127.0" text="Open Questions" />
-      <Button layoutX="595.0" layoutY="413.0" mnemonicParsing="false" onAction="#OpenStudentsAnswer" prefHeight="39.0" prefWidth="150.0" text="Open Student's Answer" />
+      <Button layoutX="533.0" layoutY="413.0" mnemonicParsing="false" onAction="#OpenStudentsAnswer" prefHeight="39.0" prefWidth="150.0" text="Open Student's Answer" />
    </children>
 </AnchorPane>

@@ -11,22 +11,17 @@
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selectpage.Student.StudentTestController">
    <children>
-      <Label layoutX="42.0" layoutY="46.0" prefHeight="25.0" prefWidth="58.0" text="test :" textFill="#7b5ef0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <TextArea layoutX="140.0" layoutY="237.0" prefHeight="167.0" prefWidth="596.0" />
-      <Button layoutX="180.0" layoutY="425.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="67.0" text="Next" />
-      <Button layoutX="100.0" layoutY="425.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="67.0" text="Preview" />
+      <TextArea fx:id="Answer" layoutX="140.0" layoutY="237.0" prefHeight="167.0" prefWidth="596.0" />
+      <Button layoutX="180.0" layoutY="425.0" mnemonicParsing="false" onAction="#NextQuestion" prefHeight="35.0" prefWidth="67.0" text="Next" />
+      <Button layoutX="100.0" layoutY="425.0" mnemonicParsing="false" onAction="#Preview" prefHeight="35.0" prefWidth="67.0" text="Preview" />
       <Label layoutX="291.0" layoutY="425.0" prefHeight="35.0" prefWidth="109.0" text="File Address :" textFill="#7b5ef0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <TextField fx:id="Address" layoutX="390.0" layoutY="430.0" text="Adddres" />
-      <Button layoutX="551.0" layoutY="425.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="67.0" text="Open File" />
-      <TextArea layoutX="140.0" layoutY="46.0" prefHeight="167.0" prefWidth="596.0" />
+      <Button layoutX="551.0" layoutY="425.0" mnemonicParsing="false" onAction="#OpenFile" prefHeight="35.0" prefWidth="67.0" text="Open File" />
+      <TextArea fx:id="Question" layoutX="140.0" layoutY="46.0" prefHeight="167.0" prefWidth="596.0" />
       <RadioButton fx:id="AmsewrtestA" layoutX="400.0" layoutY="250.0" mnemonicParsing="false" text="(A">
          <toggleGroup>
             <ToggleGroup fx:id="AnswerTest" />
@@ -41,5 +36,15 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="AnswerFalse" layoutX="590.0" layoutY="283.0" mnemonicParsing="false" text="(False" toggleGroup="$TrueFalse" />
+      <Label layoutX="35.0" layoutY="46.0" prefHeight="25.0" prefWidth="84.0" text="Question :" textFill="#7b5ef0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="238.0" prefHeight="25.0" prefWidth="84.0" text="Answer :" textFill="#7b5ef0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

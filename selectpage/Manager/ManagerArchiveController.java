@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import javax.print.DocFlavor;
@@ -54,8 +55,8 @@ public class ManagerArchiveController implements Initializable {
                 stage.setTitle(" Manager Archive Test Page");
                 stage.setScene(new Scene(root1));
                 stage.show();
-//                stage = (Stage)((Lab)event.getSource()).getScene().getWindow();
-//                stage.close();
+                stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+                stage.close();
             } catch (IOException ex) {
                 System.out.println("Can't Open Manager Archive Test page");
 

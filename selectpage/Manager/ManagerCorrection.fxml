@@ -19,6 +19,6 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="OpenTest" layoutX="589.0" layoutY="418.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="73.0" text="Open Test" />
+      <Button layoutX="589.0" layoutY="418.0" mnemonicParsing="false" onAction="#OpenTest" prefHeight="37.0" prefWidth="73.0" text="Open Test" />
    </children>
 </AnchorPane>

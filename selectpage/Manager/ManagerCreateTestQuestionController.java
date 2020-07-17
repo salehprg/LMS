@@ -83,16 +83,16 @@ public class ManagerCreateTestQuestionController implements Initializable {
 
     @FXML
     private void Preview(ActionEvent event) {
-        System.out.println("kiiiiiiiiiiiiiiiiiiiiiiiiiiiiiir");
+        
         try {
-            System.out.println("00000000000000000000000000000");
+      
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerCreateTestQuestion.fxml"));
-            System.out.println("1111111111111111111111111111");
+            
             Parent root1 = (Parent) fxmlloader.load();
-            System.out.println("2222222222222222222222222222");
+           
             Stage stage = new Stage();
 
-            System.out.println("33333333333333333333333333333333");
+          
             stage.setTitle("Manager Create Test Question Page");
             stage.setScene(new Scene(root1));
             stage.show();

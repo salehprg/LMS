@@ -62,20 +62,22 @@ public class ManagerArchiveTestController implements Initializable {
     }    
 
 
+
     @FXML
-    private void OpenQuestions(ActionEvent event) {
+    private void OpenStudentsAnswer(ActionEvent event) {
+        
         try {
-                FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerArchiveTestQuestions.fxml"));
+                FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerArchiveTestStudent.fxml"));
                 Parent root1 = (Parent) fxmlloader.load();
                 Stage stage = new Stage();
 
-                stage.setTitle(" Manager Archive Test Questions Page");
+                stage.setTitle(" Manager Archive Test Student Page");
                 stage.setScene(new Scene(root1));
                 stage.show();
 //                stage = (Stage)((Lab)event.getSource()).getScene().getWindow();
 //                stage.close();
             } catch (IOException ex) {
-                System.out.println("Can't Open Manager Archive Test Question page");
+                System.out.println("Can't Open Manager Archive Test Student Page");
             }
     }
     

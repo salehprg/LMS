@@ -7,10 +7,9 @@ package selectpage.Manager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextArea;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.TextField;
 
 /**
@@ -18,14 +17,12 @@ import javafx.scene.control.TextField;
  *
  * @author sajad cj
  */
-public class ManagerProgramTestQuuestionController implements Initializable {
+public class ManagerChartsTestSelectedController implements Initializable {
 
     @FXML
-    private TextArea Question;
+    private TextField TestName;
     @FXML
-    private TextField QuestionTime;
-    @FXML
-    private TextField QuestionAnswer;
+    private BarChart<?, ?> TestChart;
 
     /**
      * Initializes the controller class.
@@ -34,13 +31,5 @@ public class ManagerProgramTestQuuestionController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-    @FXML
-    private void Next(ActionEvent event) {
-    }
-
-    @FXML
-    private void Preview(ActionEvent event) {
-    }
     
 }

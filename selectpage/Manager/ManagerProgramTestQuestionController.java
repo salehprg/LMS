@@ -15,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -25,34 +24,14 @@ import javafx.stage.Stage;
  *
  * @author sajad cj
  */
-public class ManagerProgramTestController implements Initializable {
+public class ManagerProgramTestQuestionController implements Initializable {
 
     @FXML
-    private TextField TestName;
+    private TextArea Question;
     @FXML
-    private TextArea Students;
+    private TextField QuestionTime;
     @FXML
-    private TextField TestDuration;
-    @FXML
-    private DatePicker DataPicker;
-    @FXML
-    private TextField StartMinute;
-    @FXML
-    private TextField StartHour;
-    @FXML
-    private TextField EndMinute;
-    @FXML
-    private TextField EndHour;
-    @FXML
-    private TextArea BlockedStudents;
-    @FXML
-    private TextField TestMethod;
-    @FXML
-    private TextField ArrangeMethod;
-    @FXML
-    private TextField AnswerMethod;
-    @FXML
-    private TextField TestReview;
+    private TextField QuestionAnswer;
 
     /**
      * Initializes the controller class.
@@ -63,8 +42,7 @@ public class ManagerProgramTestController implements Initializable {
     }    
 
     @FXML
-    private void OpenQuestions(ActionEvent event) {
-        
+    private void Next(ActionEvent event) {
         try {
 
                 FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerProgramTestQuestion.fxml"));
@@ -83,7 +61,22 @@ public class ManagerProgramTestController implements Initializable {
     }
 
     @FXML
-    private void AddBlockStudent(ActionEvent event) {
+    private void Preview(ActionEvent event) {
+        try {
+
+                FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerProgramTestQuestion.fxml"));
+                Parent root1 = (Parent) fxmlloader.load();
+                Stage stage = new Stage();
+
+                stage.setTitle("Manager Program Test Question Page");
+                stage.setScene(new Scene(root1));
+                stage.show();
+                stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+                stage.close();
+            } catch (IOException ex) {
+                System.out.println("Can't Open Manager Program Test Question Page");
+
+            }
     }
     
 }

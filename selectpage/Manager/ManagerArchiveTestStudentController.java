@@ -14,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
@@ -24,12 +23,10 @@ import javafx.stage.Stage;
  *
  * @author sajad cj
  */
-public class ManagerChartsController implements Initializable {
+public class ManagerArchiveTestStudentController implements Initializable {
 
     @FXML
-    private BarChart<?, ?> TestsChart;
-    @FXML
-    private ListView<?> TestsList;
+    private ListView<?> StudentsList;
 
     /**
      * Initializes the controller class.
@@ -40,20 +37,21 @@ public class ManagerChartsController implements Initializable {
     }    
 
     @FXML
-    private void OpenTestChart(ActionEvent event) {
-        try {
+    private void OpenAnswer(ActionEvent event) {
+        
+         try {
 
-                FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerChartsTestSelected.fxml"));
+                FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerArchiveTestStudentAnswer.fxml"));
                 Parent root1 = (Parent) fxmlloader.load();
                 Stage stage = new Stage();
 
-                stage.setTitle("Manager Charts Test Selected Page");
+                stage.setTitle("Manager Archive Test Student Answer Page");
                 stage.setScene(new Scene(root1));
                 stage.show();
                 stage = (Stage)((Button)event.getSource()).getScene().getWindow();
                 stage.close();
             } catch (IOException ex) {
-                System.out.println("Can't Open Manager Charts Test Selected Page");
+                System.out.println("Can't Open Manager Archive Test Student Answer Page");
 
             }
     }
