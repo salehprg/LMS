@@ -42,7 +42,7 @@ public class SqlManager {
                 data.EndTime = resultSet.getDate("StartTime");
                 data.Duration = resultSet.getFloat("Duration");
                 data.Random = resultSet.getBoolean("Random");
-                data.CanReview = resultSet.getBoolean("GrCanReviewade");
+                data.CanReview = resultSet.getBoolean("CanReview");
 
                 quizesModels.add(data);
             }
@@ -239,7 +239,7 @@ public class SqlManager {
     protected ArrayList<QuestionsModel> DB_GetQuestionInQuiz(int QuizId)
     {
         // Create and execute a SELECT SQL statement.
-        String sqlQuery = "SELECT * from Questions Where QuizId = " + QuizId;
+        String sqlQuery = "SELECT * from Questions Where QuizId = '" + QuizId + "'";
 
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -274,7 +274,7 @@ public class SqlManager {
         "([UserId]"+
         ",[QuizId]"+
         ",[Allow])"+
-       " VALUES",
+       " VALUES "+
         "('%s','%s','%s')" , UserId , QuizId , true);
 
         Boolean result = false;
@@ -692,7 +692,7 @@ public class SqlManager {
     protected UserModel DB_GetUserInfo(String IdNumber)
     {
         // Create and execute a SELECT SQL statement.
-        String sqlQuery = "SELECT * from Users Where IdNumber = " + IdNumber;
+        String sqlQuery = "SELECT * from Users Where IdNumber = '" + IdNumber + "'";
 
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);

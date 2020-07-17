@@ -134,6 +134,10 @@ public class ManagerCreateTestQuestionController implements Initializable {
         try {
 
             QuestionIndex++;
+            if(QuestionIndex > questionsModels.size())
+            {
+                QuestionIndex =  questionsModels.size();
+            }
 
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerCreateTestQuestion.fxml"));
             Parent root1 = (Parent) fxmlloader.load();
@@ -169,7 +173,10 @@ public class ManagerCreateTestQuestionController implements Initializable {
         try {
 
             QuestionIndex--;
-
+            if(QuestionIndex < 0)
+            {
+                QuestionIndex =  0;
+            }
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerCreateTestQuestion.fxml"));
 
             Parent root1 = (Parent) fxmlloader.load();
@@ -189,7 +196,7 @@ public class ManagerCreateTestQuestionController implements Initializable {
 
     private void loadData() {
 
-        questionsModels = Api.GetQuestions(Api.CurrentQuizId);
+        questionsModels = Api.Admin_GetQuestions(Api.CurrentQuizId);
         //AnswerMethod check box
         List.removeAll(List);
         String AnswerMethod1 = "Test";

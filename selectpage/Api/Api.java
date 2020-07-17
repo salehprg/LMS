@@ -73,6 +73,14 @@ public class Api {
     }
 
     
+    public static ArrayList<QuestionsModel> Admin_GetQuestions(int QuizId) {
+        if(SendRequest(RequestList.Admin_getQuestions.getId(), new Object[] { QuizId }))
+        {
+            return (ArrayList<QuestionsModel>)ReadResponse();
+        }
+        return null;
+    }
+
     public static ArrayList<QuizSurvey> Admin_getQuizSurvey(int QuizId)
     {
         if(SendRequest(RequestList.Admin_getQuizSurvey.getId(),new Object[]{QuizId}))
@@ -298,7 +306,7 @@ public class Api {
     }
 
     
-    public static ArrayList<QuestionsModel> GetQuestions(int QuizId) {
+    public static ArrayList<QuestionsModel> User_GetQuestions(int QuizId) {
         if(SendRequest(RequestList.User_GetQuestions.getId(), new Object[] { QuizId }))
         {
             return (ArrayList<QuestionsModel>)ReadResponse();

@@ -59,7 +59,7 @@ public class AdminController extends SqlManager implements IAdminController {
         UserModel user = DB_GetUserInfo(_userModel.IdNumber);
 
         // If user does not exist Register it
-        if (user == null) {
+        if (user.UserName == null) {
             _userModel.UserName = _userModel.IdNumber;
             _userModel.Password = _userModel.IdNumber;
 
