@@ -1,78 +1,72 @@
 package Controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import Helper.ExcelFile;
 import Helper.SqlManager;
 import Interface.IAdminController;
 import Model.*;
 import Model.QuestionsModel.QType;
 
-public class AdminController extends SqlManager implements IAdminController{
+public class AdminController extends SqlManager implements IAdminController {
 
     public AdminController() throws SQLException {
         super();
-        
+
     }
 
-//#region Quiz
+    // #region Quiz
 
     @Override
-    public boolean createNewQuiz(QuizesModel quizesModel)
-    {
-        return (DB_CreateQuiz(quizesModel) != -1 ? true : false);
+    public int createNewQuiz(QuizesModel quizesModel) {
+        int quizId = DB_CreateQuiz(quizesModel);
+
+        return quizId;
     }
 
     @Override
-    public boolean addQuestionToQuiz(QuestionsModel questionsModel)
-    {
+    public boolean addQuestionToQuiz(QuestionsModel questionsModel) {
         return (DB_AddQuestion(questionsModel) != -1 ? true : false);
     }
 
     @Override
-    public boolean addQuestionToQuiz(QuestionsModel questionsModel , ArrayList<OptionsModel> optionsModels)
-    {
+    public boolean addQuestionToQuiz(QuestionsModel questionsModel, ArrayList<OptionsModel> optionsModels) {
         int QuestionId = DB_AddQuestion(questionsModel);
 
-        if(questionsModel.QuestionType == QType.Testi)
-        {
+        if (questionsModel.QuestionType == QType.Testi) {
             for (OptionsModel opt : optionsModels) {
                 opt.QuestionId = QuestionId;
                 DB_AddOptions(opt);
             }
         }
-        
+
         return true;
-    } 
+    }
 
     @Override
-    public boolean AssignUserToQuiz(UserModel _userModel , int QuizId)
-    {
+    public boolean AssignUserToQuiz(UserModel _userModel, int QuizId) {
         UserModel user = DB_GetUserInfo(_userModel.IdNumber);
-        
-        //If user does not exist Register it
-        if(user == null)
-        {
+
+        // If user does not exist Register it
+        if (user == null) {
             _userModel.UserName = _userModel.IdNumber;
             _userModel.Password = _userModel.IdNumber;
 
-            if(DB_AddUser(_userModel))
-            {
+            if (DB_AddUser(_userModel)) {
                 user = DB_GetUserInfo(_userModel.IdNumber);
-            }
-            else
-            {
+            } else {
                 return false;
             }
         }
 
-        return DB_AddUserToQuiz(user.Id , QuizId);
+        return DB_AddUserToQuiz(user.Id, QuizId);
 
     }
 
     @Override
-    public boolean RemoveUserFromQuiz(int userId , int QuizId)
-    {
+    public boolean RemoveUserFromQuiz(int userId, int QuizId) {
         return DB_RemoveUserFromQuiz(userId, QuizId);
     }
 
@@ -89,17 +83,34 @@ public class AdminController extends SqlManager implements IAdminController{
 
     }
 
-//#endregion
+    // #endregion
 
     @Override
-    public ArrayList<AnswersForGrading> getUserAnswers(int UserId , int QuizId)
-    {
-        return DB_GetAnswersForGrading(QuizId , UserId);
+    public ArrayList<AnswersForGrading> getUserAnswers(int UserId, int QuizId) {
+        return DB_GetAnswersForGrading(QuizId, UserId);
     }
 
     @Override
-    public ArrayList<QuestionsModel> getQuestions(int QuizId)
-    {
+    public ArrayList<QuestionsModel> getQuestions(int QuizId) {
         return getQuestions(QuizId);
+    }
+
+    @Override
+    public boolean AdduserFromExcel(String fileUrl) {
+        try {
+            ArrayList<UserModel> users = ExcelFile.ReadStudentData(fileUrl);
+
+            for (UserModel userModel : users) 
+            {
+                DB_AddUser(userModel);
+            }
+
+            return true;
+        } catch (IOException e) {
+            
+            e.printStackTrace();
+            return false;
+        }
+        
     }
 }

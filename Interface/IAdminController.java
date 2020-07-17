@@ -13,7 +13,7 @@ public interface IAdminController {
 
 //#region Quiz
 
-    boolean createNewQuiz(QuizesModel quizesModel);
+    int createNewQuiz(QuizesModel quizesModel);
 
     boolean addQuestionToQuiz(QuestionsModel questionsModel);
 
@@ -25,7 +25,7 @@ public interface IAdminController {
 
     boolean BanUserFromQuiz(String IdNumber , int QuizId);
 
-    
+    boolean AdduserFromExcel(String fileUrl);
 //#endregion
     ArrayList<AnswersForGrading> getUserAnswers(int UserId , int QuizId);
 

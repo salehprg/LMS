@@ -70,13 +70,22 @@ public class Api {
     }
 
     
-    public static boolean createNewQuiz(QuizesModel quizesModel) {
-       
-        if(SendRequest(RequestList.Admin_createNewQuiz.getId(), new Object[] { quizesModel }))
+    public static boolean AddUserFromExcel(String fileUrl)
+    {
+        if(SendRequest(RequestList.Admin_AdduserFromExcel.getId(), new Object[] { fileUrl }))
         {
             return (boolean)ReadResponse();
         }
         return false;
+    }
+
+    public static int createNewQuiz(QuizesModel quizesModel) {
+        
+        if(SendRequest(RequestList.Admin_createNewQuiz.getId(), new Object[] { quizesModel }))
+        {
+            return (int)ReadResponse();
+        }
+        return -1;
     }
 
     
