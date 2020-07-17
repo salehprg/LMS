@@ -1,6 +1,6 @@
-package lms.Model;
+package Model;
 
-import lms.Helper.SqlManager;
+import Helper.SqlManager;
 
 public class UserModel {
     public int Id;
@@ -17,3 +17,4 @@ public class UserModel {
         Admin
     }
 }
+

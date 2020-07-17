@@ -1,12 +1,12 @@
-package lms.Controller;
+package Controller;
 
 import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import lms.Helper.SqlManager;
-import lms.Model.*;
-import lms.Model.QuestionsModel.QType;
+import Helper.SqlManager;
+import Model.*;
+import Model.QuestionsModel.QType;
 
 public class AdminController extends SqlManager {
 
