@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Model.*;
-import Model.QuestionsModel.QType;
+import lms.Model.*;
+import lms.Model.QuestionsModel.QType;
 
 
 public class SqlManager {
