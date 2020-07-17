@@ -16,6 +16,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -24,6 +26,9 @@ import javafx.stage.Stage;
  * @author sajad cj
  */
 public class StudentPageController implements Initializable{
+
+    @FXML
+    private ListView<?> TestsList;
 
     
     /**
@@ -52,6 +57,37 @@ public class StudentPageController implements Initializable{
                 System.out.println("Can't Open Samane Shiba page");
 
             }
+    }
+
+    @FXML
+    private void OpenTest(ActionEvent event) {
+        try {
+
+                FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentWaitTest.fxml"));
+                Parent root1 = (Parent) fxmlloader.load();
+                Stage stage = new Stage();
+
+                stage.setTitle("Student Wait Test Page");
+                stage.setScene(new Scene(root1));
+                stage.show();
+                stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+                stage.close();
+            } catch (IOException ex) {
+                System.out.println("Can't Open Student Wait Test Page");
+
+            }
+    }
+
+    @FXML
+    private void Chat(MouseEvent event) {
+    }
+
+    @FXML
+    private void StudantChat(MouseEvent event) {
+    }
+
+    @FXML
+    private void Archive(MouseEvent event) {
     }
     
 }

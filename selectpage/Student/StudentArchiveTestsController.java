@@ -14,36 +14,39 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
  *
  * @author sajad cj
  */
-public class StudentTestController implements Initializable {
+public class StudentArchiveTestsController implements Initializable {
 
-    @FXML
-    private TextField Address;
-    @FXML
-    private RadioButton AmsewrtestA;
-    @FXML
-    private ToggleGroup AnswerTest;
-    @FXML
-    private RadioButton AmsewrtestB;
-    @FXML
-    private RadioButton AmsewrtestD;
-    @FXML
-    private RadioButton AmsewrtestC;
-    @FXML
-    private RadioButton AnswerTrue;
-    @FXML
-    private ToggleGroup TrueFalse;
-    @FXML
-    private RadioButton AnswerFalse;
     @FXML
     private TextArea Answer;
     @FXML
+    private TextField Address;
+    @FXML
     private TextArea Question;
+    @FXML
+    private VBox TestAns;
+    @FXML
+    private RadioButton AmswerA;
+    @FXML
+    private ToggleGroup Answer1;
+    @FXML
+    private RadioButton AmswerB;
+    @FXML
+    private RadioButton AmswerC;
+    @FXML
+    private RadioButton AmswerD;
+    @FXML
+    private VBox TrueFalse;
+    @FXML
+    private RadioButton AmswerTrue;
+    @FXML
+    private RadioButton AmswerFalse;
 
     /**
      * Initializes the controller class.

@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -33,8 +34,6 @@ public class ManagerArchiveTestController implements Initializable {
     @FXML
     private TextField TestDuration;
     @FXML
-    private DatePicker DataPicker;
-    @FXML
     private TextField StartMinute;
     @FXML
     private TextField StartHour;
@@ -52,6 +51,8 @@ public class ManagerArchiveTestController implements Initializable {
     private TextField AnswerMethod;
     @FXML
     private TextField TestReview;
+    @FXML
+    private Label Date;
 
     /**
      * Initializes the controller class.

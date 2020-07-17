@@ -17,10 +17,10 @@
           <CategoryAxis fx:id="X" label="Tests Name" side="BOTTOM" />
         </xAxis>
         <yAxis>
-          <NumberAxis fx:id="y" label="Tests Average" prefHeight="120.0" prefWidth="48.0" side="LEFT" />
+          <NumberAxis fx:id="y" label="Score Average" prefHeight="120.0" prefWidth="48.0" side="LEFT" />
         </yAxis>
       </BarChart>
-      <Label layoutX="138.0" layoutY="344.0" prefHeight="38.0" prefWidth="128.0" text="Tests : " textFill="#7b5ef0">
+      <Label layoutX="220.0" layoutY="337.0" prefHeight="38.0" prefWidth="54.0" text="Tests : " textFill="#7b5ef0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

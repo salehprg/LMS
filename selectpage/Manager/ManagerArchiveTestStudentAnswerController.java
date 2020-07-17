@@ -19,6 +19,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -35,21 +36,25 @@ public class ManagerArchiveTestStudentAnswerController implements Initializable 
     @FXML
     private TextArea Question;
     @FXML
-    private RadioButton AmsewrtestA;
+    private VBox TrueFalse;
     @FXML
-    private ToggleGroup AnswerTest;
+    private VBox TestAns;
     @FXML
-    private RadioButton AmsewrtestB;
+    private RadioButton AmswerA;
     @FXML
-    private RadioButton AmsewrtestD;
+    private ToggleGroup Answer1;
     @FXML
-    private RadioButton AmsewrtestC;
+    private RadioButton AmswerB;
     @FXML
-    private RadioButton AnswerTrue;
+    private RadioButton AmswerC;
     @FXML
-    private ToggleGroup TrueFalse;
+    private RadioButton AmswerD;
     @FXML
-    private RadioButton AnswerFalse;
+    private RadioButton AmswerTrue;
+    @FXML
+    private RadioButton AmswerFalse;
+    @FXML
+    private TextField Score;
 
     /**
      * Initializes the controller class.
