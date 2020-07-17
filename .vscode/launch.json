@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - ChatServer",
+            "request": "launch",
+            "mainClass": "Controller.ChatServer",
+            "projectName": "lms_eb6fd19e"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - Current File",
             "vmArgs": "--module-path %PATH_TO_FX% --add-modules javafx.controls,javafx.fxml",
             "request": "launch",

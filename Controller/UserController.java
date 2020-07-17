@@ -24,7 +24,7 @@ public class UserController extends SqlManager implements IUserController{
         ArrayList<UserModel> users = DB_GetAllUsers();
 
         for (UserModel user : users) {
-            if(user.UserName == userModel.UserName)
+            if(user.UserName.equals(userModel.UserName))
             {
                 return false;
             }
