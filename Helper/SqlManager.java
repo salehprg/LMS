@@ -20,8 +20,43 @@ public class SqlManager {
         statement = conn.createStatement();
     }
 
-//#region Quiz
+    //#region Quiz
 
+    protected ArrayList<QuizesModel> DB_GetQuizes()
+    {
+        // Create and execute a SELECT SQL statement.
+        String sqlQuery = "SELECT * from Quizes";
+
+        try {
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            
+
+            ArrayList<QuizesModel> quizesModels = new ArrayList<>();
+            
+            while (resultSet.next()) {
+                QuizesModel data = new QuizesModel();
+
+                data.Id = resultSet.getInt("Id");
+                data.QuizName = resultSet.getString("QuizName");
+                data.StartTime = resultSet.getDate("StartTime");
+                data.EndTime = resultSet.getDate("StartTime");
+                data.Duration = resultSet.getFloat("Duration");
+                data.Random = resultSet.getBoolean("Random");
+                data.CanReview = resultSet.getBoolean("GrCanReviewade");
+
+                quizesModels.add(data);
+            }
+            
+            return quizesModels;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+
+        
     protected int DB_CreateQuiz(QuizesModel quizesModel)
     {
         String sqlQuery = String.format("INSERT INTO [dbo].[Quizes]"+

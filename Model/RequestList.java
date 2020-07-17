@@ -23,7 +23,10 @@ public enum RequestList{
     Admin_reportStudentByStudent(19),
     Admin_saveExcelUserGrades(20),
     Admin_saveExcelQuizByQuiz(21),
-    Admin_autoGrading(22);
+    Admin_autoGrading(22),
+    Admin_getAllQuiz(23),
+    Admin_getQuizProgram(24),
+    Admin_getQuizArchive(25);
 
 
     private int Id;

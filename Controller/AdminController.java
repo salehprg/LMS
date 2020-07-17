@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -188,5 +189,46 @@ public class AdminController extends SqlManager implements IAdminController {
         }
         
         return false;
+    }
+
+    @Override
+    public ArrayList<QuizesModel> getAllQuiz() {
+
+        return DB_GetQuizes();
+    }
+
+    @Override
+    public ArrayList<QuizesModel> getQuizProgram() {
+        ArrayList<QuizesModel> quizes = DB_GetQuizes();
+
+        ArrayList<QuizesModel> activeQuizes = new ArrayList<>();
+
+        for (QuizesModel quizesModel : quizes) 
+        {
+            if(quizesModel.EndTime.compareTo(new Date(System.currentTimeMillis())) > 0)
+            {
+                activeQuizes.add(quizesModel);
+            }
+        }
+
+        return activeQuizes;
+    }
+
+    @Override
+    public ArrayList<QuizesModel> getQuizArchive() {
+        
+        ArrayList<QuizesModel> quizes = DB_GetQuizes();
+
+        ArrayList<QuizesModel> activeQuizes = new ArrayList<>();
+
+        for (QuizesModel quizesModel : quizes) 
+        {
+            if(quizesModel.EndTime.compareTo(new Date(System.currentTimeMillis())) < 0)
+            {
+                activeQuizes.add(quizesModel);
+            }
+        }
+
+        return activeQuizes;
     }
 }

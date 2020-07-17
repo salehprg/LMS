@@ -73,6 +73,33 @@ public class Api {
     }
 
     
+    public static ArrayList<QuizesModel> Admin_getAllQuiz()
+    {
+        if(SendRequest(RequestList.Admin_getAllQuiz.getId(),null))
+        {
+            return (ArrayList<QuizesModel>)ReadResponse();
+        }
+        return null;
+    }
+
+    public static ArrayList<QuizesModel> Admin_getQuizArchive()
+    {
+        if(SendRequest(RequestList.Admin_getQuizArchive.getId(), null))
+        {
+            return (ArrayList<QuizesModel>)ReadResponse();
+        }
+        return null;
+    }
+
+    public static ArrayList<QuizesModel> Admin_getQuizProgram()
+    {
+        if(SendRequest(RequestList.Admin_getQuizProgram.getId(),null ))
+        {
+            return (ArrayList<QuizesModel>)ReadResponse();
+        }
+        return null;
+    }
+
     public static boolean Admin_AutoGrading(int QuizId)
     {
         if(SendRequest(RequestList.Admin_autoGrading.getId(), new Object[]{QuizId}))
