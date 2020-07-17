@@ -35,10 +35,18 @@ public class AdminController extends SqlManager implements IAdminController {
     public boolean addQuestionToQuiz(QuestionsModel questionsModel, ArrayList<OptionsModel> optionsModels) {
         int QuestionId = DB_AddQuestion(questionsModel);
 
-        if (questionsModel.QuestionType == QType.Testi) {
-            for (OptionsModel opt : optionsModels) {
-                opt.QuestionId = QuestionId;
-                DB_AddOptions(opt);
+        if (questionsModel.QuestionType == QType.Testi) 
+        {
+            for (int i = 0;i < optionsModels.size();i++) 
+            {
+                optionsModels.get(i).QuestionId = QuestionId;
+                int OptionId = DB_AddOptions(optionsModels.get(i));
+
+                if(i == Integer.valueOf(questionsModel.Answer))
+                {
+                    questionsModel.Answer = String.valueOf(OptionId);
+                    DB_EditQuestion(questionsModel);
+                }
             }
         }
 
@@ -112,5 +120,10 @@ public class AdminController extends SqlManager implements IAdminController {
             return false;
         }
         
+    }
+
+    @Override
+    public ArrayList<OptionsModel> getOptions(int QuestionId) {
+        return DB_GetQuestionOptions(QuestionId);
     }
 }

@@ -25,13 +25,14 @@ public class SqlManager {
     protected int DB_CreateQuiz(QuizesModel quizesModel)
     {
         String sqlQuery = String.format("INSERT INTO [dbo].[Quizes]"+
-        "([StartTime]"+
+        "([QuizName]"+
+        ",[StartTime]"+
         ",[EndTime]"+
         ",[Duration]"+
         ",[Random]"+
         ",[CanReview])"+
         "VALUES"+
-        "('%s','%s','%s','%s','%s')" , quizesModel.StartTime , quizesModel.EndTime , quizesModel.Duration
+        "('%s' , '%tF %tT','%tF %tT','%s','%s','%s')" ,quizesModel.QuizName , quizesModel.StartTime , quizesModel.StartTime , quizesModel.EndTime , quizesModel.EndTime , quizesModel.Duration
                                 , quizesModel.Random , quizesModel.CanReview);
 
         Boolean result = false;
@@ -49,7 +50,7 @@ public class SqlManager {
 
             //Get currently quiz id
             int QuizId = -1;
-            sqlQuery = "SELECT * from Quizes ORDER BY Id DESC";
+            sqlQuery = "SELECT * from Quizes ORDER BY Id Asc";
 
             try {
                 ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -77,8 +78,8 @@ public class SqlManager {
         ",[Duration]"+
         ",[Answer]"+
         ",[Grade])"+
-        "VALUES ('%s','%s','%s','%s','%s','%s')" , questionsModel.QuizId , questionsModel.QuestionText , questionsModel.QuestionType
-                                , questionsModel.Duration , questionsModel.Answer);
+        "VALUES ('%s','%s','%s','%s','%s','%s')" , questionsModel.QuizId , questionsModel.QuestionText , questionsModel.QuestionType.getId()
+                                , questionsModel.Duration , questionsModel.Answer , questionsModel.Grade);
 
         Boolean result = false;
 
@@ -113,8 +114,54 @@ public class SqlManager {
         return -1;
     }
 
+    protected int DB_EditQuestion(QuestionsModel questionsModel)
+    {
+        String sqlQuery = String.format("UPDATE [dbo].[Questions]"+
+        "SET [QuizId] = %s"+
+        ",[QuestionText] = %s"+
+        ",[QuestionType] = %s"+
+        ",[Duration] = %s"+
+        ",[Answer] = %s"+
+        ",[Grade] = %s"+
+        "WHERE Id = %s" , questionsModel.QuizId , questionsModel.QuestionText , questionsModel.QuestionType.getId()
+                                , questionsModel.Duration , questionsModel.Answer , questionsModel.Grade , questionsModel.QuizId);
+
+        Boolean result = false;
+
+        try {
+            statement.execute(sqlQuery);
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            result = false;
+        }
+
+        if(result)
+        {
+            //Get currently Question id
+            int QuestionId = -1;
+            sqlQuery = "SELECT * from Questions ORDER BY Id DESC";
+
+            try {
+                ResultSet resultSet = statement.executeQuery(sqlQuery);
+
+                while (resultSet.next()) {
+                    QuestionId = resultSet.getInt("Id");
+                }
+                
+                return QuestionId;
+                
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return -1;
+    }
+
+
     //Used when question Type is testi
-    protected boolean DB_AddOptions(OptionsModel optionsModel)
+    protected int DB_AddOptions(OptionsModel optionsModel)
     {
         String sqlQuery = String.format("INSERT INTO [dbo].[Options]"+
         "([QuestionId]"+
@@ -131,7 +178,27 @@ public class SqlManager {
             result = false;
         }
 
-        return result;
+        if(result)
+        {
+            //Get currently Question id
+            int OptionId = -1;
+            sqlQuery = "SELECT * from Options ORDER BY Id DESC";
+
+            try {
+                ResultSet resultSet = statement.executeQuery(sqlQuery);
+
+                while (resultSet.next()) {
+                    OptionId = resultSet.getInt("Id");
+                }
+                
+                return OptionId;
+                
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return -1;
     }
 
     protected ArrayList<QuestionsModel> DB_GetQuestionInQuiz(int QuizId)

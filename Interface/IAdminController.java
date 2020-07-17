@@ -30,4 +30,10 @@ public interface IAdminController {
     ArrayList<AnswersForGrading> getUserAnswers(int UserId , int QuizId);
 
     ArrayList<QuestionsModel> getQuestions(int QuizId);
+    
+    ArrayList<OptionsModel> getOptions(int QuestionId);
+
+    ArrayList<OptionsModel> reportQuizByQuiz();
+
+    ArrayList<OptionsModel> reportStudentByStudent();
 }

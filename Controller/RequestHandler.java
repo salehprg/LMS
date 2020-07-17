@@ -134,6 +134,11 @@ public class RequestHandler implements Runnable {
                     response = adminController.AdduserFromExcel(fileUrl);
                     break;
 
+                case Admin_getOptions:
+                    int QuestionId = (int)fromClient.readObject();
+                    response = adminController.getOptions(QuestionId);
+                    break;
+
                 case User_EnrolQuiz:
                     IdUser = (int)fromClient.readObject();
                     quizId = (int)fromClient.readObject();

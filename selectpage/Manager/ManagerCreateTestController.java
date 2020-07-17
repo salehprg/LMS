@@ -8,6 +8,9 @@ package selectpage.Manager;
 import Model.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -83,15 +86,22 @@ public class ManagerCreateTestController implements Initializable {
     @FXML
     private void DoCreate(ActionEvent event) {
         try {
-            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerCreateTestQuestion.fxml"));
-            Parent root1 = (Parent) fxmlloader.load();
-            Stage stage = new Stage();
 
-            stage.setTitle("Manager Create Test Manager Create Test Question Page");
-            stage.setScene(new Scene(root1));
-            stage.show();
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            stage.close();
+            int QuizId = CreateTest();
+            Api.CurrentQuizId = QuizId;
+            if(QuizId != -1)
+            {
+                FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerCreateTestQuestion.fxml"));
+
+                Parent root1 = (Parent) fxmlloader.load();
+                Stage stage = new Stage();
+                stage.setTitle("Manager Create Test Manager Create Test Question Page");
+                stage.setScene(new Scene(root1));
+                stage.show();
+                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                stage.close();
+            }
+
         } catch (IOException ex) {
             System.out.println("Can't Open Manager Create Test Manager Create Test Question page");
 
@@ -110,20 +120,20 @@ public class ManagerCreateTestController implements Initializable {
 
     }
 
-    private void CreateTest() {
+    private int CreateTest() {
         
-        QuizesModel MyQuizesModel = new QuizesModel();
+        QuizesModel quizesModel = new QuizesModel();
+        quizesModel.QuizName = TestName.getText();
+        quizesModel.Duration = Float.valueOf(TestDuration.getText());
+        quizesModel.StartTime = Date.from(DataPicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        quizesModel.StartTime.setHours(Integer.valueOf(StartHour.getText()));
+        quizesModel.StartTime.setMinutes(Integer.valueOf(StartMinute.getText()));
+        
+        quizesModel.EndTime = Date.from(DataPicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        quizesModel.EndTime.setHours(Integer.valueOf(EndHour.getText()));
+        quizesModel.EndTime.setMinutes(Integer.valueOf(EndMinute.getText()));
+        quizesModel.Random = RandomArrangement.selectedProperty().get();
 
-//        Api.addQuestionToQuiz(questionsModel);
-//        
-        MyQuizesModel.QuizName = TestName.getText();
-        MyQuizesModel.Duration = Float.parseFloat(TestDuration.getText());
-        //MyQuizesModel.Random = RandomArrangement.get
-        //        MyQuizesModel.StartTime = DataPicker.
-        //        MyQuizesModel.EndTime = 
-//                MyQuizesModel.CanReview = TestReviw.
-        QuestionsModel questionsModel ;
-//                        Api.AssignUserToQuiz(_userModel, 0) ;
-                //        Api.createNewQuiz(MyQuizesModel);
+        return Api.createNewQuiz(quizesModel);
     }
 }

@@ -19,7 +19,10 @@ public class Api {
     private static ObjectInputStream fromServer;
     private static ObjectOutputStream toServer;
     private static Socket clientSocket;
+
+
     private static int ActiveUserId;
+    public static int CurrentQuizId;
 
     static boolean SendRequest(int funcId, Object[] dataObjects) {
         try {
@@ -147,7 +150,7 @@ public class Api {
     }
 
     
-    public static ArrayList<QuestionsModel> getQuestions(int QuizId) {
+    public static ArrayList<QuestionsModel> Admin_getQuestions_Grading(int QuizId) {
         if(SendRequest(RequestList.Admin_Grading_getQuestions.getId(), new Object[] { QuizId }))
         {
             return (ArrayList<QuestionsModel>)ReadResponse();
@@ -213,6 +216,13 @@ public class Api {
         return null;
     }
 
+    public static ArrayList<OptionsModel> GetOptionss(int QuestionId) {
+        if(SendRequest(RequestList.Admin_getOptions.getId(), new Object[] { QuestionId }))
+        {
+            return (ArrayList<OptionsModel>)ReadResponse();
+        }
+        return null;
+    }
     
     public static ArrayList<QuestionsModel> Review_GetQuestions(int QuizId) {
         if(SendRequest(RequestList.User_Review_GetQuestions.getId(), new Object[] { ActiveUserId }))

@@ -12,39 +12,39 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selectpage.Manager.ManagerCreateTestQuestionController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selectpage.Manager.ManagerCreateTestQuestionController">
    <children>
-      <Label layoutX="58.0" layoutY="49.0" prefHeight="31.0" prefWidth="97.0" text="Question :" textFill="#290ed7">
+      <Label layoutX="57.0" layoutY="66.0" prefHeight="31.0" prefWidth="97.0" text="Question :" textFill="#290ed7">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <TextArea fx:id="Question" layoutX="140.0" layoutY="41.0" prefHeight="230.0" prefWidth="616.0" />
-      <Label layoutX="140.0" layoutY="283.0" prefHeight="31.0" prefWidth="114.0" text="Question Time :" textFill="#290ed7">
+      <TextArea fx:id="Question" layoutX="140.0" layoutY="41.0" prefHeight="81.0" prefWidth="616.0" />
+      <Label layoutX="58.0" layoutY="149.0" prefHeight="31.0" prefWidth="114.0" text="Question Time :" textFill="#290ed7">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="QuestionTime" layoutX="282.0" layoutY="286.0" prefHeight="25.0" prefWidth="150.0" />
+      <TextField fx:id="QuestionTime" layoutX="200.0" layoutY="152.0" prefHeight="25.0" prefWidth="150.0" />
       <Button layoutX="595.0" layoutY="402.0" mnemonicParsing="false" onAction="#Next" prefHeight="31.0" prefWidth="72.0" text="Next" />
       <Button layoutX="675.0" layoutY="402.0" mnemonicParsing="false" onAction="#CreateTest" prefHeight="31.0" prefWidth="72.0" text="Creat Test" />
       <Button layoutX="513.0" layoutY="402.0" mnemonicParsing="false" onAction="#Preview" prefHeight="31.0" prefWidth="72.0" text="Preview" />
-      <Label layoutX="140.0" layoutY="327.0" text="Answer Method :" textFill="#290ed7">
+      <Label layoutX="58.0" layoutY="193.0" text="Answer Method :" textFill="#290ed7">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="AnswerMethod" layoutX="282.0" layoutY="325.0" onMouseReleased="#kir8" pickOnBounds="false" prefWidth="150.0" />
+      <ChoiceBox fx:id="AnswerMethod" layoutX="200.0" layoutY="191.0" onMouseReleased="#kir8" pickOnBounds="false" prefWidth="150.0" />
       <VBox fx:id="TestAns" layoutX="706.0" layoutY="282.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="110.0" prefWidth="49.0" spacing="10.0" visible="false">
          <children>
-            <RadioButton fx:id="AmswerA" mnemonicParsing="false" text="(A">
+            <RadioButton fx:id="AnswerA" mnemonicParsing="false" text="(A">
                <toggleGroup>
                   <ToggleGroup fx:id="Answer" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="AmswerB" mnemonicParsing="false" text="(B" toggleGroup="$Answer" />
-            <RadioButton fx:id="AmswerC" mnemonicParsing="false" text="(C" toggleGroup="$Answer" />
-            <RadioButton fx:id="AmswerD" mnemonicParsing="false" text="(D" toggleGroup="$Answer" />
+            <RadioButton fx:id="AnswerB" mnemonicParsing="false" text="(B" toggleGroup="$Answer" />
+            <RadioButton fx:id="AnswerD" mnemonicParsing="false" text="(C" toggleGroup="$Answer" />
+            <RadioButton fx:id="AnswerC" mnemonicParsing="false" text="(D" toggleGroup="$Answer" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -52,12 +52,18 @@
       </VBox>
       <VBox fx:id="TrueFalse" layoutX="624.0" layoutY="282.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="61.0" spacing="10.0" visible="false">
          <children>
-            <RadioButton fx:id="AmswerTrue" mnemonicParsing="false" text="(True" toggleGroup="$Answer" />
-            <RadioButton fx:id="AmswerFalse" mnemonicParsing="false" text="(False" toggleGroup="$Answer" />
+            <RadioButton fx:id="AnswerTrue" mnemonicParsing="false" text="(True" toggleGroup="$Answer" />
+            <RadioButton fx:id="AnswerFalse" mnemonicParsing="false" text="(False" toggleGroup="$Answer" />
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </VBox>
+      <Label fx:id="Grade" layoutX="58.0" layoutY="230.0" text="Grade :" textFill="#290ed7">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TextGrade" layoutX="200.0" layoutY="228.0" prefHeight="25.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

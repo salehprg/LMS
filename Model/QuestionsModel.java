@@ -34,6 +34,10 @@ public class QuestionsModel implements Serializable{
     
             return null;
         }
+
+        public int getId() {
+            return Id;
+        }
     }
 
 }
