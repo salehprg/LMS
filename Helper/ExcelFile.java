@@ -85,7 +85,13 @@ public class ExcelFile
             XSSFSheet sheet = wb.createSheet("میانگین نمرات آزمون به آزمون");  
             
             int rowCount = 0;
-         
+            
+            Row rowHeader = sheet.createRow(0);
+            Cell cellHeader = rowHeader.createCell(0);
+            cellHeader.setCellValue("نام آزمون");
+            cellHeader = rowHeader.createCell(1);
+            cellHeader.setCellValue("میانگین نمرات");
+
             for (AvgQuizGrade quizGrade : avgQuizGrades) {
                 Row row = sheet.createRow(++rowCount);
                 
@@ -120,7 +126,19 @@ public class ExcelFile
             XSSFSheet sheet = wb.createSheet("میانگین نمرات آزمون به آزمون");  
             
             int rowCount = 0;
-         
+            
+            Row rowHeader = sheet.createRow(0);
+            
+            Cell cellHeader = rowHeader.createCell(0);
+            cellHeader.setCellValue("شماره دانشجویی");
+            cellHeader = rowHeader.createCell(1);
+            cellHeader.setCellValue("نام");
+            cellHeader = rowHeader.createCell(2);
+            cellHeader.setCellValue("نام خانوادگی");
+            cellHeader = rowHeader.createCell(3);
+            cellHeader.setCellValue("نمره");
+
+
             for (UserGradesInQuiz quizGrade : userGrades) {
                 Row row = sheet.createRow(++rowCount);
 

@@ -2,17 +2,17 @@ package Controller;
 
 import java.io.*;
 import java.net.*;
+import java.sql.SQLException;
 import java.util.concurrent.*;
 
-
 public class Server {
-    private ServerSocket serverSocket;
+	private ServerSocket serverSocket;
 
-    public Server(int port) throws IOException {
+	public Server(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
-    }
+	}
 
-    	// thread manager
+	// thread manager
 	public void acceptClients() throws IOException {
 		// for keeping track of client number
 		int clientNumber = 0;
@@ -27,23 +27,23 @@ public class Server {
 				System.out.println("Just connected to " + clientSocket.getRemoteSocketAddress());
 
 				// create new client handler and fork to background thread
-				threadPool.submit(new RequestHandler(clientSocket, clientNumber++ , serverSocket));
+				threadPool.submit(new RequestHandler(clientSocket, clientNumber++, serverSocket));
 			}
-		} 
-		catch(Exception ex)
-		{
+		} catch (Exception ex) {
 			ex.printStackTrace();
-		}
-		finally {
+		} finally {
 			// shut down thread pool when done
 			threadPool.shutdown();
 		}
 	}
-    public static void main(String[] args) {
-        int port = 9876;
+
+	public static void main(String[] args) {
+		int port = 9876;
 		try {
+			AdminController adminController = new AdminController();
+			adminController.saveExcelUserGrades(1);
 			new Server(port).acceptClients();
-		} catch(IOException e) {
+		} catch (IOException | SQLException e) {
 			e.printStackTrace();
 		}
     }
