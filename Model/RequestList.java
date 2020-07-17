@@ -26,7 +26,9 @@ public enum RequestList{
     Admin_autoGrading(22),
     Admin_getAllQuiz(23),
     Admin_getQuizProgram(24),
-    Admin_getQuizArchive(25);
+    Admin_getQuizArchive(25),
+    Admin_getQuizSurvey(26),
+    User_SubmitSurvey(27);
 
 
     private int Id;
