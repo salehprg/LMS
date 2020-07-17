@@ -101,7 +101,7 @@ public class AdminController extends SqlManager implements IAdminController {
 
     @Override
     public ArrayList<QuestionsModel> getQuestions(int QuizId) {
-        return getQuestions(QuizId);
+        return DB_GetQuestionInQuiz(QuizId);
     }
 
     @Override
