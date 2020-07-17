@@ -166,4 +166,27 @@ public class AdminController extends SqlManager implements IAdminController {
 
         return DB_GetUserGradesInQuiz(QuizId);
     }
+
+    @Override
+    public boolean autoGrading(int QuizId) {
+        ArrayList<TriesModel> triesModels = DB_GetTries(QuizId);
+        for (TriesModel triesModel : triesModels) 
+        {
+            ArrayList<AnswersForGrading> answers = DB_GetAnswersForGrading(QuizId, triesModel.UserId);
+            for (AnswersForGrading answer : answers) 
+            {
+                if(answer.Answer.equals(answer.QuestionAnswer))
+                {
+                    DB_GradeAnswer(answer.Grade , answer.AnswerId);
+                }
+                else
+                {
+                    DB_GradeAnswer(0 , answer.AnswerId);
+                }
+            }
+
+        }
+        
+        return false;
+    }
 }

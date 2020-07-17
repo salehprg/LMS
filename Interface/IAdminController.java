@@ -41,5 +41,7 @@ public interface IAdminController {
 
     boolean saveExcelUserGrades(int QuizId);
 
+    boolean autoGrading(int QuizId);
+
     
 }

@@ -40,8 +40,9 @@ public class Server {
 	public static void main(String[] args) {
 		int port = 9876;
 		try {
+
 			new Server(port).acceptClients();
-		} catch (IOException e) {
+		} catch (IOException  e) {
 			e.printStackTrace();
 		}
     }

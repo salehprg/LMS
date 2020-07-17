@@ -73,6 +73,15 @@ public class Api {
     }
 
     
+    public static boolean Admin_AutoGrading(int QuizId)
+    {
+        if(SendRequest(RequestList.Admin_autoGrading.getId(), new Object[]{QuizId}))
+        {
+            return (boolean)ReadResponse();
+        }
+        return false;
+    }
+
     public static boolean Admin_saveExcelQuizByQuiz()
     {
         if(SendRequest(RequestList.Admin_saveExcelQuizByQuiz.getId(), null))

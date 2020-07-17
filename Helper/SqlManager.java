@@ -95,7 +95,7 @@ public class SqlManager {
         {
             //Get currently Question id
             int QuestionId = -1;
-            sqlQuery = "SELECT * from Questions ORDER BY Id DESC";
+            sqlQuery = "SELECT * from Questions ORDER BY Id Asc";
 
             try {
                 ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -140,7 +140,7 @@ public class SqlManager {
         {
             //Get currently Question id
             int QuestionId = -1;
-            sqlQuery = "SELECT * from Questions ORDER BY Id DESC";
+            sqlQuery = "SELECT * from Questions ORDER BY Id Asc";
 
             try {
                 ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -182,7 +182,7 @@ public class SqlManager {
         {
             //Get currently Question id
             int OptionId = -1;
-            sqlQuery = "SELECT * from Options ORDER BY Id DESC";
+            sqlQuery = "SELECT * from Options ORDER BY Id Asc";
 
             try {
                 ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -542,6 +542,56 @@ public class SqlManager {
         
         return null;
     }
+    
+    protected ArrayList<TriesModel> DB_GetTries(int QuizId )
+    {
+        // Create and execute a SELECT SQL statement.
+        String sqlQuery = "SELECT * from Tries Where QuizId = " + QuizId ;
+        ArrayList<TriesModel> triesModels = new ArrayList<>();
+
+        try {
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+
+            while (resultSet.next()) {
+                
+                TriesModel data = new TriesModel();
+
+                data.QuizId = resultSet.getInt("QuizId");
+                data.TryTime = resultSet.getDate("TryTime");
+                data.UserId = resultSet.getInt("UserId");
+                
+
+                triesModels.add(data);
+            }
+            
+            return triesModels;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+    
+    protected boolean DB_GradeAnswer(float grade , int answerId)
+    {
+        // Create and execute a Update SQL statement.
+        String sqlQuery = String.format("UPDATE Answers SET [UserGrade] = '%s' , [Graded] = 'true' where Id = '%s'" , grade , answerId);
+
+        Boolean result = false;
+
+        try {
+            statement.execute(sqlQuery);
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            result = false;
+        }
+        
+        return result;
+    }
+    
+
     //#endregion
 
     //#region Reporting
