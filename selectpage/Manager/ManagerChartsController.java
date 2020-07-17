@@ -15,6 +15,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
@@ -30,13 +33,17 @@ public class ManagerChartsController implements Initializable {
     private BarChart<?, ?> TestsChart;
     @FXML
     private ListView<?> TestsList;
+    @FXML
+    private NumberAxis y;
+    @FXML
+    private CategoryAxis X;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        loadData();
     }    
 
     @FXML
@@ -56,6 +63,12 @@ public class ManagerChartsController implements Initializable {
                 System.out.println("Can't Open Manager Charts Test Selected Page");
 
             }
+    }
+    private void loadData()
+    {
+        XYChart.Series myChart =  new XYChart.Series<>() ;
+        myChart.getData().add(new XYChart.Data("kir",50)) ;
+        TestsChart.getData().addAll(myChart);
     }
     
 }

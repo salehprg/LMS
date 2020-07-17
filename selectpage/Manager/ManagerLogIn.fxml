@@ -31,11 +31,11 @@
             </Label>
          </children></Pane>
       <TextField fx:id="UserName" layoutX="348.0" layoutY="151.0" promptText="Username" />
+      <PasswordField fx:id="Password" layoutX="348.0" layoutY="215.0" promptText="password" />
+      <Button layoutX="389.0" layoutY="308.0" mnemonicParsing="false" onAction="#LogIn" prefHeight="25.0" prefWidth="67.0" text="Log In" textFill="#7647d3" />
       <Label layoutX="350.0" layoutY="36.0" prefHeight="80.0" prefWidth="150.0" text="Manager Log In" textFill="#191f46">
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Label>
-      <Button layoutX="389.0" layoutY="308.0" mnemonicParsing="false" onAction="#LogIn" prefHeight="25.0" prefWidth="67.0" text="Log In" textFill="#7647d3" />
-      <PasswordField fx:id="Password" layoutX="348.0" layoutY="215.0" promptText="password" />
    </children>
 </AnchorPane>

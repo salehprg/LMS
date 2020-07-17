@@ -12,20 +12,15 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selectpage.Manager.ManagerChartsController">
    <children>
-      <BarChart fx:id="TestsChart" layoutX="250.0" layoutY="94.0" prefHeight="206.0" prefWidth="476.0">
+      <BarChart fx:id="TestsChart" layoutX="8.0" layoutY="72.0" prefHeight="265.0" prefWidth="717.0" title="Tests Chart">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <CategoryAxis fx:id="X" label="Tests Name" side="BOTTOM" />
         </xAxis>
         <yAxis>
-          <NumberAxis prefHeight="291.0" prefWidth="28.0" side="LEFT" />
+          <NumberAxis fx:id="y" label="Tests Average" prefHeight="120.0" prefWidth="48.0" side="LEFT" />
         </yAxis>
       </BarChart>
-      <Label layoutX="134.0" layoutY="281.0" prefHeight="38.0" prefWidth="128.0" text="Tests : " textFill="#7b5ef0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="134.0" layoutY="94.0" prefHeight="38.0" prefWidth="128.0" text="Tests Chart : " textFill="#7b5ef0">
+      <Label layoutX="138.0" layoutY="344.0" prefHeight="38.0" prefWidth="128.0" text="Tests : " textFill="#7b5ef0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -34,7 +29,7 @@
       <Pane layoutY="37.0" prefHeight="10.0" prefWidth="800.0" style="-fx-background-color: #2F2C44;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Pane layoutY="50.0" prefHeight="5.0" prefWidth="800.0" style="-fx-background-color: #2F2C44;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Pane layoutY="58.0" prefHeight="2.0" prefWidth="800.0" style="-fx-background-color: #2F2C44;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <ListView fx:id="TestsList" layoutX="284.0" layoutY="293.0" prefHeight="169.0" prefWidth="441.0" />
+      <ListView fx:id="TestsList" layoutX="284.0" layoutY="344.0" prefHeight="118.0" prefWidth="441.0" />
       <Button layoutX="125.0" layoutY="437.0" mnemonicParsing="false" onAction="#OpenTestChart" prefHeight="25.0" prefWidth="141.0" text="Open Test's Chart" />
    </children>
 </AnchorPane>

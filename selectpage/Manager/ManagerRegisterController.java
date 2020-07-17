@@ -5,6 +5,7 @@
  */
 package selectpage.Manager;
 
+import Model.UserModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +21,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import selectpage.Api.Api;
 import selectpage.SelectPage;
 
 /**
@@ -44,35 +46,41 @@ public class ManagerRegisterController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-
-  
+    }
 
     @FXML
     private void BackToRolls(MouseEvent event) {
-        
-       try {
-                URL test = SelectPage.class.getResource("FXMLDocument.fxml");
-                
-                FXMLLoader fxmlloader = new FXMLLoader(test);
-                Parent root1 = (Parent) fxmlloader.load();
-                Stage stage = new Stage();
 
-                stage.setTitle(" Samane Shiba");
-                stage.setScene(new Scene(root1));
-                stage.show();
-                stage = (Stage)((Label)event.getSource()).getScene().getWindow();
-                stage.close();
-            } catch (IOException ex) {
-                System.out.println("Can't Open Samane Shiba page");
+        try {
+            URL test = SelectPage.class.getResource("FXMLDocument.fxml");
 
-            }
+            FXMLLoader fxmlloader = new FXMLLoader(test);
+            Parent root1 = (Parent) fxmlloader.load();
+            Stage stage = new Stage();
+
+            stage.setTitle(" Samane Shiba");
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage = (Stage) ((Label) event.getSource()).getScene().getWindow();
+            stage.close();
+        } catch (IOException ex) {
+            System.out.println("Can't Open Samane Shiba page");
+
+        }
     }
 
     @FXML
     private void Register(ActionEvent event) {
         try {
 
+            UserModel userModel = new UserModel();
+
+            userModel.FirstName = firstName.getText();
+            userModel.LastName = LastName.getText();
+            userModel.UserName = UserName.getText();
+            userModel.Password = Password.getText();
+
+            if (Api.Register(userModel)) {
                 FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerPage.fxml"));
                 Parent root1 = (Parent) fxmlloader.load();
                 Stage stage = new Stage();
@@ -80,30 +88,37 @@ public class ManagerRegisterController implements Initializable {
                 stage.setTitle("Manager Page");
                 stage.setScene(new Scene(root1));
                 stage.show();
-                stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
                 stage.close();
-            } catch (IOException ex) {
-                System.out.println("Can't Open Manager page");
-
+            }else{
+                System.out.println("user name is valid");
             }
-    }
+            }catch (IOException ex) {
+            System.out.println("Can't Open Manager page");
 
-    @FXML
-    private void LogIn(MouseEvent event) {
+        }
+        }
+
+        @FXML
+        private void LogIn (MouseEvent event) {
+
         try {
-                FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerLogIn.fxml"));
-                Parent root1 = (Parent) fxmlloader.load();
-                Stage stage = new Stage();
+                
+                    FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerLogIn.fxml"));
+                    Parent root1 = (Parent) fxmlloader.load();
+                    Stage stage = new Stage();
 
-                stage.setTitle(" Manager Log In Page");
-                stage.setScene(new Scene(root1));
-                stage.show();
-                stage = (Stage)((Label)event.getSource()).getScene().getWindow();
-                stage.close();
+                    stage.setTitle(" Manager Log In Page");
+                    stage.setScene(new Scene(root1));
+                    stage.show();
+                    stage = (Stage) ((Label) event.getSource()).getScene().getWindow();
+                    stage.close();
+                
+
             } catch (IOException ex) {
                 System.out.println("Can't Open Manager Log In page");
 
             }
+        }
+
     }
-    
-}

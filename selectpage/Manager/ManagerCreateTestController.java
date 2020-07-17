@@ -5,7 +5,7 @@
  */
 package selectpage.Manager;
 
-import Model.QuizesModel;
+import Model.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -29,6 +29,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import selectpage.Api.Api;
+
 /**
  * FXML Controller class
  *
@@ -36,7 +37,7 @@ import selectpage.Api.Api;
  */
 public class ManagerCreateTestController implements Initializable {
 
-    ObservableList List = FXCollections.observableArrayList() ;
+    ObservableList List = FXCollections.observableArrayList();
     @FXML
     private TextField TestName;
     @FXML
@@ -44,20 +45,17 @@ public class ManagerCreateTestController implements Initializable {
     @FXML
     private TextField TestDuration;
     @FXML
-    private ChoiceBox<?> TestMethod;
-    @FXML
-    private ChoiceBox<?> ArrangeMethod;
+    private ChoiceBox<String> TestMethod;
+
     @FXML
     private CheckBox TestReviw;
     @FXML
     private DatePicker DataPicker;
-    
     @FXML
     private Label lbDdate;
     @FXML
     private Button CreateTest;
-    @FXML
-    private ChoiceBox<?> AnswerMethod;
+
     @FXML
     private TextField StartMinute;
     @FXML
@@ -66,6 +64,8 @@ public class ManagerCreateTestController implements Initializable {
     private TextField EndMinute;
     @FXML
     private TextField EndHour;
+    @FXML
+    private RadioButton RandomArrangement;
 
     /**
      * Initializes the controller class.
@@ -74,7 +74,7 @@ public class ManagerCreateTestController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         loadData();
     }
-    
+
     @FXML
     private void SelectDate(ActionEvent event) {
         lbDdate.setText(DataPicker.getValue().toString());
@@ -82,32 +82,23 @@ public class ManagerCreateTestController implements Initializable {
 
     @FXML
     private void DoCreate(ActionEvent event) {
-          try {
-                FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerCreateTestQuestion.fxml"));
-                Parent root1 = (Parent) fxmlloader.load();
-                Stage stage = new Stage();
+        try {
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerCreateTestQuestion.fxml"));
+            Parent root1 = (Parent) fxmlloader.load();
+            Stage stage = new Stage();
 
-                stage.setTitle("Manager Create Test Manager Create Test Question Page");
-                stage.setScene(new Scene(root1));
-                stage.show();
-                stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-                stage.close();
-            } catch (IOException ex) {
-                System.out.println("Can't Open Manager Create Test Manager Create Test Question page");
+            stage.setTitle("Manager Create Test Manager Create Test Question Page");
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.close();
+        } catch (IOException ex) {
+            System.out.println("Can't Open Manager Create Test Manager Create Test Question page");
 
-            }
+        }
     }
 
     private void loadData() {
-
-        //AnswerMethod check box
-        List.removeAll(List);
-        String AnswerMethod1 = "Test";
-        String AnswerMethod2 = "Long Answer";
-        String AnswerMethod3 = "True Or False";
-
-        List.addAll(AnswerMethod1, AnswerMethod2, AnswerMethod3);
-        AnswerMethod.getItems().addAll(List);
 
         //TestMethod check box
         List.removeAll(List);
@@ -117,28 +108,22 @@ public class ManagerCreateTestController implements Initializable {
         List.addAll(TestMethod1, TestMethod2);
         TestMethod.getItems().addAll(List);
 
-        //ArrangeMethod check box
-        List.removeAll(List);
-        String ArrangeMethod1 = "Orderly";
-        String ArrangeMethod2 = "Random";
-
-        List.addAll(ArrangeMethod1, ArrangeMethod2);
-        ArrangeMethod.getItems().addAll(List);
     }
 
-    private void CreateTest()
-    {
+    private void CreateTest() {
+        
         QuizesModel MyQuizesModel = new QuizesModel();
-        
-        
+
 //        Api.addQuestionToQuiz(questionsModel);
 //        
-//        MyQuizesModel.QuizName = TestName.getText();
-//        MyQuizesModel.CanReview = ;
-//        MyQuizesModel. = TestName.getText();
-//        MyQuizesModel.QuizName = TestName.getText();
-//        
-//        Api.AssignUserToQuiz(_userModel, 0)
-//        Api.createNewQuiz(MyQuizesModel);
+        MyQuizesModel.QuizName = TestName.getText();
+        MyQuizesModel.Duration = Float.parseFloat(TestDuration.getText());
+        //MyQuizesModel.Random = RandomArrangement.get
+        //        MyQuizesModel.StartTime = DataPicker.
+        //        MyQuizesModel.EndTime = 
+//                MyQuizesModel.CanReview = TestReviw.
+        QuestionsModel questionsModel ;
+//                        Api.AssignUserToQuiz(_userModel, 0) ;
+                //        Api.createNewQuiz(MyQuizesModel);
     }
 }

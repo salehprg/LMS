@@ -63,7 +63,7 @@ public class StudentRegisterController implements Initializable {
                 stage.setTitle(" Student Log In Page");
                 stage.setScene(new Scene(root1));
                 stage.show();
-                stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+                stage = (Stage)((Label)event.getSource()).getScene().getWindow();
                 stage.close();
             } catch (IOException ex) {
                 System.out.println("Can't Open Student Log In page");
@@ -116,12 +116,11 @@ public class StudentRegisterController implements Initializable {
                     stage.show();
                     stage = (Stage)((Button)event.getSource()).getScene().getWindow();
                     stage.close();
+                }else{
+                    System.out.println("user name is valid");
                 }
-                
-
             } catch (IOException ex) {
                 System.out.println("Can't Open Student Page");
-
             }
     }
     

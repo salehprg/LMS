@@ -33,11 +33,11 @@
       <TextField fx:id="firstName" layoutX="348.0" layoutY="93.0" promptText="First Name" />
       <TextField fx:id="LastName" layoutX="348.0" layoutY="152.0" promptText="Last Name" />
       <TextField fx:id="UserName" layoutX="348.0" layoutY="211.0" promptText="Username" />
+      <PasswordField fx:id="Password" layoutX="348.0" layoutY="268.0" promptText="password" />
       <Label layoutX="342.0" prefHeight="80.0" prefWidth="160.0" text="Student Register" textFill="#191f46">
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Label>
       <Button layoutX="389.0" layoutY="342.0" mnemonicParsing="false" onAction="#Register" prefHeight="25.0" prefWidth="67.0" text="register" textFill="#7647d3" />
-      <PasswordField fx:id="Password" layoutX="348.0" layoutY="268.0" promptText="password" />
    </children>
 </AnchorPane>

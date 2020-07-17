@@ -14,6 +14,7 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import selectpage.Api.Api;
 import selectpage.SelectPage;
 
 /**
@@ -80,7 +81,9 @@ public class ManagerLogInController implements Initializable {
     private void LogIn(ActionEvent event) {
         
         try {
-
+                int userId = Api.Login(UserName.getText(), Password.getText());
+                if(userId != -1)
+                {
                 FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerPage.fxml"));
                 Parent root1 = (Parent) fxmlloader.load();
                 Stage stage = new Stage();
@@ -90,10 +93,13 @@ public class ManagerLogInController implements Initializable {
                 stage.show();
                 stage = (Stage)((Button)event.getSource()).getScene().getWindow();
                 stage.close();
+                }
             } catch (IOException ex) {
                 System.out.println("Can't Open Manager page");
 
             }
+            
     }
     
+   
 }
