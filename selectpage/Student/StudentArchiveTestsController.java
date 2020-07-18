@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -47,6 +48,8 @@ public class StudentArchiveTestsController implements Initializable {
     private RadioButton AmswerTrue;
     @FXML
     private RadioButton AmswerFalse;
+    @FXML
+    private ChoiceBox<?> Survey;
 
     /**
      * Initializes the controller class.

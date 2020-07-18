@@ -55,6 +55,8 @@ public class ManagerArchiveTestStudentAnswerController implements Initializable 
     private RadioButton AmswerFalse;
     @FXML
     private TextField Score;
+    @FXML
+    private TextField Score1;
 
     /**
      * Initializes the controller class.
