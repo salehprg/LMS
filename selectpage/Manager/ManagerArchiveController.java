@@ -5,6 +5,7 @@
  */
 package selectpage.Manager;
 
+import Model.AllowQuizList;
 import Model.QuizesModel;
 import java.io.IOException;
 import java.net.URL;
@@ -40,60 +41,44 @@ public class ManagerArchiveController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         loadData();
-        
-    }    
+
+    }
 
     @FXML
     private void OpenTest(ActionEvent event) {
         selection();
-        
+
         try {
-                FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerArchiveTest.fxml"));
-                Parent root1 = (Parent) fxmlloader.load();
-                Stage stage = new Stage();
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerArchiveTest.fxml"));
+            Parent root1 = (Parent) fxmlloader.load();
+            Stage stage = new Stage();
 
-                stage.setTitle(" Manager Archive Test Page");
-                stage.setScene(new Scene(root1));
-                stage.show();
-                stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-                stage.close();
-            } catch (IOException ex) {
-                System.out.println("Can't Open Manager Archive Test page");
+            stage.setTitle(" Manager Archive Test Page");
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.close();
+        } catch (IOException ex) {
+            System.out.println("Can't Open Manager Archive Test page");
 
-            }
-        
-        
-    }
-    
-    private void selection()
-    {
-        String SelectedTest = "";
-        ObservableList listOfItems = ArchiveList.getSelectionModel().getSelectedItems();
-        
-        for(Object item : listOfItems)
-        {
-            SelectedTest += String.format("%s%n", (String)item) ;
         }
-        
-        System.out.println(SelectedTest);
-        //inja dg mitoni SelectedTest o be sql pass bedi
+
     }
-    private void loadData()
-    {
-        
-        ArrayList<QuizesModel> MyList = Api.Admin_getQuizProgram();
-//        for (int i = 0; i < 10; i++) {
-//            MyList.add(i, "test " + i); 
-//        }
-        //ezafe kardn be list
-        
-        for (int i = 0; i < 10; i++) {
-           ArchiveList.getItems().add(MyList.get(1).QuizName) ;
+
+    private void selection() {
+        int index = ArchiveList.getSelectionModel().getSelectedIndex();
+        ArrayList<AllowQuizList> quizLists = Api.GetQuizes();
+        Api.CurrentQuizId = ArchiveList.getSelectionModel().getSelectedIndex();
+        System.out.println(Api.CurrentQuizId);
+    }
+
+    private void loadData() {
+        ArrayList<QuizesModel> MyList = Api.Admin_getQuizArchive();
+        for (int i = 0; i < MyList.size(); i++) {
+            ArchiveList.getItems().add(MyList.get(1).QuizName);
         }
-        
-        
     }
-    
+
 }

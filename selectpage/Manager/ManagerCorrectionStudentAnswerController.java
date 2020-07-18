@@ -11,6 +11,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 
 /**
  * FXML Controller class
@@ -20,7 +24,29 @@ import javafx.scene.control.ListView;
 public class ManagerCorrectionStudentAnswerController implements Initializable {
 
     @FXML
-    private ListView<?> StudantsAnswersList;
+    private TextArea Answer;
+    @FXML
+    private TextField Address;
+    @FXML
+    private TextArea Question;
+    @FXML
+    private RadioButton AmsewrtestA;
+    @FXML
+    private ToggleGroup AnswerTest;
+    @FXML
+    private RadioButton AmsewrtestB;
+    @FXML
+    private RadioButton AmsewrtestD;
+    @FXML
+    private RadioButton AmsewrtestC;
+    @FXML
+    private RadioButton AnswerTrue;
+    @FXML
+    private ToggleGroup TrueFalse;
+    @FXML
+    private RadioButton AnswerFalse;
+    @FXML
+    private TextField Grade;
 
     /**
      * Initializes the controller class.
@@ -31,7 +57,19 @@ public class ManagerCorrectionStudentAnswerController implements Initializable {
     }    
 
     @FXML
-    private void OpenAnswer(ActionEvent event) {
+    private void NextQuestion(ActionEvent event) {
+    }
+
+    @FXML
+    private void Preview(ActionEvent event) {
+    }
+
+    @FXML
+    private void OpenFile(ActionEvent event) {
+    }
+
+    @FXML
+    private void SetGrade(ActionEvent event) {
     }
     
 }

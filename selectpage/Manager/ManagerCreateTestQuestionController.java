@@ -26,6 +26,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -80,6 +81,8 @@ public class ManagerCreateTestQuestionController implements Initializable {
 
     private ArrayList<QuestionsModel> questionsModels = new ArrayList<>();
     private static int QuestionIndex;
+    @FXML
+    private Label Grade;
 
     /**
      * Initializes the controller class.
