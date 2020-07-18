@@ -40,7 +40,6 @@ public class ManagerArchiveTestStudentController implements Initializable {
         loadData();
     }    
 
-    @FXML
     void AutoGrade(ActionEvent event) {
         Api.Admin_AutoGrading(Api.CurrentQuizId);
     }

@@ -72,8 +72,6 @@ public class ManagerCreateTestController implements Initializable {
     private TextField EndHour;
     @FXML
     private RadioButton RandomArrangement;
-    @FXML
-    private TextField Address;
 
     String fileAddress;
     /**

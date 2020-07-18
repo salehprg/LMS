@@ -144,13 +144,7 @@ public class StudentTestController implements Initializable {
 
         Question.setText(myQuestionsModels.get(QuestionIndex).QuestionText);
 
-        if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.Tashrihi)) {
-            Answer.setText(myQuestionsModels.get(QuestionIndex).Answer);
-        }
-        if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.Testi)) {
-        }
-        if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.TrueFalse)) {
-        }
+        
         
                  
     }
