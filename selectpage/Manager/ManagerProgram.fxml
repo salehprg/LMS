@@ -9,13 +9,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selectpage.Manager.ManagerProgramController">
    <children>
-      <ListView layoutX="131.0" layoutY="103.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="272.0" prefWidth="538.0" />
+      <ListView fx:id="TestsList" layoutX="131.0" layoutY="103.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="272.0" prefWidth="538.0" />
       <Pane layoutY="23.0" prefHeight="20.0" prefWidth="800.0" style="-fx-background-color: #2F2C44;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Pane layoutY="46.0" prefHeight="10.0" prefWidth="800.0" style="-fx-background-color: #2F2C44;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Pane layoutY="59.0" prefHeight="5.0" prefWidth="800.0" style="-fx-background-color: #2F2C44;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Pane layoutY="67.0" prefHeight="2.0" prefWidth="800.0" style="-fx-background-color: #2F2C44;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Button layoutX="367.0" layoutY="408.0" mnemonicParsing="false" onAction="#OpenTest" prefHeight="30.0" prefWidth="83.0" text="Open Test" />
-      <Label layoutX="28.0" layoutY="103.0" text="Tests LIst :" textFill="#370ce4">
+      <Label layoutX="28.0" layoutY="103.0" text="Tests List :" textFill="#370ce4">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>
