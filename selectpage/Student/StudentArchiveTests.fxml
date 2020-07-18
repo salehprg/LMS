@@ -15,8 +15,8 @@
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selectpage.Student.StudentArchiveTestsController">
    <children>
       <TextArea fx:id="Answer" editable="false" layoutX="148.0" layoutY="234.0" prefHeight="131.0" prefWidth="596.0" />
-      <Button layoutX="228.0" layoutY="415.0" mnemonicParsing="false" onAction="#NextQuestion" prefHeight="35.0" prefWidth="67.0" text="Next" />
-      <Button layoutX="148.0" layoutY="415.0" mnemonicParsing="false" onAction="#Preview" prefHeight="35.0" prefWidth="67.0" text="Preview" />
+      <Button layoutX="198.0" layoutY="418.0" mnemonicParsing="false" onAction="#NextQuestion" prefHeight="35.0" prefWidth="67.0" text="Next" />
+      <Button layoutX="118.0" layoutY="418.0" mnemonicParsing="false" onAction="#Preview" prefHeight="35.0" prefWidth="67.0" text="Preview" />
       <Label layoutX="516.0" layoutY="375.0" prefHeight="35.0" prefWidth="109.0" text="File Address :" textFill="#7b5ef0">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -68,8 +68,14 @@
          </opaqueInsets>
       </VBox>
       <Button layoutX="624.0" layoutY="228.0" mnemonicParsing="false" opacity="0.0" prefHeight="122.0" prefWidth="142.0" text="Button" />
-      <ChoiceBox fx:id="Survey" layoutX="337.0" layoutY="422.0" prefWidth="150.0" />
-      <Label layoutX="337.0" layoutY="374.0" prefHeight="35.0" prefWidth="109.0" text="Score :" textFill="#7b5ef0">
+      <ChoiceBox fx:id="Survey" layoutX="386.0" layoutY="423.0" onMouseReleased="#SetSurvey" prefHeight="25.0" prefWidth="121.0" />
+      <Label layoutX="277.0" layoutY="375.0" prefHeight="35.0" prefWidth="109.0" text="Score :" textFill="#7b5ef0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Score" editable="false" layoutX="277.0" layoutY="423.0" prefHeight="25.0" prefWidth="84.0" />
+      <Label layoutX="386.0" layoutY="375.0" onMouseReleased="#SetSurvey" prefHeight="35.0" prefWidth="109.0" text="Survey :" textFill="#7b5ef0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

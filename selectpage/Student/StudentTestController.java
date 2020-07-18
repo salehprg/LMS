@@ -58,6 +58,8 @@ public class StudentTestController implements Initializable {
     private RadioButton AmswerFalse;
 
     private int QuestionIndex ;
+    
+    ArrayList<QuestionsModel> myQuestionsModels =  Api.User_GetQuestions(Api.CurrentQuizId) ;
     /**
      * Initializes the controller class.
      */
@@ -71,7 +73,11 @@ public class StudentTestController implements Initializable {
         
         try {
 
-            QuestionIndex++; 
+           QuestionIndex++;
+            if(QuestionIndex > myQuestionsModels.size())
+            {
+                QuestionIndex =  myQuestionsModels.size();
+            }
             
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentTest.fxml"));
             Parent root1 = (Parent) fxmlloader.load();
@@ -120,7 +126,17 @@ public class StudentTestController implements Initializable {
     
     private void loadData()
     {
-        ArrayList<QuestionsModel> myQuestionsModels =  Api.User_GetQuestions(Api.CurrentQuizId) ;
+        
+
+        Question.setText(myQuestionsModels.get(QuestionIndex).QuestionText);
+
+        if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.Tashrihi)) {
+            Answer.setText(myQuestionsModels.get(QuestionIndex).Answer);
+        }
+        if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.Testi)) {
+        }
+        if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.TrueFalse)) {
+        }
         
                  
     }

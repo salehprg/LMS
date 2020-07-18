@@ -206,7 +206,7 @@ public class ManagerArchiveTestStudentAnswerController implements Initializable 
     {
        answersModels = Api.Admin_getUserAnswers(Api.CurrentStudentId , Api.CurrentQuizId);
        answersGrading = answersModels.get(questionIndex);
-
+       
         Api.CurrentQuestionId = answersGrading.QuestionId;
     }
     
