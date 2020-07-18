@@ -53,8 +53,8 @@ public class StudentArchiveController implements Initializable {
             stage.setTitle(" Student Archive Tests Page");
             stage.setScene(new Scene(root1));
             stage.show();
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            stage.close();
+            // stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            // stage.close();
         } catch (IOException ex) {
             System.out.println("Can't Open Student Archive Tests page");
 

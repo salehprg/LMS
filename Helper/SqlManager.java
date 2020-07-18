@@ -351,8 +351,18 @@ public class SqlManager {
                 
                 data.Id = resultSet.getInt("Id");
                 data.QuizName = resultSet.getString("QuizName");
-                data.StartTime = resultSet.getDate("StartTime");
-                data.EndTime = resultSet.getDate("EndTime");
+                data.StartTime = new Date();
+                data.StartTime.setTime(resultSet.getTime("StartTime").getTime());
+                data.StartTime.setYear(resultSet.getDate("StartTime").getYear());
+                data.StartTime.setMonth(resultSet.getDate("StartTime").getMonth());
+                data.StartTime.setDate(resultSet.getDate("StartTime").getDate());
+
+                data.EndTime = new Date();
+                data.EndTime.setTime(resultSet.getTime("EndTime").getTime());
+                data.EndTime.setYear(resultSet.getDate("EndTime").getYear());
+                data.EndTime.setMonth(resultSet.getDate("EndTime").getMonth());
+                data.EndTime.setDate(resultSet.getDate("EndTime").getDate());
+
                 data.Duration = resultSet.getFloat("Duration");
                 data.Random = resultSet.getBoolean("Random");
                 data.CanReview = resultSet.getBoolean("CanReview");
@@ -374,7 +384,7 @@ public class SqlManager {
         ",[UserId]"+
         ",[TryTime])"+
         "VALUES"+
-        "('%s','%s','%s')" , triesModel.QuizId , triesModel.UserId , triesModel.TryTime , true);
+        "('%s','%s','%tF %tT')" , triesModel.QuizId , triesModel.UserId , triesModel.TryTime , triesModel.TryTime , true);
 
         Boolean result = false;
 
@@ -392,15 +402,19 @@ public class SqlManager {
     protected TriesModel DB_GetUserTries(int UserId , int QuizId)
     {
         // Create and execute a SELECT SQL statement.
-        String sqlQuery = "SELECT * from Tries Where QuizId= " + QuizId + " UserId=" + UserId;
+        String sqlQuery = "SELECT * from Tries Where QuizId= " + QuizId + " And UserId=" + UserId;
 
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
             TriesModel data = new TriesModel();
 
             while (resultSet.next()) {
+                data.TryTime = new Date();
+                data.TryTime.setTime(resultSet.getTime("TryTime").getTime());
+                data.TryTime.setYear(resultSet.getDate("TryTime").getYear());
+                data.TryTime.setMonth(resultSet.getDate("TryTime").getMonth());
+                data.TryTime.setDate(resultSet.getDate("TryTime").getDate());
                 
-                data.TryTime = resultSet.getDate("TryTime");
             }
             
             return data;
@@ -429,8 +443,17 @@ public class SqlManager {
                 data.IdNumber = resultSet.getString("IdNumber");
                 data.Allow = resultSet.getBoolean("Allow");
                 data.QuizName = resultSet.getString("QuizName");
-                data.StartTime = resultSet.getDate("StartTime");
-                data.EndTime = resultSet.getDate("EndTime");
+                data.StartTime = new Date();
+                data.StartTime.setTime(resultSet.getTime("StartTime").getTime());
+                data.StartTime.setYear(resultSet.getDate("StartTime").getYear());
+                data.StartTime.setMonth(resultSet.getDate("StartTime").getMonth());
+                data.StartTime.setDate(resultSet.getDate("StartTime").getDate());
+
+                data.EndTime = new Date();
+                data.EndTime.setTime(resultSet.getTime("EndTime").getTime());
+                data.EndTime.setYear(resultSet.getDate("EndTime").getYear());
+                data.EndTime.setMonth(resultSet.getDate("EndTime").getMonth());
+                data.EndTime.setDate(resultSet.getDate("EndTime").getDate());
 
                 quizesModels.add(data);
             }
@@ -605,7 +628,11 @@ public class SqlManager {
                 TriesModel data = new TriesModel();
 
                 data.QuizId = resultSet.getInt("QuizId");
-                data.TryTime = resultSet.getDate("TryTime");
+                data.TryTime = new Date();
+                data.TryTime.setTime(resultSet.getTime("TryTime").getTime());
+                data.TryTime.setYear(resultSet.getDate("TryTime").getYear());
+                data.TryTime.setMonth(resultSet.getDate("TryTime").getMonth());
+                data.TryTime.setDate(resultSet.getDate("TryTime").getDate());
                 data.UserId = resultSet.getInt("UserId");
                 
 

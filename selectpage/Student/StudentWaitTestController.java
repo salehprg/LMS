@@ -46,14 +46,14 @@ public class StudentWaitTestController implements Initializable{
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        loadData();
     }    
 
     @FXML
     private void StartTest(ActionEvent event) {
         
         
-        if (Api.EnrolQuiz(Api.ActiveUserId)) {       
+        if (Api.EnrolQuiz(Api.CurrentQuizId)) {       
         
         try {
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentArchiveTests.fxml"));
@@ -75,8 +75,13 @@ public class StudentWaitTestController implements Initializable{
     private void loadData ()
     {
         ArrayList<AllowQuizList> myAllowQuizLists = Api.GetQuizes();
-        TestName.setText(myAllowQuizLists.get(Api.CurrentQuizId).QuizName);
-        TestDuration.setText(String.valueOf(myAllowQuizLists.get(Api.CurrentQuizId).Duration));
-        TestStartDate.setText(String.valueOf(myAllowQuizLists.get(Api.CurrentQuizId).StartTime));    
+        AllowQuizList quizInfo = new AllowQuizList();
+        quizInfo = myAllowQuizLists.get(Api.CurrentQuizId);
+
+        TestName.setText(quizInfo.QuizName);
+        TestDuration.setText(String.valueOf(quizInfo.Duration));
+        TestStartDate.setText(String.valueOf(quizInfo.StartTime));   
+         
+        Api.CurrentQuizId = quizInfo.QuizId;
     }
 }

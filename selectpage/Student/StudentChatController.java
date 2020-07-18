@@ -18,10 +18,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import selectpage.Api.Api;
+import selectpage.ChatRoom.ChatServer;
 
 /**
  * FXML Controller class
@@ -33,9 +34,15 @@ public class StudentChatController implements Initializable {
     @FXML
     private ListView<String> ChatLits;
 
-    /**
-     * Initializes the controller class.
-     */
+    
+    @FXML
+    private TextField txtMessage;
+
+    @FXML
+    void SendMessage(ActionEvent event) {
+        ChatServer.SendMessage(txtMessage.getText());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loadData();
@@ -49,11 +56,7 @@ public class StudentChatController implements Initializable {
 
     private void loadData() {
 
-        ArrayList<AllowQuizList> myaAllowQuizLists = Api.GetQuizes();
-        ArrayList<AllowQuizList> MyList = Api.GetQuizes();
-        for (int i = 0; i < myaAllowQuizLists.size(); i++) {
-            ChatLits.getItems().add(myaAllowQuizLists.get(i).QuizName);
-        }
+        ChatServer.StartChat(Api.userModel.FirstName , this);
     }
 
     @FXML
@@ -77,5 +80,10 @@ public class StudentChatController implements Initializable {
 
         }
 
+    }
+
+    public void WriteMessage(String message)
+    {
+        ChatLits.getItems().addAll(message);
     }
 }

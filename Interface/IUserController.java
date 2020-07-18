@@ -7,7 +7,7 @@ import Model.*;
 public interface IUserController {
     public boolean Register(UserModel userModel);
 
-    public int Login(String UserName , String Password);
+    public UserModel Login(String UserName , String Password);
 
     public boolean EnrolQuiz(int UserId , int QuizId);
 

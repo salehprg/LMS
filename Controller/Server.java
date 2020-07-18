@@ -40,9 +40,10 @@ public class Server {
 	public static void main(String[] args) {
 		int port = 9876;
 		try {
-
+			UserController userController = new UserController();
+			userController.UploadFile("D:\\Project\\VSCode\\JavaFinalProject\\lms\\Images\\chat.png");
 			new Server(port).acceptClients();
-		} catch (IOException  e) {
+		} catch (IOException | SQLException e) {
 			e.printStackTrace();
 		}
     }

@@ -22,6 +22,7 @@ public class Api {
     
 
     public static int ActiveUserId;
+    public static UserModel userModel;
     public static int CurrentQuizId;
     public static int CurrentStudentId;
     public static int CurrentQuestionId = -1;
@@ -296,14 +297,15 @@ public class Api {
 
         if(SendRequest(RequestList.User_Login.getId(), new Object[] { UserName , Password }))
         {
-            int responseId = (int)ReadResponse();
-            if(responseId != -1)
+            UserModel responseModel = (UserModel)ReadResponse();
+            if(responseModel != null)
             {
-                ActiveUserId = responseId;
-                return responseId;
+                ActiveUserId = responseModel.Id;
+                userModel = responseModel;
+                return ActiveUserId;
             }
         }
-        return -1;
+        return -1 ;
     }
 
     
@@ -318,7 +320,7 @@ public class Api {
     
     //public static ArrayList<AllowQuizList> GetQuizes(int UserId) {
     public static ArrayList<AllowQuizList> GetQuizes() {
-        if(SendRequest(RequestList.Admin_addQuestionToQuiz.getId(), new Object[] { ActiveUserId }))
+        if(SendRequest(RequestList.User_GetQuizes.getId(), new Object[] { ActiveUserId }))
         {
             return (ArrayList<AllowQuizList>)ReadResponse();
         }
