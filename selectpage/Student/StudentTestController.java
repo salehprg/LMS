@@ -59,6 +59,7 @@ public class StudentTestController implements Initializable {
     @FXML
     private RadioButton AmswerFalse;
 
+    private String imgAddress;
     private int QuestionIndex ;
     
     ArrayList<QuestionsModel> myQuestionsModels =  Api.User_GetQuestions(Api.CurrentQuizId) ;
@@ -67,7 +68,7 @@ public class StudentTestController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        loadData();
     }    
 
     @FXML
@@ -128,13 +129,13 @@ public class StudentTestController implements Initializable {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
-            new FileChooser.ExtensionFilter("Excel2007 Files", "*.xlsx")
+            new FileChooser.ExtensionFilter("Image files (.jpg)", "*.jpg")
         );
         File selectedFile = fileChooser.showOpenDialog(stage);
 
         if(selectedFile != null)
         {
-            Api.AddUserFromExcel(selectedFile.getAbsolutePath());
+            imgAddress = selectedFile.getAbsolutePath();
         }
     }
     

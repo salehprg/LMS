@@ -23,4 +23,5 @@ public interface IUserController {
     public boolean SubmitAnswer(AnswersModel answersModel);
 
     public boolean SubmitSurvey(SurveyModel surveyModel);
+
 }

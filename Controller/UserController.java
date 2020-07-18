@@ -1,15 +1,18 @@
 package Controller;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
+
 import Helper.SqlManager;
 import Interface.*;
 import Model.*;
 
-public class UserController extends SqlManager implements IUserController {
+public class UserController extends SqlManager implements IUserController   {
 
     public UserController() throws SQLException {
         super();
@@ -51,10 +54,11 @@ public class UserController extends SqlManager implements IUserController {
         TriesModel triesModel = new TriesModel();
         triesModel = DB_GetUserTries(UserId, QuizId);
 
-        Date currentTime = new Date();
+        Date currentTime = new Date(System.currentTimeMillis());
 
-        if (quizesModel.StartTime.getTime() < currentTime.getTime()
-                && quizesModel.EndTime.getTime() > currentTime.getTime()) {
+        if (quizesModel.StartTime.compareTo(currentTime) < 0
+                && quizesModel.EndTime.compareTo(currentTime) >= 0)
+            {
             if (triesModel == null) {
                 triesModel = new TriesModel();
                 triesModel.QuizId = QuizId;
@@ -149,6 +153,22 @@ public class UserController extends SqlManager implements IUserController {
     public boolean SubmitSurvey(SurveyModel surveyModel) {
     
         return DB_SubmitSurvey(surveyModel);
+    }
+
+    void UploadFile(String address)
+    {
+        // BufferedImage bImage = null;
+        // try {
+        //     File initialImage = new File("C://Users/Rou/Desktop/image.jpg");
+        //     bImage = ImageIO.read(initialImage);
+
+        //     ImageIO.write(bImage, "gif", new File("C://Users/Rou/Desktop/image.gif"));
+        //     ImageIO.write(bImage, "jpg", new File("C://Users/Rou/Desktop/image.png"));
+        //     ImageIO.write(bImage, "bmp", new File("C://Users/Rou/Desktop/image.bmp"));
+
+        // } catch (Exception e) {
+        //       System.out.println("Exception occured :" + e.getMessage());
+        // }
     }
 
 

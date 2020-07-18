@@ -78,12 +78,12 @@ public class ManagerArchiveTestStudentAnswerController implements Initializable 
     private static int questionIndex = 0;
     private String fileAddr;
     private ArrayList<AnswersForGrading> answersModels;
-    private AnswersForGrading answersGrading;
+    private AnswersForGrading answersGradingModel;
 
     @FXML
     void SubmitGrade(ActionEvent event) {
 
-        Api.Admin_SubmitGrade(answersGrading.AnswerId , Float.valueOf(txtScore.getText()));
+        Api.Admin_SubmitGrade(answersGradingModel.AnswerId , Float.valueOf(txtScore.getText()));
     }
     /**
      * Initializes the controller class.
@@ -92,26 +92,26 @@ public class ManagerArchiveTestStudentAnswerController implements Initializable 
     public void initialize(URL url, ResourceBundle rb) {
         loadData();
 
-        if(answersGrading != null)
+        if(answersGradingModel != null)
         {
-            Question.setText(answersGrading.QuestionText);
-            txtScore.setText(String.valueOf(answersGrading.UserGrade));
-            questionGrade.setText(String.valueOf(answersGrading.Grade));
+            Question.setText(answersGradingModel.QuestionText);
+            txtScore.setText(String.valueOf(answersGradingModel.UserGrade));
+            questionGrade.setText(String.valueOf(answersGradingModel.Grade));
 
             try {
-                switch (answersGrading.QuestionType) {
+                switch (answersGradingModel.QuestionType) {
                     case Testi:
                         TrueFalse.setVisible(false);
                         Answer.setVisible(false);
                         TestAns.setVisible(true);
 
-                        if (answersGrading.Answer.equals("0")) {
+                        if (answersGradingModel.Answer.equals("0")) {
                             AnswerA.setSelected(true);
-                        } else if (answersGrading.Answer.equals("1")) {
+                        } else if (answersGradingModel.Answer.equals("1")) {
                             AnswerB.setSelected(true);
-                        } else if (answersGrading.Answer.equals("2")) {
+                        } else if (answersGradingModel.Answer.equals("2")) {
                             AnswerC.setSelected(true);
-                        } else if (answersGrading.Answer.equals("3")) {
+                        } else if (answersGradingModel.Answer.equals("3")) {
                             AnswerD.setSelected(true);
                         }
 
@@ -122,7 +122,7 @@ public class ManagerArchiveTestStudentAnswerController implements Initializable 
                         Answer.setVisible(false);
                         TestAns.setVisible(false);
 
-                        if (answersGrading.Answer.equals("True")) {
+                        if (answersGradingModel.Answer.equals("True")) {
                             AnswerTrue.setSelected(true);
                         } else {
                             AnswerFalse.setSelected(true);
@@ -130,7 +130,7 @@ public class ManagerArchiveTestStudentAnswerController implements Initializable 
                         break;
 
                     case Tashrihi:
-                        Address.setText(answersGrading.FileAddress);
+                        Address.setText(answersGradingModel.FileAddress);
                         TrueFalse.setVisible(false);
                         Answer.setVisible(true);
                         TestAns.setVisible(false);
@@ -205,9 +205,9 @@ public class ManagerArchiveTestStudentAnswerController implements Initializable 
     private void loadData()
     {
        answersModels = Api.Admin_getUserAnswers(Api.CurrentStudentId , Api.CurrentQuizId);
-       answersGrading = answersModels.get(questionIndex);
+       answersGradingModel = answersModels.get(questionIndex);
        
-        Api.CurrentQuestionId = answersGrading.QuestionId;
+        Api.CurrentQuestionId = answersGradingModel.QuestionId;
     }
     
 }
