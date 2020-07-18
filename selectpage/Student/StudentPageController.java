@@ -30,6 +30,8 @@ import selectpage.Api.Api;
  */
 public class StudentPageController implements Initializable{
 
+    private ArrayList<AllowQuizList> MyList;
+
     @FXML
     private ListView<String> TestsList;
 
@@ -39,7 +41,7 @@ public class StudentPageController implements Initializable{
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        loadData();
     }    
 
     @FXML
@@ -65,6 +67,7 @@ public class StudentPageController implements Initializable{
     @FXML
     private void OpenTest(ActionEvent event) {
         try {
+                selection();
 
                 FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentWaitTest.fxml"));
                 Parent root1 = (Parent) fxmlloader.load();
@@ -88,7 +91,7 @@ public class StudentPageController implements Initializable{
     @FXML
     private void StudantChat(MouseEvent event) {
         try{
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentChat.fxml"));
+                FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentChat.fxml"));
                 Parent root1 = (Parent) fxmlloader.load();
                 Stage stage = new Stage();
 
@@ -106,7 +109,7 @@ public class StudentPageController implements Initializable{
     private void Archive(MouseEvent event) {
         
         try{
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentArchive.fxml"));
+                FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentArchive.fxml"));
                 Parent root1 = (Parent) fxmlloader.load();
                 Stage stage = new Stage();
 
@@ -127,7 +130,7 @@ public class StudentPageController implements Initializable{
     }
 
     private void loadData() {
-        ArrayList<AllowQuizList> MyList = Api.GetQuizes();
+        MyList = Api.GetQuizes();
         for (int i = 0; i < MyList.size(); i++) {
             TestsList.getItems().add(MyList.get(i).QuizName);
 

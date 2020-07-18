@@ -53,7 +53,8 @@ ArrayList<AllowQuizList> myAllowQuizLists = Api.GetQuizes();
     private void StartTest(ActionEvent event) {
         
         
-        if (Api.EnrolQuiz(Api.ActiveUserId)) {
+        if (Api.EnrolQuiz(Api.CurrentQuizId)) {       
+        
         try {
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentArchiveTests.fxml"));
             Parent root1 = (Parent) fxmlloader.load();
@@ -73,9 +74,14 @@ ArrayList<AllowQuizList> myAllowQuizLists = Api.GetQuizes();
     
     private void loadData ()
     {
-        
-        TestName.setText(myAllowQuizLists.get(Api.CurrentQuizId).QuizName);
-        TestDuration.setText(String.valueOf(myAllowQuizLists.get(Api.CurrentQuizId).Duration));
-        TestStartDate.setText(String.valueOf(myAllowQuizLists.get(Api.CurrentQuizId).StartTime));    
+        ArrayList<AllowQuizList> myAllowQuizLists = Api.GetQuizes();
+        AllowQuizList quizInfo = new AllowQuizList();
+        quizInfo = myAllowQuizLists.get(Api.CurrentQuizId);
+
+        TestName.setText(quizInfo.QuizName);
+        TestDuration.setText(String.valueOf(quizInfo.Duration));
+        TestStartDate.setText(String.valueOf(quizInfo.StartTime));   
+         
+        Api.CurrentQuizId = quizInfo.QuizId;
     }
 }

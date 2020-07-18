@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
-
+import java.awt.image.*;
 import javax.imageio.ImageIO;
 
 import Helper.SqlManager;
@@ -34,16 +34,16 @@ public class UserController extends SqlManager implements IUserController   {
     }
 
     @Override
-    public int Login(String UserName, String Password) {
+    public UserModel Login(String UserName, String Password) {
         ArrayList<UserModel> users = DB_GetAllUsers();
 
         for (UserModel user : users) {
             if (user.UserName.equals(UserName) && user.Password.equals(Password)) {
-                return user.Id;
+                return user;
             }
         }
 
-        return -1;
+        return null;
     }
 
     @Override
@@ -59,11 +59,11 @@ public class UserController extends SqlManager implements IUserController   {
         if (quizesModel.StartTime.compareTo(currentTime) < 0
                 && quizesModel.EndTime.compareTo(currentTime) >= 0)
             {
-            if (triesModel == null) {
+            if (triesModel.TryTime == null) {
                 triesModel = new TriesModel();
                 triesModel.QuizId = QuizId;
                 triesModel.UserId = UserId;
-                triesModel.TryTime = new Date();
+                triesModel.TryTime = currentTime;
 
                 DB_EnrolUserToQuiz(triesModel);
 
@@ -146,6 +146,10 @@ public class UserController extends SqlManager implements IUserController   {
 
     @Override
     public boolean SubmitAnswer(AnswersModel answersModel) {
+        if(answersModel.FileAddress != null)
+        {
+            UploadFile(answersModel.FileAddress);
+        }
         return DB_SubmitAnswer(answersModel);
     }
 
@@ -157,18 +161,19 @@ public class UserController extends SqlManager implements IUserController   {
 
     void UploadFile(String address)
     {
-        // BufferedImage bImage = null;
-        // try {
-        //     File initialImage = new File("C://Users/Rou/Desktop/image.jpg");
-        //     bImage = ImageIO.read(initialImage);
+        BufferedImage bImage = null;
+        try {
+            File initialImage = new File(address);
+            bImage = ImageIO.read(initialImage);
 
-        //     ImageIO.write(bImage, "gif", new File("C://Users/Rou/Desktop/image.gif"));
-        //     ImageIO.write(bImage, "jpg", new File("C://Users/Rou/Desktop/image.png"));
-        //     ImageIO.write(bImage, "bmp", new File("C://Users/Rou/Desktop/image.bmp"));
+            String imgname = initialImage.getName();
+            File saveTo =new File("AnswerImage/" + imgname);
 
-        // } catch (Exception e) {
-        //       System.out.println("Exception occured :" + e.getMessage());
-        // }
+            ImageIO.write(bImage, "jpg", saveTo);
+
+        } catch (Exception e) {
+              System.out.println("Exception occured :" + e.getMessage());
+        }
     }
 
 
