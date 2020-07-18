@@ -5,9 +5,11 @@
  */
 package selectpage.Student;
 
+import Model.AllowQuizList;
 import java.io.IOException;
 import selectpage.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import selectpage.Api.Api;
 
 /**
  * FXML Controller class
@@ -28,7 +31,7 @@ import javafx.stage.Stage;
 public class StudentPageController implements Initializable{
 
     @FXML
-    private ListView<?> TestsList;
+    private ListView<String> TestsList;
 
     
     /**
@@ -84,10 +87,50 @@ public class StudentPageController implements Initializable{
 
     @FXML
     private void StudantChat(MouseEvent event) {
+        try{
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentChat.fxml"));
+                Parent root1 = (Parent) fxmlloader.load();
+                Stage stage = new Stage();
+
+                stage.setTitle("Student Chat Page");
+                stage.setScene(new Scene(root1));
+                stage.show();
+                
+            } catch (IOException ex) {
+                System.out.println("Can't Open Student Chat Page");
+
+            }
     }
 
     @FXML
     private void Archive(MouseEvent event) {
+        
+        try{
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentArchive.fxml"));
+                Parent root1 = (Parent) fxmlloader.load();
+                Stage stage = new Stage();
+
+                stage.setTitle("Student Archive Page");
+                stage.setScene(new Scene(root1));
+                stage.show();
+                
+            } catch (IOException ex) {
+                System.out.println("Can't Open Studen tArchive Page");
+
+            }
     }
     
+    private void selection() {        
+        Api.CurrentQuizId = TestsList.getSelectionModel().getSelectedIndex();
+        System.out.println(Api.CurrentQuizId);
+
+    }
+
+    private void loadData() {
+        ArrayList<AllowQuizList> MyList = Api.GetQuizes();
+        for (int i = 0; i < MyList.size(); i++) {
+            TestsList.getItems().add(MyList.get(i).QuizName);
+
+        }
+    }
 }

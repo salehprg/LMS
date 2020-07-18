@@ -18,7 +18,7 @@
             <Image url="@../../Images/chat.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="250.0" layoutX="68.0" layoutY="38.0" onDragDetected="#Archive" onMouseClicked="#Archive" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="250.0" layoutX="68.0" layoutY="38.0" onMouseClicked="#Archive" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../Images/archive.png" />
          </image>

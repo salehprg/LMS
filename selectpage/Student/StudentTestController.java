@@ -6,6 +6,7 @@
 package selectpage.Student;
 
 import Model.QuestionsModel;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import selectpage.Api.Api;
 
@@ -122,6 +124,18 @@ public class StudentTestController implements Initializable {
 
     @FXML
     private void OpenFile(ActionEvent event) {
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+            new FileChooser.ExtensionFilter("Excel2007 Files", "*.xlsx")
+        );
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if(selectedFile != null)
+        {
+            Api.AddUserFromExcel(selectedFile.getAbsolutePath());
+        }
     }
     
     private void loadData()

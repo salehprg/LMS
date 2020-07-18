@@ -70,8 +70,7 @@ public class StudentArchiveController implements Initializable {
     private void loadData() {
         ArrayList<AllowQuizList> MyList = Api.GetQuizes();
         for (int i = 0; i < MyList.size(); i++) {
-            ArchiveList.getItems().add(MyList.get(1).QuizName);
-
+            ArchiveList.getItems().add(MyList.get(i).QuizName);
         }
     }
 
