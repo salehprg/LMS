@@ -6,6 +6,8 @@
 package selectpage.Manager;
 
 import Model.*;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -30,6 +32,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import selectpage.Api.Api;
 
@@ -81,6 +84,22 @@ public class ManagerCreateTestController implements Initializable {
     }
 
     @FXML
+    void OpenFile(ActionEvent event) {
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+            new FileChooser.ExtensionFilter("Excel2007 Files", "*.xlsx")
+        );
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if(selectedFile != null)
+        {
+            Api.AddUserFromExcel(selectedFile.getAbsolutePath());
+        }
+    }
+
+    @FXML
     private void SelectDate(ActionEvent event) {
         lbDdate.setText(DataPicker.getValue().toString());
     }
@@ -93,6 +112,8 @@ public class ManagerCreateTestController implements Initializable {
             Api.CurrentQuizId = QuizId;
             if(QuizId != -1)
             {
+                AssignUserToQuiz(QuizId);
+
                 FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerCreateTestQuestion.fxml"));
 
                 Parent root1 = (Parent) fxmlloader.load();
@@ -100,6 +121,7 @@ public class ManagerCreateTestController implements Initializable {
                 stage.setTitle("Manager Create Test Manager Create Test Question Page");
                 stage.setScene(new Scene(root1));
                 stage.show();
+
                 stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
                 stage.close();
             }
@@ -134,8 +156,27 @@ public class ManagerCreateTestController implements Initializable {
         quizesModel.EndTime = Date.from(DataPicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         quizesModel.EndTime.setHours(Integer.valueOf(EndHour.getText()));
         quizesModel.EndTime.setMinutes(Integer.valueOf(EndMinute.getText()));
-        quizesModel.Random = RandomArrangement.selectedProperty().get();
+        quizesModel.Random = RandomArrangement.isSelected();
+        quizesModel.CanReview = TestReviw.isSelected();
 
         return Api.createNewQuiz(quizesModel);
+    }
+
+    private boolean AssignUserToQuiz(int QuizId)
+    {
+        String[] users = Students.getText().split("\\r?\\n");
+
+        for (String user : users) {
+            UserModel userModel = new UserModel();
+            String[] userDetail = user.split(",");
+
+            userModel.FirstName = userDetail[0];
+            userModel.LastName = userDetail[1];
+            userModel.IdNumber = userDetail[2];
+
+            Api.AssignUserToQuiz(userModel , QuizId);
+        }
+        
+        return true;
     }
 }

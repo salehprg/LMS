@@ -178,6 +178,13 @@ public class RequestHandler implements Runnable {
                     QuizId = (int)fromClient.readObject();
                     response = adminController.getQuizSurvey(QuizId);
 
+                    break;
+
+                case Admin_getQuestions:
+                    QuizId = (int)fromClient.readObject();
+                    response = adminController.getQuestions(QuizId);
+                    break;
+
                 case User_EnrolQuiz:
                     IdUser = (int)fromClient.readObject();
                     quizId = (int)fromClient.readObject();

@@ -28,7 +28,8 @@ public enum RequestList{
     Admin_getQuizProgram(24),
     Admin_getQuizArchive(25),
     Admin_getQuizSurvey(26),
-    User_SubmitSurvey(27);
+    User_SubmitSurvey(27),
+    Admin_getQuestions(28);
 
 
     private int Id;

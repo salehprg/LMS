@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selectpage.Manager.ManagerCreateTestController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selectpage.Manager.ManagerCreateTestController">
    <children>
       <TextField fx:id="TestName" layoutX="572.0" layoutY="98.0" prefHeight="25.0" prefWidth="150.0" promptText="Test Name" />
-      <TextArea fx:id="Students" layoutX="65.0" layoutY="198.0" prefHeight="160.0" prefWidth="312.0" promptText="Please add students here        first_name1\last_name1\ID1 \\ first_name2\last_name2\ID2  \\" />
+      <TextArea fx:id="Students" layoutX="65.0" layoutY="198.0" prefHeight="160.0" prefWidth="312.0" promptText="Please add students here        first_name1,last_name1,ID1  first_name2,last_name2,ID2 " />
       <TextField fx:id="TestDuration" layoutX="572.0" layoutY="151.0" promptText="Test Duration" />
       <ChoiceBox fx:id="TestMethod" layoutX="228.0" layoutY="98.0" pickOnBounds="false" prefWidth="150.0" />
       <Label layoutX="445.0" layoutY="101.0" text="Test Name :" textFill="#7b5ef0">
@@ -73,6 +73,6 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="Address" layoutX="229.0" layoutY="385.0" prefHeight="25.0" prefWidth="150.0" promptText="Adddress" />
+      <Button layoutX="169.0" layoutY="385.0" mnemonicParsing="false" onAction="#OpenFile" prefHeight="25.0" prefWidth="85.0" text="Browse..." />
    </children>
 </AnchorPane>
