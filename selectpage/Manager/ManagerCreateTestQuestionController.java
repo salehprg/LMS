@@ -80,64 +80,50 @@ public class ManagerCreateTestQuestionController implements Initializable {
 
     private ArrayList<QuestionsModel> questionsModels = new ArrayList<>();
     private static int QuestionIndex;
+
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) 
-    {
+    public void initialize(URL url, ResourceBundle rb) {
         loadData();
-        try 
-        {
+        try {
             QuestionsModel model = questionsModels.get(QuestionIndex);
             Question.setText(model.QuestionText);
             QuestionTime.setText(String.valueOf(model.Duration));
             TextGrade.setText(String.valueOf(model.Grade));
 
-            switch(model.QuestionType)
-            {
+            switch (model.QuestionType) {
                 case Testi:
-                    ArrayList<OptionsModel> options =  Api.GetOptionss(model.Id);
-                    if(model.Answer.equals(String.valueOf(options.get(0).Id)))
-                    {
+                    ArrayList<OptionsModel> options = Api.GetOptionss(model.Id);
+                    if (model.Answer.equals(String.valueOf(options.get(0).Id))) {
                         AnswerA.setSelected(true);
-                    }
-                    else if(model.Answer.equals(String.valueOf(options.get(1).Id)))
-                    {
+                    } else if (model.Answer.equals(String.valueOf(options.get(1).Id))) {
                         AnswerB.setSelected(true);
-                    }
-                    else if(model.Answer.equals(String.valueOf(options.get(2).Id)))
-                    {
+                    } else if (model.Answer.equals(String.valueOf(options.get(2).Id))) {
                         AnswerC.setSelected(true);
-                    }
-                    else if(model.Answer.equals(String.valueOf(options.get(3).Id)))
-                    {
+                    } else if (model.Answer.equals(String.valueOf(options.get(3).Id))) {
                         AnswerD.setSelected(true);
                     }
-                    
+
                     break;
 
                 case TrueFalse:
-                    if(model.Answer.equals("true"))
-                    {
+                    if (model.Answer.equals("true")) {
                         AnswerTrue.setSelected(true);
-                    }
-                    else
-                    {
+                    } else {
                         AnswerFalse.setSelected(true);
                     }
                     break;
 
                 default:
                     break;
-                
+
             }
-        } 
-        catch (Exception e) 
-        {
-            
+        } catch (Exception e) {
+
         }
-       
+
     }
 
     @FXML
@@ -166,8 +152,7 @@ public class ManagerCreateTestQuestionController implements Initializable {
 
         try {
 
-            if(CreateQuestion())
-            {
+            if (CreateQuestion()) {
                 Next(event);
             }
         } catch (Exception ex) {
@@ -226,54 +211,37 @@ public class ManagerCreateTestQuestionController implements Initializable {
             TrueFalse.setVisible(false);
         }
     }
-    
-    private boolean CreateQuestion()
-    {
+
+    private boolean CreateQuestion() {
         QuestionsModel questionsModel = new QuestionsModel();
         questionsModel.QuestionText = Question.getText();
-        questionsModel.Duration = Float.parseFloat(( QuestionTime.getText() != null ? QuestionTime.getText() : "0"));
-        questionsModel.QuizId = Api.CurrentQuizId ;
+        questionsModel.Duration = Float.parseFloat((QuestionTime.getText() != null ? QuestionTime.getText() : "0"));
+        questionsModel.QuizId = Api.CurrentQuizId;
         questionsModel.Grade = Float.valueOf(TextGrade.getText());
-        
-        if (AnswerMethod.getValue().equals("Test")) 
-        {
-            questionsModel.QuestionType = QType.Testi ;
-            if(AnswerA.isSelected())
-            {
+
+        if (AnswerMethod.getValue().equals("Test")) {
+            questionsModel.QuestionType = QType.Testi;
+            if (AnswerA.isSelected()) {
                 questionsModel.Answer = "0";
-            }
-            else if(AnswerB.isSelected())
-            {
+            } else if (AnswerB.isSelected()) {
                 questionsModel.Answer = "1";
-            }
-            else if(AnswerC.isSelected())
-            {
+            } else if (AnswerC.isSelected()) {
                 questionsModel.Answer = "2";
-            }
-            else if(AnswerD.isSelected())
-            {
+            } else if (AnswerD.isSelected()) {
                 questionsModel.Answer = "3";
             }
-        } 
-        else if (AnswerMethod.getValue().equals("True Or False")) 
-        {
-            questionsModel.QuestionType = QType.TrueFalse ;
-            if(AnswerTrue.isSelected())
-            {
+        } else if (AnswerMethod.getValue().equals("True Or False")) {
+            questionsModel.QuestionType = QType.TrueFalse;
+            if (AnswerTrue.isSelected()) {
                 questionsModel.Answer = String.valueOf(true);
-            }
-            else
-            {
+            } else {
                 questionsModel.Answer = String.valueOf(false);
             }
-        } 
-        else 
-        {
-            questionsModel.QuestionType = QType.Tashrihi ;
+        } else {
+            questionsModel.QuestionType = QType.Tashrihi;
         }
 
         return Api.addQuestionToQuiz(questionsModel);
     }
 
-    
 }

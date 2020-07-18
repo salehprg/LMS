@@ -5,6 +5,7 @@
  */
 package selectpage.Manager;
 
+import Model.QuizesModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import javax.print.DocFlavor;
+import selectpage.Api.Api;
 
 /**
  * FXML Controller class
@@ -81,13 +83,14 @@ public class ManagerArchiveController implements Initializable {
     private void loadData()
     {
         
-        ArrayList<String> MyList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            MyList.add(i, "test " + i); 
-        }
+        ArrayList<QuizesModel> MyList = Api.Admin_getQuizProgram();
+//        for (int i = 0; i < 10; i++) {
+//            MyList.add(i, "test " + i); 
+//        }
         //ezafe kardn be list
+        
         for (int i = 0; i < 10; i++) {
-           ArchiveList.getItems().add(MyList.get(i)) ;
+           ArchiveList.getItems().add(MyList.get(1).QuizName) ;
         }
         
         

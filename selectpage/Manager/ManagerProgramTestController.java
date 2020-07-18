@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -37,7 +39,6 @@ public class ManagerProgramTestController implements Initializable {
     private TextArea Students;
     @FXML
     private TextField TestDuration;
-    @FXML
     private DatePicker DataPicker;
     @FXML
     private TextField StartMinute;
@@ -57,6 +58,8 @@ public class ManagerProgramTestController implements Initializable {
     private TextField AnswerMethod;
     @FXML
     private TextField TestReview;
+    @FXML
+    private Label Date;
 
     /**
      * Initializes the controller class.
@@ -92,20 +95,23 @@ public class ManagerProgramTestController implements Initializable {
     
     private void loadData()
     {
-//        Api.GetQuizes(Api.CurrentQuizId) ;
-        QuizesModel myqModel = new QuizesModel();
-//        myqModel.QuizName
-        QuizesModel quizesModel = new QuizesModel();
-         TestName.setText(quizesModel.QuizName);
-         TestDuration.setText(String.valueOf(quizesModel.Duration));
-        quizesModel.StartTime = Date.from(DataPicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        quizesModel.StartTime.setHours(Integer.valueOf(StartHour.getText()));
-        quizesModel.StartTime.setMinutes(Integer.valueOf(StartMinute.getText()));
-        
-        quizesModel.EndTime = Date.from(DataPicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        quizesModel.EndTime.setHours(Integer.valueOf(EndHour.getText()));
-        quizesModel.EndTime.setMinutes(Integer.valueOf(EndMinute.getText()));
-        quizesModel.Random = RandomArrangement.selectedProperty().get();
+
+        ArrayList<QuizesModel> mylist = Api.Admin_getQuizProgram() ;
+        QuizesModel myqModel = mylist.get(Api.CurrentQuizId);
+         TestName.setText(myqModel.QuizName);
+         TestDuration.setText(String.valueOf(myqModel.Duration));
+         Date.setText(myqModel.StartTime.getYear() + "/" + myqModel.StartTime.getMonth() + "/" + myqModel.StartTime.getDay() );
+        StartHour.setText(String.valueOf(myqModel.StartTime.getHours()));
+        StartMinute.setText(String.valueOf(myqModel.StartTime.getMinutes()));
+      
+        EndHour.setText(String.valueOf(myqModel.EndTime.getHours()));
+        EndMinute.setText(String.valueOf(myqModel.EndTime.getMinutes()));
+        if(myqModel.Random)
+        {
+            ArrangeMethod.setText("Random");
+        }else{
+            ArrangeMethod.setText(("Normal"));
+        }
     }
     
 }
