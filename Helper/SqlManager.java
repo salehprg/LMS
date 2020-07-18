@@ -491,10 +491,31 @@ public class SqlManager {
         return result;
     }
 
+    protected boolean DB_EditAnswer(AnswersModel answersModel)
+    {
+        String sqlQuery = String.format("UPDATE [dbo].[Answers]"+
+        "SET [Answer] = '%s'"+
+        ",[FileAddress] = '%s' "+
+        "WHERE UserId= %s And QuestionId = %s" , answersModel.Answer , answersModel.FileAddress , answersModel.UserId , answersModel.QuestionId);
+
+        Boolean result = false;
+
+        try {
+            statement.execute(sqlQuery);
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            result = false;
+        }
+
+        return result;
+    }
+
+
     protected AnswersModel DB_GetUserAnswer(int UserId , int QuestionId)
     {
         // Create and execute a SELECT SQL statement.
-        String sqlQuery = "SELECT * from Answers Where UserId= " + UserId + " QuestionId=" + QuestionId;
+        String sqlQuery = "SELECT * from Answers Where UserId= " + UserId + "And QuestionId=" + QuestionId;
 
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -505,6 +526,7 @@ public class SqlManager {
                 data.Id = resultSet.getInt("Id");
                 data.Answer = resultSet.getString("Answer");
                 data.UserGrade = resultSet.getFloat("UserGrade");
+                data.UserId = resultSet.getInt("UserId");
             }
             
             return data;

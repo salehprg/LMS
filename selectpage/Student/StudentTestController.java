@@ -64,69 +64,49 @@ public class StudentTestController implements Initializable {
     private String imgAddress;
     private int QuestionIndex;
 
-    ArrayList<QuestionsModel> myQuestionsModels = Api.User_GetQuestions(Api.CurrentQuizId);
+    ArrayList<QuestionsModel> myQuestionsModels;
     @FXML
     private Label lblAddress;
     @FXML
     private Button BtnAddress;
 
-    private ArrayList<AnswersModel> myAnswersModels;
+    private static ArrayList<AnswersModel> myAnswersModels = new ArrayList<>();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        myQuestionsModels = Api.User_GetQuestions(Api.CurrentQuizId);
         loadData();
     }
 
     @FXML
-    private void NextQuestion(ActionEvent event) {
-setData();
-        try {
-
-            QuestionIndex++;
-            if (QuestionIndex > myQuestionsModels.size()) {
-                QuestionIndex = myQuestionsModels.size();
-            }
-
-            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentTest.fxml"));
-            Parent root1 = (Parent) fxmlloader.load();
-            Stage stage = new Stage();
-
-            stage.setTitle("Student Test Page");
-            stage.setScene(new Scene(root1));
-            stage.show();
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            stage.close();
-        } catch (IOException ex) {
-            System.out.println("Can't Open Student Test page");
-
+    void NextQuestion(ActionEvent event) {
+        
+        setData();
+        
+        QuestionIndex++;
+        if (QuestionIndex >= myQuestionsModels.size()) 
+        {
+            QuestionIndex = myQuestionsModels.size() - 1;
         }
+
+
+        loadData();
     }
 
     @FXML
-    private void Preview(ActionEvent event) {
-setData();
-        try {
-            QuestionIndex--;
-            if (QuestionIndex < 0) {
-                QuestionIndex = 0;
-            }
+    void Preview(ActionEvent event) {
+        setData();
 
-            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentTest.fxml"));
-            Parent root1 = (Parent) fxmlloader.load();
-            Stage stage = new Stage();
-
-            stage.setTitle("Student Test Page");
-            stage.setScene(new Scene(root1));
-            stage.show();
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            stage.close();
-        } catch (IOException ex) {
-            System.out.println("Can't Open Student Test page");
-
+        QuestionIndex--;
+        if (QuestionIndex < 0) {
+            QuestionIndex = 0;
         }
+
+
+        loadData();
 
     }
 
@@ -147,6 +127,8 @@ setData();
 
     private void loadData() {
 
+        Api.CurrentQuestionId = myQuestionsModels.get(QuestionIndex).Id;
+        
         Question.setText(myQuestionsModels.get(QuestionIndex).QuestionText);
 
         if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.Tashrihi)) {
@@ -178,46 +160,89 @@ setData();
 
     private void setData() {
 
-        myAnswersModels.get(QuestionIndex).QuestionId = Api.CurrentQuizId;
 
-        if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.Tashrihi)) {
+        if(QuestionIndex >= 0 && QuestionIndex < myAnswersModels.size())
+        {
+            myAnswersModels.get(QuestionIndex).QuestionId = Api.CurrentQuizId;
 
-            myAnswersModels.get(QuestionIndex).Answer = Answer.getText();
-            myAnswersModels.get(QuestionIndex).FileAddress = Address.getText();
+            if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.Tashrihi)) {
+
+                myAnswersModels.get(QuestionIndex).Answer = Answer.getText();
+                myAnswersModels.get(QuestionIndex).FileAddress = Address.getText();
+            }
+            if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.Testi)) {
+                if (AmswerA.isSelected()) {
+                    myAnswersModels.get(QuestionIndex).Answer = "0";
+                }
+                if (AmswerB.isSelected()) {
+                    myAnswersModels.get(QuestionIndex).Answer = "1";
+                }
+                if (AmswerC.isSelected()) {
+                    myAnswersModels.get(QuestionIndex).Answer = "2";
+                }
+                if (AmswerD.isSelected()) {
+                    myAnswersModels.get(QuestionIndex).Answer = "3";
+                }
+            }
+            if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.TrueFalse)) {
+                if (AmswerTrue.isSelected()) {
+                    myAnswersModels.get(QuestionIndex).Answer = "True";
+                }
+                if (AmswerFalse.isSelected()) {
+                    myAnswersModels.get(QuestionIndex).Answer = "False";
+                }
+            }
+            myAnswersModels.get(QuestionIndex).QuestionId = Api.CurrentQuestionId;
+            myAnswersModels.get(QuestionIndex).UserId = Api.ActiveUserId;
+
+            Api.User_EditAnswer(myAnswersModels.get(QuestionIndex));
         }
-        if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.Testi)) {
-            if (AmswerA.isSelected()) {
-                myAnswersModels.get(QuestionIndex).Answer = "0";
+        else
+        {
+            AnswersModel answersModel = new AnswersModel();
+
+            if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.Tashrihi)) {
+
+                answersModel.Answer = Answer.getText();
+                answersModel.FileAddress = Address.getText();
             }
-            if (AmswerB.isSelected()) {
-                myAnswersModels.get(QuestionIndex).Answer = "1";
+            if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.Testi)) {
+                if (AmswerA.isSelected()) {
+                    answersModel.Answer = "0";
+                }
+                if (AmswerB.isSelected()) {
+                    answersModel.Answer = "1";
+                }
+                if (AmswerC.isSelected()) {
+                    answersModel.Answer = "2";
+                }
+                if (AmswerD.isSelected()) {
+                    answersModel.Answer = "3";
+                }
             }
-            if (AmswerC.isSelected()) {
-                myAnswersModels.get(QuestionIndex).Answer = "2";
+            if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.TrueFalse)) {
+                if (AmswerTrue.isSelected()) {
+                    answersModel.Answer = "True";
+                }
+                if (AmswerFalse.isSelected()) {
+                    answersModel.Answer = "False";
+                }
             }
-            if (AmswerD.isSelected()) {
-                myAnswersModels.get(QuestionIndex).Answer = "3";
-            }
+            answersModel.QuestionId = Api.CurrentQuestionId;
+            answersModel.UserId = Api.ActiveUserId;
+
+            myAnswersModels.add(answersModel);
+            Api.SubmitAnswer(answersModel);
         }
-        if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.TrueFalse)) {
-            if (AmswerTrue.isSelected()) {
-                myAnswersModels.get(QuestionIndex).Answer = "True";
-            }
-            if (AmswerFalse.isSelected()) {
-                myAnswersModels.get(QuestionIndex).Answer = "False";
-            }
-        }
-        myAnswersModels.get(QuestionIndex).QuestionId = Api.CurrentQuizId;
-        myAnswersModels.get(QuestionIndex).UserId = Api.ActiveUserId;
         
-        Api.SubmitAnswer(myAnswersModels.get(QuestionIndex));
+        
     }
 
     @FXML
     private void Finish(ActionEvent event) {
         
-        
         setData();
+        
         Stage stage = new Stage();
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         stage.close();

@@ -56,7 +56,7 @@ ArrayList<AllowQuizList> myAllowQuizLists = Api.GetQuizes();
         if (Api.EnrolQuiz(Api.CurrentQuizId)) {       
         
         try {
-            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentArchiveTests.fxml"));
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentTest.fxml"));
             Parent root1 = (Parent) fxmlloader.load();
             Stage stage = new Stage();
 

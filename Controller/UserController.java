@@ -91,7 +91,7 @@ public class UserController extends SqlManager implements IUserController   {
         if (quizesModel.Random) {
             ArrayList<QuestionsModel> randomisedQuestions = new ArrayList<>();
 
-            for (int i = 0; i < questionsModels.size(); i++) {
+            while (questionsModels.size() > 0) {
                 int randomId = new Random().nextInt(questionsModels.size());
                 randomisedQuestions.add(questionsModels.get(randomId));
                 questionsModels.remove(randomId);
@@ -116,32 +116,33 @@ public class UserController extends SqlManager implements IUserController   {
     }
 
     @Override
-    public Object Review_GetUserAnswer(int UserId, int QuestionId) {
+    public AnswersModel Review_GetUserAnswer(int UserId, int QuestionId) {
         AnswersModel answersModel = DB_GetUserAnswer(UserId, QuestionId);
 
-        QuestionsModel questionModel = DB_GetQuestionInfo(QuestionId);
+        return answersModel;
+        // QuestionsModel questionModel = DB_GetQuestionInfo(QuestionId);
 
-        switch (questionModel.QuestionType) {
-            case Testi:
-                ArrayList<OptionsModel> optionsModels = DB_GetQuestionOptions(QuestionId);
+        // switch (questionModel.QuestionType) {
+        //     case Testi:
+        //         ArrayList<OptionsModel> optionsModels = DB_GetQuestionOptions(QuestionId);
 
-                int AnswerId = Integer.parseInt(answersModel.Answer);
-                for (OptionsModel optionsModel : optionsModels) {
-                    if (optionsModel.Id == AnswerId) {
-                        optionsModel.UserAnswer = true;
-                        optionsModels.set(optionsModels.indexOf(optionsModel), optionsModel);
-                    }
-                }
+        //         int AnswerId = Integer.parseInt(answersModel.Answer);
+        //         for (OptionsModel optionsModel : optionsModels) {
+        //             if (optionsModel.Id == AnswerId) {
+        //                 optionsModel.UserAnswer = true;
+        //                 optionsModels.set(optionsModels.indexOf(optionsModel), optionsModel);
+        //             }
+        //         }
 
-                return optionsModels;
+        //         return optionsModels;
 
-            case Tashrihi:
-                return answersModel.Answer;
+        //     case Tashrihi:
+        //         return answersModel.Answer;
 
-            case TrueFalse:
-                return Boolean.parseBoolean(answersModel.Answer);
-        }
-        return DB_SubmitAnswer(answersModel);
+        //     case TrueFalse:
+        //         return Boolean.parseBoolean(answersModel.Answer);
+        // }
+        // return DB_SubmitAnswer(answersModel);
     }
 
     @Override
@@ -151,6 +152,15 @@ public class UserController extends SqlManager implements IUserController   {
             UploadFile(answersModel.FileAddress);
         }
         return DB_SubmitAnswer(answersModel);
+    }
+
+    @Override
+    public boolean EditAnswer(AnswersModel answersModel) {
+        if(answersModel.FileAddress != null)
+        {
+            UploadFile(answersModel.FileAddress);
+        }
+        return DB_EditAnswer(answersModel);
     }
 
     @Override

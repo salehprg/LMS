@@ -76,8 +76,8 @@ public class StudentPageController implements Initializable{
                 stage.setTitle("Student Wait Test Page");
                 stage.setScene(new Scene(root1));
                 stage.show();
-                stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-                stage.close();
+                // stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+                // stage.close();
             } catch (IOException ex) {
                 System.out.println("Can't Open Student Wait Test Page");
 

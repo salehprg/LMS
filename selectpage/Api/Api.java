@@ -78,6 +78,14 @@ public class Api {
         
     }
 
+    public static boolean User_EditAnswer(AnswersModel answersModel){
+        if(SendRequest(RequestList.User_EditAnswer.getId(), new Object[] { answersModel }))
+        {
+            return (boolean)ReadResponse();
+        }
+        return false;
+    }
+
     public static ArrayList<UserModel> Admin_getUsersInQuiz(int QuizId) {
         if(SendRequest(RequestList.Admin_getUsersInQuiz.getId(), new Object[] { QuizId }))
         {
@@ -354,10 +362,10 @@ public class Api {
 
     
     //public static Object Review_GetUserAnswer(int UserId, int QuestionId) {
-    public static Object Review_GetUserAnswer(int QuestionId) {
+    public static AnswersModel Review_GetUserAnswer(int QuestionId) {
         if(SendRequest(RequestList.User_Review_GetUserAnswer.getId(), new Object[] { ActiveUserId , QuestionId }))
         {
-            return (Object)ReadResponse();
+            return (AnswersModel)ReadResponse();
         }
         return null;
     }

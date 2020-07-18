@@ -254,6 +254,11 @@ public class RequestHandler implements Runnable {
                     response = userController.SubmitSurvey(surveyModel);
                     break;
                     
+                case User_EditAnswer:
+                    answersModel = (AnswersModel)fromClient.readObject();
+                    response = userController.EditAnswer(answersModel);
+                    break;
+
                 default:
                     break;
                 

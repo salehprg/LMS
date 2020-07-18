@@ -31,7 +31,8 @@ public enum RequestList{
     User_SubmitSurvey(27),
     Admin_getQuestions(28),
     Admin_getUsersInQuiz(29),
-    Admin_SubmitGrade(30);
+    Admin_SubmitGrade(30),
+    User_EditAnswer(31);
 
 
     private int Id;

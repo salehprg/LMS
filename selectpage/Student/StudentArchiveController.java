@@ -29,6 +29,8 @@ import selectpage.Api.Api;
  */
 public class StudentArchiveController implements Initializable {
 
+    ArrayList<AllowQuizList> MyList = new ArrayList<>();
+
     @FXML
     private ListView<String> ArchiveList;
 
@@ -62,13 +64,13 @@ public class StudentArchiveController implements Initializable {
     }
 
     private void selection() {        
-        Api.CurrentQuizId = ArchiveList.getSelectionModel().getSelectedIndex();
+        Api.CurrentQuizId = MyList.get(ArchiveList.getSelectionModel().getSelectedIndex()).QuizId;
         System.out.println(Api.CurrentQuizId);
 
     }
 
     private void loadData() {
-        ArrayList<AllowQuizList> MyList = Api.GetQuizes();
+        MyList = Api.GetQuizes();
         for (int i = 0; i < MyList.size(); i++) {
             ArchiveList.getItems().add(MyList.get(i).QuizName);
         }

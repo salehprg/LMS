@@ -17,10 +17,12 @@ public interface IUserController {
 
     public ArrayList<QuestionsModel> Review_GetQuestions(int QuizId);
 
-    public Object Review_GetUserAnswer(int UserId , int QuestionId);
+    public AnswersModel Review_GetUserAnswer(int UserId , int QuestionId);
 
 
     public boolean SubmitAnswer(AnswersModel answersModel);
+
+    public boolean EditAnswer(AnswersModel answersModel);
 
     public boolean SubmitSurvey(SurveyModel surveyModel);
 

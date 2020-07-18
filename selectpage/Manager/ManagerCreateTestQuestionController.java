@@ -226,9 +226,9 @@ public class ManagerCreateTestQuestionController implements Initializable {
         } else if (AnswerMethod.getValue().equals("True Or False")) {
             questionsModel.QuestionType = QType.TrueFalse;
             if (AnswerTrue.isSelected()) {
-                questionsModel.Answer = String.valueOf(true);
+                questionsModel.Answer = "True";
             } else {
-                questionsModel.Answer = String.valueOf(false);
+                questionsModel.Answer = "False";
             }
         } else {
             questionsModel.QuestionType = QType.Tashrihi;

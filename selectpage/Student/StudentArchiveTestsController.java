@@ -5,6 +5,7 @@
  */
 package selectpage.Student;
 
+import Model.AnswersModel;
 import Model.QuestionsModel;
 import Model.SurveyModel;
 import java.io.IOException;
@@ -21,6 +22,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -39,43 +42,47 @@ public class StudentArchiveTestsController implements Initializable {
 
     ObservableList List = FXCollections.observableArrayList();
     @FXML
-    private TextArea Answer;
+    private Label Answer;
     @FXML
-    private TextField Address;
+    private Hyperlink Address;
     @FXML
-    private TextArea Question;
+    private Label Question;
     @FXML
     private VBox TestAns;
     @FXML
-    private RadioButton AmswerA;
+    private RadioButton AnswerA;
     @FXML
     private ToggleGroup Answer1;
     @FXML
-    private RadioButton AmswerB;
+    private RadioButton AnswerB;
     @FXML
-    private RadioButton AmswerC;
+    private RadioButton AnswerC;
     @FXML
-    private RadioButton AmswerD;
+    private RadioButton AnswerD;
     @FXML
     private VBox TrueFalse;
     @FXML
-    private RadioButton AmswerTrue;
+    private RadioButton AnswerTrue;
     @FXML
-    private RadioButton AmswerFalse;
+    private RadioButton AnswerFalse;
     @FXML
     private ChoiceBox<?> Survey;
 
+    @FXML
+    private Label UserScore;
+
     private int QuestionIndex;
     @FXML
-    private TextField Score;
+    private Label Score;
 
     
-    ArrayList<QuestionsModel> myQuestionsModels = Api.User_GetQuestions(Api.CurrentQuizId);
+    ArrayList<QuestionsModel> myQuestionsModels;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        myQuestionsModels = Api.User_GetQuestions(Api.CurrentQuizId);
         loadData();
     }
 
@@ -84,21 +91,13 @@ public class StudentArchiveTestsController implements Initializable {
 
         try {
             QuestionIndex++;
-            if(QuestionIndex > myQuestionsModels.size())
+            if(QuestionIndex >= myQuestionsModels.size())
             {
                 QuestionIndex =  myQuestionsModels.size();
             }
 
-            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentArchiveTests.fxml"));
-            Parent root1 = (Parent) fxmlloader.load();
-            Stage stage = new Stage();
-
-            stage.setTitle("Student Archive Tests Page");
-            stage.setScene(new Scene(root1));
-            stage.show();
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            stage.close();
-        } catch (IOException ex) {
+            loadData();
+        } catch (Exception ex) {
             System.out.println("Can't Open Student Archive Tests Page");
 
         }
@@ -115,16 +114,9 @@ public class StudentArchiveTestsController implements Initializable {
                 QuestionIndex =  0;
             }
 
-            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentArchiveTests.fxml"));
-            Parent root1 = (Parent) fxmlloader.load();
-            Stage stage = new Stage();
-
-            stage.setTitle("Student Archive Tests Page");
-            stage.setScene(new Scene(root1));
-            stage.show();
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            stage.close();
-        } catch (IOException ex) {
+            loadData();
+            
+        } catch (Exception ex) {
             System.out.println("Can't Open Student Archive Tests Page");
 
         }
@@ -136,19 +128,63 @@ public class StudentArchiveTestsController implements Initializable {
 
     private void loadData() {
 
-        
+        QuestionsModel questionsModel = myQuestionsModels.get(QuestionIndex);
+        AnswersModel answersModel = Api.Review_GetUserAnswer(questionsModel.Id);
 
-        Question.setText(myQuestionsModels.get(QuestionIndex).QuestionText);
+        Question.setText(questionsModel.QuestionText);
 
-        if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.Tashrihi)) {
-            Answer.setText(myQuestionsModels.get(QuestionIndex).Answer);
-        }
-        if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.Testi)) {
-        }
-        if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.TrueFalse)) {
+        switch (questionsModel.QuestionType) 
+        {
+            case Tashrihi:
+                TestAns.setVisible(false);
+                TrueFalse.setVisible(false);
+                Answer.setVisible(true);
+                Address.setVisible(true);
+
+                Answer.setText(answersModel.Answer);
+                Address.setText(answersModel.FileAddress);
+
+                break;
+                
+            case Testi:
+                TestAns.setVisible(true);
+                TrueFalse.setVisible(false);
+                Answer.setVisible(false);
+                Address.setVisible(false);
+
+                if (answersModel.Answer.equals("0")) {
+                    AnswerA.setSelected(true);
+                } else if (answersModel.Answer.equals("1")) {
+                    AnswerB.setSelected(true);
+                } else if (answersModel.Answer.equals("2")) {
+                    AnswerC.setSelected(true);
+                } else if (answersModel.Answer.equals("3")) {
+                    AnswerD.setSelected(true);
+                }
+
+                break;
+                
+            case TrueFalse:
+                TestAns.setVisible(false);
+                TrueFalse.setVisible(true);
+                Answer.setVisible(false);
+                Address.setVisible(false);
+
+                if (answersModel.Answer.equals("True")) {
+                    AnswerTrue.setSelected(true);
+                } else {
+                    AnswerFalse.setSelected(true);
+                }
+				break;
+			default:
+				break;
+
+           
         }
 
-        Score.setText(String.valueOf(myQuestionsModels.get(QuestionIndex).Grade));
+
+        Score.setText(String.valueOf(questionsModel.Grade));
+        UserScore.setText(String.valueOf(answersModel.UserGrade));
 
         List.removeAll(List);
         String Score1 = "Easy";
