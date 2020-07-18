@@ -31,7 +31,7 @@ public interface IAdminController {
 
     boolean BanUserFromQuiz(String IdNumber , int QuizId);
 
-    boolean AdduserFromExcel(String fileUrl);
+    boolean AdduserFromExcel(String fileUrl , int QuizId);
 //#endregion
     ArrayList<AnswersForGrading> getUserAnswers(int UserId , int QuizId);
 

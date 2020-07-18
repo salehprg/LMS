@@ -25,7 +25,7 @@ public class UserController extends SqlManager implements IUserController {
                 return false;
             }
         }
-        boolean result = DB_AddUser(userModel);
+        boolean result = (DB_AddUser(userModel) != -1 ? true : false);
 
         return result;
     }
