@@ -63,7 +63,7 @@ public class AdminController extends SqlManager implements IAdminController {
             _userModel.UserName = _userModel.IdNumber;
             _userModel.Password = _userModel.IdNumber;
 
-            if (DB_AddUser(_userModel)) {
+            if (DB_AddUser(_userModel) != -1) {
                 user = DB_GetUserInfo(_userModel.IdNumber);
             } else {
                 return false;
@@ -105,13 +105,35 @@ public class AdminController extends SqlManager implements IAdminController {
     }
 
     @Override
-    public boolean AdduserFromExcel(String fileUrl) {
+    public boolean AdduserFromExcel(String fileUrl , int QuizId) {
         try {
+
+            ArrayList<UserModel> dbUsers = DB_GetAllUsers();
+
             ArrayList<UserModel> users = ExcelFile.ReadStudentData(fileUrl);
 
+            int userId = -1;
             for (UserModel userModel : users) 
             {
-                DB_AddUser(userModel);
+                boolean add = true;
+
+                for (UserModel user : dbUsers) 
+                {
+                    userModel.UserName = userModel.IdNumber;
+                    userModel.Password = userModel.IdNumber;
+                    if (userModel.UserName.equals(user.UserName)) 
+                    {
+                        add = false;
+                    }
+                }
+
+                if(add)
+                {
+                    userId = DB_AddUser(userModel);
+                    userModel.Id = userId;
+                }
+
+                AssignUserToQuiz(userModel, QuizId);
             }
 
             return true;

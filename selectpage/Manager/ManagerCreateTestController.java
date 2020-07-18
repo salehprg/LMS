@@ -75,6 +75,7 @@ public class ManagerCreateTestController implements Initializable {
     @FXML
     private TextField Address;
 
+    String fileAddress;
     /**
      * Initializes the controller class.
      */
@@ -95,7 +96,7 @@ public class ManagerCreateTestController implements Initializable {
 
         if(selectedFile != null)
         {
-            Api.AddUserFromExcel(selectedFile.getAbsolutePath());
+            fileAddress = selectedFile.getAbsolutePath();
         }
     }
 
@@ -112,7 +113,13 @@ public class ManagerCreateTestController implements Initializable {
             Api.CurrentQuizId = QuizId;
             if(QuizId != -1)
             {
-                AssignUserToQuiz(QuizId);
+                if(fileAddress != null)
+                {
+                    Api.AddUserFromExcel(fileAddress , Api.CurrentQuizId);
+                }
+                else{
+                    AssignUserToQuiz(QuizId);
+                }
 
                 FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerCreateTestQuestion.fxml"));
 
@@ -173,6 +180,8 @@ public class ManagerCreateTestController implements Initializable {
             userModel.FirstName = userDetail[0];
             userModel.LastName = userDetail[1];
             userModel.IdNumber = userDetail[2];
+            userModel.UserName = userDetail[2];
+            userModel.Password = userDetail[2];
 
             Api.AssignUserToQuiz(userModel , QuizId);
         }

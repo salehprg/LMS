@@ -67,6 +67,11 @@ public class ManagerArchiveTestController implements Initializable {
     }
 
     @FXML
+    void AutoGrade(ActionEvent event) {
+        Api.Admin_AutoGrading(Api.CurrentQuizId);
+    }
+
+    @FXML
     private void OpenStudentsAnswer(ActionEvent event) {
 
         try {

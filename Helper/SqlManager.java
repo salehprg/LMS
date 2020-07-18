@@ -792,7 +792,7 @@ public class SqlManager {
         return null;
     }
 
-    protected boolean DB_AddUser(UserModel userModel) 
+    protected int DB_AddUser(UserModel userModel) 
     {
         String sqlQuery = String.format("INSERT INTO Users "+
         "([FirstName]"+
@@ -814,8 +814,29 @@ public class SqlManager {
             e.printStackTrace();
             result = false;
         }
+                                
 
-        return result;
+        if(result)
+        {
+            //Get currently quiz id
+            int UserId = -1;
+            sqlQuery = "SELECT * from Users ORDER BY Id Asc";
+
+            try {
+                ResultSet resultSet = statement.executeQuery(sqlQuery);
+
+                while (resultSet.next()) {
+                    UserId = resultSet.getInt("Id");
+                }
+                
+                return UserId;
+                
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return -1;
     }
 
     protected boolean DB_SubmitSurvey(SurveyModel surveyModel)

@@ -130,8 +130,9 @@ public class RequestHandler implements Runnable {
 
                 case Admin_AdduserFromExcel:
                     String fileUrl = (String)fromClient.readObject();
+                    quizId = (int)fromClient.readObject();
 
-                    response = adminController.AdduserFromExcel(fileUrl);
+                    response = adminController.AdduserFromExcel(fileUrl , quizId);
                     break;
 
                 case Admin_getOptions:

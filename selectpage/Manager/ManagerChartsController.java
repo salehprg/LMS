@@ -81,7 +81,7 @@ public class ManagerChartsController implements Initializable {
         }
         
         //test list
-        ArrayList<QuizesModel> MyList = Api.Admin_getQuizArchive();
+        ArrayList<AvgQuizGrade>  MyList = Api.Admin_reportQuizByQuiz();
         for (int i = 0; i < MyList.size(); i++) {
             TestsList.getItems().add(MyList.get(i).QuizName);
 

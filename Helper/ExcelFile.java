@@ -49,7 +49,7 @@ public class ExcelFile
                     switch(cell.getColumnIndex())
                     {
                         case 0:
-                            userModel.IdNumber = String.valueOf(cell.getNumericCellValue());
+                            userModel.IdNumber = String.valueOf((int)cell.getNumericCellValue());
                             break;
 
                         case 1:

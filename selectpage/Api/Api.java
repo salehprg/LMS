@@ -36,8 +36,11 @@ public class Api {
 
             toServer.writeObject(funcId);
 
-            for (Object object : dataObjects) {
-                toServer.writeObject(object);
+            if(dataObjects != null)
+            {
+                for (Object object : dataObjects) {
+                    toServer.writeObject(object);
+                }
             }
 
             return true;
@@ -74,7 +77,22 @@ public class Api {
         
     }
 
-    
+    public static ArrayList<UserModel> Admin_getUsersInQuiz(int QuizId) {
+        if(SendRequest(RequestList.Admin_getUsersInQuiz.getId(), new Object[] { QuizId }))
+        {
+            return (ArrayList<UserModel>)ReadResponse();
+        }
+        return null;
+    }
+
+    public static boolean Admin_SubmitGrade(int AnswerId, float UserGrade) {
+        if(SendRequest(RequestList.Admin_SubmitGrade.getId(), new Object[] { AnswerId , UserGrade }))
+        {
+            return (boolean)ReadResponse();
+        }
+        return false;
+    }
+
     public static ArrayList<QuestionsModel> Admin_GetQuestions(int QuizId) {
         if(SendRequest(RequestList.Admin_getQuestions.getId(), new Object[] { QuizId }))
         {
@@ -173,9 +191,9 @@ public class Api {
         return null;
     }
 
-    public static boolean AddUserFromExcel(String fileUrl)
+    public static boolean AddUserFromExcel(String fileUrl , int QuizId)
     {
-        if(SendRequest(RequestList.Admin_AdduserFromExcel.getId(), new Object[] { fileUrl }))
+        if(SendRequest(RequestList.Admin_AdduserFromExcel.getId(), new Object[] { fileUrl , QuizId}))
         {
             return (boolean)ReadResponse();
         }
@@ -241,7 +259,7 @@ public class Api {
     }
 
     
-    public static ArrayList<AnswersForGrading> getUserAnswers(int UserId, int QuizId) {
+    public static ArrayList<AnswersForGrading> Admin_getUserAnswers(int UserId, int QuizId) {
         if(SendRequest(RequestList.Admin_Grading_getUserAnswers.getId(), new Object[] { UserId , QuizId}))
         {
             return (ArrayList<AnswersForGrading>)ReadResponse();
