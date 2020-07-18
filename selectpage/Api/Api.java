@@ -73,6 +73,24 @@ public class Api {
     }
 
     
+    public static ArrayList<QuizSurvey> Admin_getQuizSurvey(int QuizId)
+    {
+        if(SendRequest(RequestList.Admin_getQuizSurvey.getId(),new Object[]{QuizId}))
+        {
+            return (ArrayList<QuizSurvey>)ReadResponse();
+        }
+        return null;
+    }
+
+    public static boolean User_submitSurvey(SurveyModel surveyModel)
+    {
+        if(SendRequest(RequestList.User_SubmitSurvey.getId(), new Object[]{surveyModel}))
+        {
+            return (boolean)ReadResponse();
+        }
+        return false;
+    }
+
     public static ArrayList<QuizesModel> Admin_getAllQuiz()
     {
         if(SendRequest(RequestList.Admin_getAllQuiz.getId(),null))

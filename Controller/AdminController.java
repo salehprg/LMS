@@ -231,4 +231,10 @@ public class AdminController extends SqlManager implements IAdminController {
 
         return activeQuizes;
     }
+
+    @Override
+    public ArrayList<QuizSurvey> getQuizSurvey(int QuizId) {
+        
+        return DB_GetSurvey(QuizId);
+    }
 }

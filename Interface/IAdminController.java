@@ -49,5 +49,7 @@ public interface IAdminController {
 
     boolean autoGrading(int QuizId);
 
+    ArrayList<QuizSurvey> getQuizSurvey(int QuizId);
+
     
 }
