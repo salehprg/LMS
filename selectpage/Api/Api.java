@@ -19,11 +19,11 @@ public class Api {
     private static ObjectInputStream fromServer;
     private static ObjectOutputStream toServer;
     private static Socket clientSocket;
-
+    
 
     private static int ActiveUserId;
     public static int CurrentQuizId;
-
+    public static String WarningMassage ;
     static boolean SendRequest(int funcId, Object[] dataObjects) {
         try {
 

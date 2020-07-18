@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selectpage.WarningController">
+   <children>
+      <Label fx:id="WarningText" contentDisplay="CENTER" layoutX="46.0" layoutY="29.0" prefHeight="101.0" prefWidth="213.0" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
+      <Button layoutX="119.0" layoutY="139.0" mnemonicParsing="false" onAction="#BtnOK" prefHeight="31.0" prefWidth="63.0" text="OK" />
+   </children>
+</AnchorPane>
