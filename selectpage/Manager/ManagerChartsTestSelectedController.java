@@ -11,6 +11,7 @@ import Model.UserGradesInQuiz;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -44,9 +45,14 @@ public class ManagerChartsTestSelectedController implements Initializable {
         XYChart.Series myChart = new XYChart.Series<>();
         ArrayList<UserGradesInQuiz> myUserGradesInQuizs = Api.Admin_reportStudentByStudent(Api.CurrentQuizId);
         for (int i = 0; i < myUserGradesInQuizs.size(); i++) {
-
-            myChart.getData().add(new XYChart.Data(myUserGradesInQuizs.get(i).FirstName + myUserGradesInQuizs.get(i).LastName, myUserGradesInQuizs.get(i).UserGrade));
-            TestChart.getData().addAll(myChart);
+            myChart.getData().add(new XYChart.Data(myUserGradesInQuizs.get(i).FirstName
+                    + myUserGradesInQuizs.get(i).LastName, myUserGradesInQuizs.get(i).UserGrade));
         }
+        TestChart.getData().addAll(myChart);
+    }
+
+    @FXML
+    private void ExportTestToExcel(ActionEvent event) {
+        Api.Admin_saveExcelUserGrades(Api.CurrentQuizId);
     }
 }

@@ -23,6 +23,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import org.apache.poi.ss.usermodel.charts.ChartData;
 import selectpage.Api.Api;
 
 /**
@@ -74,25 +75,30 @@ public class ManagerChartsController implements Initializable {
         //test chart
         XYChart.Series myChart = new XYChart.Series<>();
         ArrayList<AvgQuizGrade> myAvgQuizGrades = Api.Admin_reportQuizByQuiz();
-        for (int i = 0; i < myAvgQuizGrades.size(); i++) {
 
-            myChart.getData().add(new XYChart.Data(myAvgQuizGrades.get(i).QuizName, myAvgQuizGrades.get(i).avgGrade));
-            TestsChart.getData().addAll(myChart);
+        for (int i = 0; i < myAvgQuizGrades.size(); i++) {
+            myChart.getData().add(new XYChart.Data(myAvgQuizGrades.get(i).QuizName,
+                     myAvgQuizGrades.get(i).avgGrade));
         }
-        
+        TestsChart.getData().addAll(myChart);
         //test list
-        ArrayList<AvgQuizGrade>  MyList = Api.Admin_reportQuizByQuiz();
+        ArrayList<AvgQuizGrade> MyList = Api.Admin_reportQuizByQuiz();
         for (int i = 0; i < MyList.size(); i++) {
             TestsList.getItems().add(MyList.get(i).QuizName);
-
         }
+
     }
 
-    
     private void selection() {
         int index = TestsList.getSelectionModel().getSelectedIndex();
         ArrayList<AllowQuizList> quizLists = Api.GetQuizes();
         Api.CurrentQuizId = TestsList.getSelectionModel().getSelectedIndex();
         System.out.println(Api.CurrentQuizId);
+    }
+
+    @FXML
+    private void ExportTestsToExcel(ActionEvent event) {
+
+        Api.Admin_saveExcelQuizByQuiz();
     }
 }
