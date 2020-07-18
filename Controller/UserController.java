@@ -120,29 +120,6 @@ public class UserController extends SqlManager implements IUserController   {
         AnswersModel answersModel = DB_GetUserAnswer(UserId, QuestionId);
 
         return answersModel;
-        // QuestionsModel questionModel = DB_GetQuestionInfo(QuestionId);
-
-        // switch (questionModel.QuestionType) {
-        //     case Testi:
-        //         ArrayList<OptionsModel> optionsModels = DB_GetQuestionOptions(QuestionId);
-
-        //         int AnswerId = Integer.parseInt(answersModel.Answer);
-        //         for (OptionsModel optionsModel : optionsModels) {
-        //             if (optionsModel.Id == AnswerId) {
-        //                 optionsModel.UserAnswer = true;
-        //                 optionsModels.set(optionsModels.indexOf(optionsModel), optionsModel);
-        //             }
-        //         }
-
-        //         return optionsModels;
-
-        //     case Tashrihi:
-        //         return answersModel.Answer;
-
-        //     case TrueFalse:
-        //         return Boolean.parseBoolean(answersModel.Answer);
-        // }
-        // return DB_SubmitAnswer(answersModel);
     }
 
     @Override
@@ -165,6 +142,12 @@ public class UserController extends SqlManager implements IUserController   {
 
     @Override
     public boolean SubmitSurvey(SurveyModel surveyModel) {
+    
+        return DB_SubmitSurvey(surveyModel);
+    }
+
+    @Override
+    public boolean SaveMessage(Chat chat {
     
         return DB_SubmitSurvey(surveyModel);
     }

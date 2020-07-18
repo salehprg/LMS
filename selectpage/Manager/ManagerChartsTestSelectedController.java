@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import selectpage.Api.Api;
 
@@ -27,7 +28,7 @@ import selectpage.Api.Api;
 public class ManagerChartsTestSelectedController implements Initializable {
 
     @FXML
-    private TextField TestName;
+    private Label TestName;
     @FXML
     private BarChart<?, ?> TestChart;
 
@@ -36,17 +37,19 @@ public class ManagerChartsTestSelectedController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        loadData();
     }    
     
     private void loadData() {
         
         //test chart
         XYChart.Series myChart = new XYChart.Series<>();
+
         ArrayList<UserGradesInQuiz> myUserGradesInQuizs = Api.Admin_reportStudentByStudent(Api.CurrentQuizId);
+
         for (int i = 0; i < myUserGradesInQuizs.size(); i++) {
             myChart.getData().add(new XYChart.Data(myUserGradesInQuizs.get(i).FirstName
-                    + myUserGradesInQuizs.get(i).LastName, myUserGradesInQuizs.get(i).UserGrade));
+                    + " " + myUserGradesInQuizs.get(i).LastName, myUserGradesInQuizs.get(i).UserGrade));
         }
         TestChart.getData().addAll(myChart);
     }

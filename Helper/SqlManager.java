@@ -910,6 +910,29 @@ public class SqlManager {
         return result;
     }
 
+    protected boolean DB_SubmitSurvey(SurveyModel surveyModel)
+    {
+        String sqlQuery = String.format("INSERT INTO [dbo].[Survey]"+
+        "([UserId]"+
+        ",[QuizId]"+
+        ",[QuizLevel])"+
+        "VALUES"+
+        "('%s' ,' %s' , '%s')" , surveyModel.UserId , surveyModel.QuizId , surveyModel.QuizLevel );
+
+        Boolean result = false;
+
+        try {
+            statement.execute(sqlQuery);
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            result = false;
+        }
+
+        return result;
+    }
+
+    
     protected ArrayList<QuizSurvey> DB_GetSurvey(int QuizId)
     {
         String sqlQuery = "Select * From QuizSurvey where QuizId ="+ QuizId;

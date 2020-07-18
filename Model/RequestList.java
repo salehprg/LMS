@@ -32,7 +32,9 @@ public enum RequestList{
     Admin_getQuestions(28),
     Admin_getUsersInQuiz(29),
     Admin_SubmitGrade(30),
-    User_EditAnswer(31);
+    User_EditAnswer(31),
+    User_SaveMessage(32),
+    User_GetMessages(33);
 
 
     private int Id;

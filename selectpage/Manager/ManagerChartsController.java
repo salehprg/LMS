@@ -91,8 +91,9 @@ public class ManagerChartsController implements Initializable {
 
     private void selection() {
         int index = TestsList.getSelectionModel().getSelectedIndex();
-        ArrayList<AllowQuizList> quizLists = Api.GetQuizes();
-        Api.CurrentQuizId = TestsList.getSelectionModel().getSelectedIndex();
+        ArrayList<AvgQuizGrade> quizLists = Api.Admin_reportQuizByQuiz();
+
+        Api.CurrentQuizId = quizLists.get(index).quizId;
         System.out.println(Api.CurrentQuizId);
     }
 
