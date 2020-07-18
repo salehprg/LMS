@@ -6,6 +6,7 @@
 package selectpage.Student;
 
 import Model.QuestionsModel;
+import Model.SurveyModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import selectpage.Api.Api;
@@ -63,81 +65,119 @@ public class StudentArchiveTestsController implements Initializable {
     @FXML
     private ChoiceBox<?> Survey;
 
-    private int QuestionIndex ;
+    private int QuestionIndex;
+    @FXML
+    private TextField Score;
+
+    
+    ArrayList<QuestionsModel> myQuestionsModels = Api.User_GetQuestions(Api.CurrentQuizId);
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loadData();
-    }    
+    }
 
     @FXML
     private void NextQuestion(ActionEvent event) {
-        
-          try {
-                QuestionIndex ++ ;
-              
-              
-              FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentArchiveTests.fxml"));
-                Parent root1 = (Parent) fxmlloader.load();
-                Stage stage = new Stage();
 
-                stage.setTitle("Student Archive Tests Page");
-                stage.setScene(new Scene(root1));
-                stage.show();
-                stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-                stage.close();
-            } catch (IOException ex) {
-                System.out.println("Can't Open Student Archive Tests Page");
-
+        try {
+            QuestionIndex++;
+            if(QuestionIndex > myQuestionsModels.size())
+            {
+                QuestionIndex =  myQuestionsModels.size();
             }
+
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentArchiveTests.fxml"));
+            Parent root1 = (Parent) fxmlloader.load();
+            Stage stage = new Stage();
+
+            stage.setTitle("Student Archive Tests Page");
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.close();
+        } catch (IOException ex) {
+            System.out.println("Can't Open Student Archive Tests Page");
+
+        }
     }
 
     @FXML
     private void Preview(ActionEvent event) {
-        
+
         try {
-                QuestionIndex -- ;
-              
-              
-              FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentArchiveTests.fxml"));
-                Parent root1 = (Parent) fxmlloader.load();
-                Stage stage = new Stage();
-
-                stage.setTitle("Student Archive Tests Page");
-                stage.setScene(new Scene(root1));
-                stage.show();
-                stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-                stage.close();
-            } catch (IOException ex) {
-                System.out.println("Can't Open Student Archive Tests Page");
-
+           
+             QuestionIndex--;
+            if(QuestionIndex < 0)
+            {
+                QuestionIndex =  0;
             }
+
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentArchiveTests.fxml"));
+            Parent root1 = (Parent) fxmlloader.load();
+            Stage stage = new Stage();
+
+            stage.setTitle("Student Archive Tests Page");
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.close();
+        } catch (IOException ex) {
+            System.out.println("Can't Open Student Archive Tests Page");
+
+        }
     }
 
     @FXML
     private void OpenFile(ActionEvent event) {
     }
-    
-    
-    private void loadData()
-    {
+
+    private void loadData() {
+
         
-        ArrayList<QuestionsModel> myQuestionsModels = Api.User_GetQuestions(Api.CurrentQuizId);
-        
+
         Question.setText(myQuestionsModels.get(QuestionIndex).QuestionText);
-        
-      
+
+        if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.Tashrihi)) {
+            Answer.setText(myQuestionsModels.get(QuestionIndex).Answer);
+        }
+        if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.Testi)) {
+        }
+        if (myQuestionsModels.get(QuestionIndex).QuestionType.equals(QuestionsModel.QType.TrueFalse)) {
+        }
+
+        Score.setText(String.valueOf(myQuestionsModels.get(QuestionIndex).Grade));
+
         List.removeAll(List);
         String Score1 = "Easy";
         String Score2 = "Normalr";
         String Score3 = "Hard";
 
-        List.addAll(Score3, Score2,Score1);
+        List.addAll(Score3, Score2, Score1);
         Survey.getItems().addAll(List);
 
- 
+        ArrayList<QuestionsModel> myQuestionsModels1 = Api.Review_GetQuestions(Api.CurrentQuizId);
+
     }
-    
+
+    @FXML
+    private void SetSurvey(MouseEvent event) {
+
+        if (Survey.getValue() != null) {
+            SurveyModel mysSurveyModel = new SurveyModel();
+            mysSurveyModel.QuizId = Api.CurrentQuizId;
+            if (Survey.getValue().equals("Easy")) {
+                mysSurveyModel.QuizLevel = 1;
+            } else if (Survey.getValue().equals("Normal")) {
+                mysSurveyModel.QuizLevel = 2;
+            } else if (Survey.getValue().equals("Hard")) {
+                mysSurveyModel.QuizLevel = 3 ;
+            }
+        }
+    }
+
 }
+
+

@@ -22,7 +22,6 @@
          </font>
       </Label>
       <TextField fx:id="Address" layoutX="390.0" layoutY="430.0" text="Adddres" />
-      <Button layoutX="551.0" layoutY="425.0" mnemonicParsing="false" onAction="#OpenFile" prefHeight="35.0" prefWidth="67.0" text="Open File" />
       <TextArea fx:id="Question" layoutX="140.0" layoutY="46.0" prefHeight="167.0" prefWidth="596.0" />
       <Label layoutX="35.0" layoutY="46.0" prefHeight="25.0" prefWidth="84.0" text="Question :" textFill="#7b5ef0">
          <font>
@@ -62,5 +61,6 @@
             <Insets />
          </opaqueInsets>
       </VBox>
+      <Button layoutX="556.0" layoutY="430.0" mnemonicParsing="false" onAction="#OpenFile" prefHeight="25.0" prefWidth="85.0" text="Browse..." />
    </children>
 </AnchorPane>
