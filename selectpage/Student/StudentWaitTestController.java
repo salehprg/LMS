@@ -39,7 +39,7 @@ public class StudentWaitTestController implements Initializable{
     private Text TestStartDate;
     @FXML
     private Text TestStartDate1;
-
+ArrayList<AllowQuizList> myAllowQuizLists = Api.GetQuizes();
     
     /**
      * Initializes the controller class.
@@ -53,8 +53,7 @@ public class StudentWaitTestController implements Initializable{
     private void StartTest(ActionEvent event) {
         
         
-        if (Api.EnrolQuiz(Api.ActiveUserId)) {       
-        
+        if (Api.EnrolQuiz(Api.ActiveUserId)) {
         try {
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentArchiveTests.fxml"));
             Parent root1 = (Parent) fxmlloader.load();
@@ -74,7 +73,7 @@ public class StudentWaitTestController implements Initializable{
     
     private void loadData ()
     {
-        ArrayList<AllowQuizList> myAllowQuizLists = Api.GetQuizes();
+        
         TestName.setText(myAllowQuizLists.get(Api.CurrentQuizId).QuizName);
         TestDuration.setText(String.valueOf(myAllowQuizLists.get(Api.CurrentQuizId).Duration));
         TestStartDate.setText(String.valueOf(myAllowQuizLists.get(Api.CurrentQuizId).StartTime));    

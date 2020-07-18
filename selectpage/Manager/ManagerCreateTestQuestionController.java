@@ -134,9 +134,8 @@ public class ManagerCreateTestQuestionController implements Initializable {
         try {
 
             QuestionIndex++;
-            if(QuestionIndex > questionsModels.size())
-            {
-                QuestionIndex =  questionsModels.size();
+            if (QuestionIndex > questionsModels.size()) {
+                QuestionIndex = questionsModels.size();
             }
 
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerCreateTestQuestion.fxml"));
@@ -173,9 +172,8 @@ public class ManagerCreateTestQuestionController implements Initializable {
         try {
 
             QuestionIndex--;
-            if(QuestionIndex < 0)
-            {
-                QuestionIndex =  0;
+            if (QuestionIndex < 0) {
+                QuestionIndex = 0;
             }
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerCreateTestQuestion.fxml"));
 
@@ -206,7 +204,6 @@ public class ManagerCreateTestQuestionController implements Initializable {
         List.addAll(AnswerMethod1, AnswerMethod2, AnswerMethod3);
         AnswerMethod.getItems().addAll(List);
     }
-
 
     private boolean CreateQuestion() {
         QuestionsModel questionsModel = new QuestionsModel();
@@ -242,7 +239,7 @@ public class ManagerCreateTestQuestionController implements Initializable {
 
     @FXML
     private void AnswerMethod(MouseEvent event) {
-         if (AnswerMethod.getValue().equals("Test")) {
+        if (AnswerMethod.getValue().equals("Test")) {
             TestAns.setVisible(true);
             TrueFalse.setVisible(false);
         } else if (AnswerMethod.getValue().equals("True Or False")) {
