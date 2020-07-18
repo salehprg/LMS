@@ -30,6 +30,7 @@
       <Pane layoutY="50.0" prefHeight="5.0" prefWidth="800.0" style="-fx-background-color: #2F2C44;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Pane layoutY="58.0" prefHeight="2.0" prefWidth="800.0" style="-fx-background-color: #2F2C44;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <ListView fx:id="TestsList" layoutX="284.0" layoutY="344.0" prefHeight="118.0" prefWidth="441.0" />
-      <Button layoutX="125.0" layoutY="437.0" mnemonicParsing="false" onAction="#OpenTestChart" prefHeight="25.0" prefWidth="141.0" text="Open Test's Chart" />
+      <Button layoutX="38.0" layoutY="424.0" mnemonicParsing="false" onAction="#OpenTestChart" prefHeight="38.0" prefWidth="141.0" text="Open Test's Chart" />
+      <Button layoutX="38.0" layoutY="318.0" mnemonicParsing="false" onAction="#ExportTestsToExcel" prefHeight="38.0" prefWidth="141.0" text="Export table to excel" />
    </children>
 </AnchorPane>
