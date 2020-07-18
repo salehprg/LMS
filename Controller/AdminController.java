@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -100,7 +101,7 @@ public class AdminController extends SqlManager implements IAdminController {
 
     @Override
     public ArrayList<QuestionsModel> getQuestions(int QuizId) {
-        return getQuestions(QuizId);
+        return DB_GetQuestionInQuiz(QuizId);
     }
 
     @Override
@@ -165,5 +166,69 @@ public class AdminController extends SqlManager implements IAdminController {
     public ArrayList<UserGradesInQuiz> reportStudentByStudent(int QuizId) {
 
         return DB_GetUserGradesInQuiz(QuizId);
+    }
+
+    @Override
+    public boolean autoGrading(int QuizId) {
+        ArrayList<TriesModel> triesModels = DB_GetTries(QuizId);
+        for (TriesModel triesModel : triesModels) 
+        {
+            ArrayList<AnswersForGrading> answers = DB_GetAnswersForGrading(QuizId, triesModel.UserId);
+            for (AnswersForGrading answer : answers) 
+            {
+                if(answer.Answer.equals(answer.QuestionAnswer))
+                {
+                    DB_GradeAnswer(answer.Grade , answer.AnswerId);
+                }
+                else
+                {
+                    DB_GradeAnswer(0 , answer.AnswerId);
+                }
+            }
+
+        }
+        
+        return false;
+    }
+
+    @Override
+    public ArrayList<QuizesModel> getAllQuiz() {
+
+        return DB_GetQuizes();
+    }
+
+    @Override
+    public ArrayList<QuizesModel> getQuizProgram() {
+        ArrayList<QuizesModel> quizes = DB_GetQuizes();
+
+        ArrayList<QuizesModel> activeQuizes = new ArrayList<>();
+
+        for (QuizesModel quizesModel : quizes) 
+        {
+            if(quizesModel.EndTime.compareTo(new Date(System.currentTimeMillis())) > 0)
+            {
+                activeQuizes.add(quizesModel);
+            }
+        }
+
+        return activeQuizes;
+    }
+
+    @Override
+    public ArrayList<QuizesModel> getQuizArchive() {
+        
+        ArrayList<QuizesModel> quizes = DB_GetQuizes();
+
+        ArrayList<QuizesModel> activeQuizes = new ArrayList<>();
+
+        for (QuizesModel quizesModel : quizes) 
+        {
+            if(quizesModel.EndTime.compareTo(new Date(System.currentTimeMillis())) < 0)
+            {
+                activeQuizes.add(quizesModel);
+            }
+        }
+
+        return activeQuizes;
     }
 }

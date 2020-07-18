@@ -156,6 +156,19 @@ public class RequestHandler implements Runnable {
                     QuizId = (int)fromClient.readObject();
                     response = adminController.saveExcelUserGrades(QuizId);
                     break;
+                    
+                case Admin_autoGrading:
+                    QuizId = (int)fromClient.readObject();
+                    response = adminController.autoGrading(QuizId);
+
+                case Admin_getAllQuiz:
+                    response = adminController.getAllQuiz();
+
+                case Admin_getQuizArchive:
+                    response = adminController.getQuizArchive();
+
+                case Admin_getQuizProgram:
+                    response = adminController.getQuizProgram();
 
                 case User_EnrolQuiz:
                     IdUser = (int)fromClient.readObject();

@@ -15,6 +15,12 @@ public interface IAdminController {
 
     int createNewQuiz(QuizesModel quizesModel);
 
+    ArrayList<QuizesModel> getAllQuiz();
+
+    ArrayList<QuizesModel> getQuizProgram();
+
+    ArrayList<QuizesModel> getQuizArchive();
+
     boolean addQuestionToQuiz(QuestionsModel questionsModel);
 
     boolean addQuestionToQuiz(QuestionsModel questionsModel , ArrayList<OptionsModel> optionsModels);
@@ -40,6 +46,8 @@ public interface IAdminController {
     boolean saveExcelQuizByQuiz();
 
     boolean saveExcelUserGrades(int QuizId);
+
+    boolean autoGrading(int QuizId);
 
     
 }
