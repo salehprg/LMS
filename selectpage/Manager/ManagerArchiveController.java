@@ -69,15 +69,16 @@ public class ManagerArchiveController implements Initializable {
 
     private void selection() {
         int index = ArchiveList.getSelectionModel().getSelectedIndex();
-        ArrayList<AllowQuizList> quizLists = Api.GetQuizes();
-        Api.CurrentQuizId = ArchiveList.getSelectionModel().getSelectedIndex();
+
+        Api.CurrentQuizId = index;
+
         System.out.println(Api.CurrentQuizId);
     }
 
     private void loadData() {
         ArrayList<QuizesModel> MyList = Api.Admin_getQuizArchive();
         for (int i = 0; i < MyList.size(); i++) {
-            ArchiveList.getItems().add(MyList.get(1).QuizName);
+            ArchiveList.getItems().add(MyList.get(i).QuizName);
         }
     }
 

@@ -237,4 +237,17 @@ public class AdminController extends SqlManager implements IAdminController {
         
         return DB_GetSurvey(QuizId);
     }
+
+    @Override
+    public ArrayList<UserModel> getUsersInQuiz(int QuizId) {
+        ArrayList<UserModel> users = DB_GetUserInQuiz(QuizId);
+
+        return users;
+    }
+
+    @Override
+    public boolean SubmitGrade(int AnswerId, float UserGrade) {
+        boolean result =  DB_GradeAnswer(UserGrade, AnswerId);
+        return result;
+    }
 }

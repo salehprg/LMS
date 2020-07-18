@@ -9,5 +9,6 @@ public class AnswersModel implements Serializable{
     public int UserId;
     public String Answer;
     public float UserGrade;
+    public String FileAddress;
 
 }

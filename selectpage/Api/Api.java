@@ -23,11 +23,12 @@ public class Api {
 
     public static int ActiveUserId;
     public static int CurrentQuizId;
-    public static String WarningMassage ;
-    
+    public static int CurrentStudentId;
+    public static int CurrentQuestionId = -1;
+
     static boolean SendRequest(int funcId, Object[] dataObjects) {
         try {
-
+    
             clientSocket = new Socket("localhost", port);
 
             toServer = new ObjectOutputStream(clientSocket.getOutputStream());

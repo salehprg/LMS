@@ -19,6 +19,7 @@ public class AnswersForGrading  implements Serializable{
     public String QuestionText;
     public QType QuestionType;
     public String QuestionAnswer;
+    public String FileAddress;
     public float Grade;
 
     public int QuizeId;

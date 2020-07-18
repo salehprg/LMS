@@ -2,6 +2,7 @@ package Helper;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 import Model.*;
 import Model.QuestionsModel.QType;
@@ -38,8 +39,18 @@ public class SqlManager {
 
                 data.Id = resultSet.getInt("Id");
                 data.QuizName = resultSet.getString("QuizName");
-                data.StartTime = resultSet.getDate("StartTime");
-                data.EndTime = resultSet.getDate("StartTime");
+                data.StartTime = new Date();
+                data.StartTime.setTime(resultSet.getTime("StartTime").getTime());
+                data.StartTime.setYear(resultSet.getDate("StartTime").getYear());
+                data.StartTime.setMonth(resultSet.getDate("StartTime").getMonth());
+                data.StartTime.setDate(resultSet.getDate("StartTime").getDate());
+
+                data.EndTime = new Date();
+                data.EndTime.setTime(resultSet.getTime("EndTime").getTime());
+                data.EndTime.setYear(resultSet.getDate("EndTime").getYear());
+                data.EndTime.setMonth(resultSet.getDate("EndTime").getMonth());
+                data.EndTime.setDate(resultSet.getDate("EndTime").getDate());
+
                 data.Duration = resultSet.getFloat("Duration");
                 data.Random = resultSet.getBoolean("Random");
                 data.CanReview = resultSet.getBoolean("CanReview");
@@ -439,9 +450,10 @@ public class SqlManager {
         "([UserId]"+
         ",[QuestionId]"+
         ",[Answer]"+
-        ",[UserGrade])"+
+        ",[UserGrade]"+
+        ",[FileAddress])"+
         "VALUES"+
-        "('%s','%s','%s','%s')" , answersModel.UserId , answersModel.QuestionId , answersModel.Answer , 0);
+        "('%s','%s','%s','%s', '%s')" , answersModel.UserId , answersModel.QuestionId , answersModel.Answer , 0 , answersModel.FileAddress);
 
         Boolean result = false;
 
@@ -565,6 +577,7 @@ public class SqlManager {
                 data.QuizeId = resultSet.getInt("QuizeId");
                 data.UserGrade = resultSet.getFloat("UserGrade");
                 data.UserId = resultSet.getInt("UserId");
+                data.FileAddress = resultSet.getString("FileAddress");
 
                 answersForGradings.add(data);
             }
@@ -608,6 +621,37 @@ public class SqlManager {
         return null;
     }
     
+    protected ArrayList<UserModel> DB_GetUserInQuiz(int QuizId )
+    {
+        // Create and execute a SELECT SQL statement.
+        String sqlQuery = "SELECT * from TriesView Where QuizId = " + QuizId ;
+        ArrayList<UserModel> userModels = new ArrayList<>();
+
+        try {
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+
+            while (resultSet.next()) {
+                
+                UserModel data = new UserModel();
+
+                data.Id = resultSet.getInt("UserId");
+                data.FirstName = resultSet.getString("FirstName");
+                data.LastName= resultSet.getString("LastName");
+                data.IdNumber = resultSet.getString("IdNumber");
+                
+                userModels.add(data);
+            }
+            
+            return userModels;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+    
+
     protected boolean DB_GradeAnswer(float grade , int answerId)
     {
         // Create and execute a Update SQL statement.

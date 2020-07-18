@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -53,7 +54,7 @@ public class ManagerArchiveTestController implements Initializable {
     @FXML
     private TextField AnswerMethod;
     @FXML
-    private TextField TestReview;
+    private CheckBox TestReview;
     @FXML
     private Label Date;
 
@@ -62,7 +63,7 @@ public class ManagerArchiveTestController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        loadData();
     }
 
     @FXML
@@ -76,8 +77,10 @@ public class ManagerArchiveTestController implements Initializable {
             stage.setTitle(" Manager Archive Test Student Page");
             stage.setScene(new Scene(root1));
             stage.show();
+
 //                stage = (Stage)((Lab)event.getSource()).getScene().getWindow();
 //                stage.close();
+
         } catch (IOException ex) {
             System.out.println("Can't Open Manager Archive Test Student Page");
         }
@@ -86,22 +89,27 @@ public class ManagerArchiveTestController implements Initializable {
     
     private void loadData()
     {
-
+        
         ArrayList<QuizesModel> mylist = Api.Admin_getQuizArchive();
         QuizesModel myqModel = mylist.get(Api.CurrentQuizId);
-         TestName.setText(myqModel.QuizName);
-         TestDuration.setText(String.valueOf(myqModel.Duration));
-         Date.setText(myqModel.StartTime.getYear() + "/" + myqModel.StartTime.getMonth() + "/" + myqModel.StartTime.getDay() );
+        
+        TestName.setText(myqModel.QuizName);
+        TestDuration.setText(String.valueOf(myqModel.Duration));
+        Date.setText(myqModel.StartTime.getYear() + "/" + myqModel.StartTime.getMonth() + "/" + myqModel.StartTime.getDay() );
         StartHour.setText(String.valueOf(myqModel.StartTime.getHours()));
         StartMinute.setText(String.valueOf(myqModel.StartTime.getMinutes()));
-      
+        
         EndHour.setText(String.valueOf(myqModel.EndTime.getHours()));
         EndMinute.setText(String.valueOf(myqModel.EndTime.getMinutes()));
+
+        TestReview.setSelected(myqModel.CanReview);
         if(myqModel.Random)
         {
             ArrangeMethod.setText("Random");
         }else{
             ArrangeMethod.setText(("Normal"));
         }
+
+        Api.CurrentQuizId = myqModel.Id;
     }
 }

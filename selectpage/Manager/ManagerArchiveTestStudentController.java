@@ -6,6 +6,8 @@
 package selectpage.Manager;
 
 import Model.AllowQuizList;
+import Model.UserModel;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,20 +31,26 @@ import selectpage.Api.Api;
 public class ManagerArchiveTestStudentController implements Initializable {
 
     @FXML
-    private ListView<?> StudentsList;
+    private ListView<String> StudentsList;
 
-    /**
-     * Initializes the controller class.
-     */
+    ArrayList<UserModel> users;
+        
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        loadData();
     }    
+
+    @FXML
+    void AutoGrade(ActionEvent event) {
+        Api.Admin_AutoGrading(Api.CurrentQuizId);
+    }
 
     @FXML
     private void OpenAnswer(ActionEvent event) {
         
          try {
+
+                selection();
 
                 FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerArchiveTestStudentAnswer.fxml"));
                 Parent root1 = (Parent) fxmlloader.load();
@@ -59,13 +67,21 @@ public class ManagerArchiveTestStudentController implements Initializable {
             }
     }
     
-    
+    private void loadData() {
+
+        users = Api.Admin_getUsersInQuiz(Api.CurrentQuizId);
+        for (int i = 0; i < users.size(); i++) {
+            StudentsList.getItems().add(users.get(i).FirstName + " " + users.get(i).LastName);
+        }
+
+    }
     
     private void selection() {
 
-       
-        Api.CurrentQuizId = StudentsList.getSelectionModel().getSelectedIndex();
-        System.out.println(Api.CurrentQuizId);
+        int index = StudentsList.getSelectionModel().getSelectedIndex();
+        Api.CurrentStudentId = users.get(index).Id;
+
+        System.out.println(Api.CurrentStudentId);
 
     }
     
