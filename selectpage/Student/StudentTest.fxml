@@ -16,7 +16,7 @@
       <TextArea fx:id="Answer" layoutX="140.0" layoutY="237.0" prefHeight="167.0" prefWidth="596.0" />
       <Button layoutX="180.0" layoutY="425.0" mnemonicParsing="false" onAction="#NextQuestion" prefHeight="35.0" prefWidth="67.0" text="Next" />
       <Button layoutX="100.0" layoutY="425.0" mnemonicParsing="false" onAction="#Preview" prefHeight="35.0" prefWidth="67.0" text="Preview" />
-      <Label layoutX="291.0" layoutY="425.0" prefHeight="35.0" prefWidth="109.0" text="File Address :" textFill="#7b5ef0">
+      <Label fx:id="lblAddress" layoutX="291.0" layoutY="425.0" prefHeight="35.0" prefWidth="109.0" text="File Address :" textFill="#7b5ef0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -61,6 +61,7 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Button layoutX="556.0" layoutY="430.0" mnemonicParsing="false" onAction="#OpenFile" prefHeight="25.0" prefWidth="85.0" text="Browse..." />
+      <Button fx:id="BtnAddress" layoutX="556.0" layoutY="430.0" mnemonicParsing="false" onAction="#OpenFile" prefHeight="25.0" prefWidth="85.0" text="Browse..." />
+      <Button layoutX="653.0" layoutY="430.0" mnemonicParsing="false" onAction="#Finish" prefHeight="25.0" prefWidth="85.0" text="Finish" />
    </children>
 </AnchorPane>

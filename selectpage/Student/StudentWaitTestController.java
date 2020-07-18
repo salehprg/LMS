@@ -39,7 +39,7 @@ public class StudentWaitTestController implements Initializable{
     private Text TestStartDate;
     @FXML
     private Text TestStartDate1;
-
+ArrayList<AllowQuizList> myAllowQuizLists = Api.GetQuizes();
     
     /**
      * Initializes the controller class.
