@@ -5,6 +5,8 @@
  */
 package selectpage.Student;
 
+import Model.AllowQuizList;
+import Model.QuizesModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import selectpage.Api.Api;
 
 /**
  * FXML Controller class
@@ -36,55 +39,43 @@ public class StudentChatController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loadData();
-    }    
-    private void selection()
-    {
-        String SelectedTest = "";
-        ObservableList listOfItems = ChatLits.getSelectionModel().getSelectedItems();
-        
-        for(Object item : listOfItems)
-        {
-            SelectedTest += String.format("%s%n", (String)item) ;
-        }
-        
-        System.out.println(SelectedTest);
+    }
+
+    private void selection() {
+         Api.CurrentQuizId = ChatLits.getSelectionModel().getSelectedIndex();
+        System.out.println(Api.CurrentQuizId);
         //inja dg mitoni SelectedTest o be sql pass bedi
     }
-    private void loadData()
-    {
-        
-        ArrayList<String> MyList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            MyList.add(i, "test " + i); 
+
+    private void loadData() {
+
+        ArrayList<AllowQuizList> myaAllowQuizLists = Api.GetQuizes();
+        ArrayList<AllowQuizList> MyList = Api.GetQuizes();
+        for (int i = 0; i < myaAllowQuizLists.size(); i++) {
+            ChatLits.getItems().add(myaAllowQuizLists.get(i).QuizName);
         }
-        //ezafe kardn be list
-        for (int i = 0; i < 10; i++) {
-           ChatLits.getItems().add(MyList.get(i)) ;
-        }
-        
-        
     }
 
     @FXML
     private void OpneChat(ActionEvent event) {
-        
+
         selection();
-        
+
         try {
 
-                FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentChatSelected.fxml"));
-                Parent root1 = (Parent) fxmlloader.load();
-                Stage stage = new Stage();
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("StudentChatSelected.fxml"));
+            Parent root1 = (Parent) fxmlloader.load();
+            Stage stage = new Stage();
 
-                stage.setTitle("Student Chat Selected Page");
-                stage.setScene(new Scene(root1));
-                stage.show();
-                stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-                stage.close();
-            } catch (IOException ex) {
-                System.out.println("Can't Open Student Chat Selected");
+            stage.setTitle("Student Chat Selected Page");
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.close();
+        } catch (IOException ex) {
+            System.out.println("Can't Open Student Chat Selected");
 
-            }
-        
+        }
+
     }
 }

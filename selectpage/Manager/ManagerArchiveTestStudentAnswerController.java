@@ -67,8 +67,9 @@ public class ManagerArchiveTestStudentAnswerController implements Initializable 
     }    
 
     @FXML
-    private void NextQuestion(ActionEvent event) {try {
-
+    private void NextQuestion(ActionEvent event) {
+        
+        try {
                 FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ManagerArchiveTestStudentAnswer.fxml"));
                 Parent root1 = (Parent) fxmlloader.load();
                 Stage stage = new Stage();

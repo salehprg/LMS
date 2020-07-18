@@ -69,7 +69,7 @@
       </VBox>
       <Button layoutX="624.0" layoutY="228.0" mnemonicParsing="false" opacity="0.0" prefHeight="122.0" prefWidth="142.0" text="Button" />
       <ChoiceBox fx:id="Survey" layoutX="337.0" layoutY="422.0" prefWidth="150.0" />
-      <Label layoutX="337.0" layoutY="374.0" prefHeight="35.0" prefWidth="109.0" text="File Address :" textFill="#7b5ef0">
+      <Label layoutX="337.0" layoutY="374.0" prefHeight="35.0" prefWidth="109.0" text="Score :" textFill="#7b5ef0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

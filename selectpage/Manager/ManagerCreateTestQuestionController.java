@@ -207,20 +207,6 @@ public class ManagerCreateTestQuestionController implements Initializable {
         AnswerMethod.getItems().addAll(List);
     }
 
-    @FXML
-    private void kir8(MouseEvent event) {
-
-        if (AnswerMethod.getValue().equals("Test")) {
-            TestAns.setVisible(true);
-            TrueFalse.setVisible(false);
-        } else if (AnswerMethod.getValue().equals("True Or False")) {
-            TestAns.setVisible(false);
-            TrueFalse.setVisible(true);
-        } else {
-            TestAns.setVisible(false);
-            TrueFalse.setVisible(false);
-        }
-    }
 
     private boolean CreateQuestion() {
         QuestionsModel questionsModel = new QuestionsModel();
@@ -252,6 +238,20 @@ public class ManagerCreateTestQuestionController implements Initializable {
         }
 
         return Api.addQuestionToQuiz(questionsModel);
+    }
+
+    @FXML
+    private void AnswerMethod(MouseEvent event) {
+         if (AnswerMethod.getValue().equals("Test")) {
+            TestAns.setVisible(true);
+            TrueFalse.setVisible(false);
+        } else if (AnswerMethod.getValue().equals("True Or False")) {
+            TestAns.setVisible(false);
+            TrueFalse.setVisible(true);
+        } else {
+            TestAns.setVisible(false);
+            TrueFalse.setVisible(false);
+        }
     }
 
 }
