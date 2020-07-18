@@ -379,4 +379,20 @@ public class Api {
         return false;
     }
 
+    public static ArrayList<ChatView> User_GetMessages(int RoomId) {
+        if(SendRequest(RequestList.User_GetMessages.getId(), new Object[] { RoomId }))
+        {
+            return (ArrayList<ChatView>)ReadResponse();
+        }
+        return null;
+    }
+
+    public static boolean User_SaveMessage(Chat chatModel) {
+        if(SendRequest(RequestList.User_SubmitAnswer.getId(), new Object[] { chatModel }))
+        {
+            return (boolean)ReadResponse();
+        }
+        return false;
+    }
+
 }

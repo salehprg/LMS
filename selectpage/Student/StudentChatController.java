@@ -6,6 +6,8 @@
 package selectpage.Student;
 
 import Model.AllowQuizList;
+import Model.Chat;
+import Model.ChatView;
 import Model.QuizesModel;
 import java.io.IOException;
 import java.net.URL;
@@ -57,6 +59,10 @@ public class StudentChatController implements Initializable {
     private void loadData() {
 
         ChatServer.StartChat(Api.userModel.FirstName , this);
+        ArrayList<ChatView> chats = Api.User_GetMessages(1);
+        for (ChatView chatView : chats) {
+            ChatLits.getItems().addAll(chatView.Message);
+        }
     }
 
     @FXML
@@ -84,6 +90,12 @@ public class StudentChatController implements Initializable {
 
     public void WriteMessage(String message)
     {
+        Chat chatModel = new Chat();
+        chatModel.Message = message;
+        chatModel.RoomId = 1;
+        chatModel.UserId = Api.ActiveUserId;
+
+        Api.User_SaveMessage(chatModel);
         ChatLits.getItems().addAll(message);
     }
 }

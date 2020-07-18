@@ -26,4 +26,8 @@ public interface IUserController {
 
     public boolean SubmitSurvey(SurveyModel surveyModel);
 
+    public boolean SaveMessage(Chat chat);
+
+    public ArrayList<ChatView> GetMessages(int RoomId);
+
 }

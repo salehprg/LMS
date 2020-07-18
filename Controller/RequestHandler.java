@@ -259,6 +259,15 @@ public class RequestHandler implements Runnable {
                     response = userController.EditAnswer(answersModel);
                     break;
 
+                case User_GetMessages:
+                    int Roomid = (int)fromClient.readObject();
+                    response = userController.GetMessages(Roomid);
+                    break;
+
+                case User_SaveMessage:
+                    Chat chat = (Chat)fromClient.readObject();
+                    response = userController.SaveMessage(chat);
+                    break;
                 default:
                     break;
                 

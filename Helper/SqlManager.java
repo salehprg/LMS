@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.apache.poi.ss.formula.functions.Roman;
+
 import Model.*;
 import Model.QuestionsModel.QType;
 
@@ -910,14 +912,14 @@ public class SqlManager {
         return result;
     }
 
-    protected boolean DB_SubmitSurvey(SurveyModel surveyModel)
+    protected boolean DB_SaveChat(Chat chatModel)
     {
-        String sqlQuery = String.format("INSERT INTO [dbo].[Survey]"+
+        String sqlQuery = String.format("INSERT INTO [dbo].[Chats]"+
         "([UserId]"+
-        ",[QuizId]"+
-        ",[QuizLevel])"+
+        ",[Message]"+
+        ",[RoomId])"+
         "VALUES"+
-        "('%s' ,' %s' , '%s')" , surveyModel.UserId , surveyModel.QuizId , surveyModel.QuizLevel );
+        "('%s' ,' %s' , '%s')" , chatModel.UserId , chatModel.Message, chatModel.RoomId );
 
         Boolean result = false;
 
@@ -932,7 +934,38 @@ public class SqlManager {
         return result;
     }
 
-    
+    protected ArrayList<ChatView> DB_GetChat(int RoomId)
+    {
+        String sqlQuery = "Select * From ChatView Where RoomId="+ RoomId;
+
+        ArrayList<ChatView> chatViews = new ArrayList<>();
+
+        try {
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+           
+
+            while (resultSet.next()) {
+                ChatView data = new ChatView();
+
+                data.Firstname = resultSet.getString("Firstname");
+                data.Lastname = resultSet.getString("Lastname");
+                data.Message = resultSet.getString("Message");
+                data.RoomId = resultSet.getInt("RoomId");
+                data.Id = resultSet.getInt("Id");
+
+                chatViews.add(data);
+            }
+            
+            return chatViews;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
     protected ArrayList<QuizSurvey> DB_GetSurvey(int QuizId)
     {
         String sqlQuery = "Select * From QuizSurvey where QuizId ="+ QuizId;

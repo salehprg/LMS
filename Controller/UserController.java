@@ -147,9 +147,15 @@ public class UserController extends SqlManager implements IUserController   {
     }
 
     @Override
-    public boolean SaveMessage(Chat chat {
+    public boolean SaveMessage(Chat chat) {
     
-        return DB_SubmitSurvey(surveyModel);
+        return DB_SaveChat(chat);
+    }
+
+    @Override
+    public ArrayList<ChatView> GetMessages(int RoomId) {
+    
+        return DB_GetChat(RoomId);
     }
 
     void UploadFile(String address)
@@ -168,6 +174,7 @@ public class UserController extends SqlManager implements IUserController   {
               System.out.println("Exception occured :" + e.getMessage());
         }
     }
+
 
 
 }
