@@ -4,6 +4,9 @@ import java.net.*;
 import java.io.*;
 import java.util.*;
 
+import Model.Chat;
+import selectpage.Api.Api;
+import selectpage.Manager.ManagerChatPageController;
 import selectpage.Student.StudentChatController;
 
 public class ChatServer {
@@ -17,6 +20,7 @@ public class ChatServer {
 
     static volatile boolean finished = false;
     public static StudentChatController chatController;
+    public static ManagerChatPageController adminchatController;
 
 
     public static boolean SendMessage(String Message) {
@@ -29,10 +33,45 @@ public class ChatServer {
 
             socket.send(datagram);
 
+            Chat chatModel = new Chat();
+            chatModel.Message = Message;
+            chatModel.RoomId = 1;
+            chatModel.UserId = Api.ActiveUserId;
+            
+            Api.User_SaveMessage(chatModel);
+
             return true;
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public static void StartChat(String username , ManagerChatPageController chatController){
+        try {
+            ChatServer.adminchatController = chatController;
+            name = username;
+
+            group = InetAddress.getByName(host);
+
+            socket = new MulticastSocket(port);
+
+            // Since we are deploying
+            socket.setTimeToLive(0);
+
+            socket.joinGroup(group);
+
+            Thread t = new Thread(new ReadThread(socket, group, port));
+
+            // Spawn a thread for reading messages
+            t.start();
+
+        } catch (SocketException se) {
+            System.out.println("Error creating socket");
+            se.printStackTrace();
+        } catch (IOException ie) {
+            System.out.println("Error reading/writing from/to socket");
+            ie.printStackTrace();
         }
     }
 
@@ -102,8 +141,18 @@ class ReadThread implements Runnable
 				socket.receive(datagram); 
                 message = new String(buffer,0,datagram.getLength(),"UTF-8"); 
                 
-				ChatServer.chatController.WriteMessage(message);
-                System.out.println(message); 
+                if(ChatServer.chatController != null)
+                {
+                    ChatServer.chatController.WriteMessage(message);
+                    System.out.println(message); 
+                }
+                else
+                {
+                    ChatServer.adminchatController.WriteMessage(message);
+                    System.out.println(message); 
+                }
+
+                
                 
 			} 
 			catch(IOException e) 

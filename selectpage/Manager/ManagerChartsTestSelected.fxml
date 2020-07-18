@@ -23,7 +23,7 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </BarChart>
-      <Button layoutX="437.0" layoutY="90.0" mnemonicParsing="false" onAction="#ExportTestToExcel" prefHeight="39.0" prefWidth="192.0" text="Export Table To Excer" />
+      <Button layoutX="437.0" layoutY="90.0" mnemonicParsing="false" onAction="#ExportTestToExcel" prefHeight="39.0" prefWidth="192.0" text="Export Table To Excel" />
       <Label fx:id="TestName" layoutX="152.0" layoutY="90.0" prefHeight="39.0" prefWidth="186.0" textFill="#2907e4">
          <font>
             <Font name="System Bold Italic" size="18.0" />

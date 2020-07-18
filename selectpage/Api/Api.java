@@ -388,7 +388,7 @@ public class Api {
     }
 
     public static boolean User_SaveMessage(Chat chatModel) {
-        if(SendRequest(RequestList.User_SubmitAnswer.getId(), new Object[] { chatModel }))
+        if(SendRequest(RequestList.User_SaveMessage.getId(), new Object[] { chatModel }))
         {
             return (boolean)ReadResponse();
         }

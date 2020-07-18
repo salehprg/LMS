@@ -90,12 +90,7 @@ public class StudentChatController implements Initializable {
 
     public void WriteMessage(String message)
     {
-        Chat chatModel = new Chat();
-        chatModel.Message = message;
-        chatModel.RoomId = 1;
-        chatModel.UserId = Api.ActiveUserId;
 
-        Api.User_SaveMessage(chatModel);
         ChatLits.getItems().addAll(message);
     }
 }
